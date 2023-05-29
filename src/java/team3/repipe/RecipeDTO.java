@@ -12,77 +12,108 @@ import java.io.Serializable;
  * @author THIS PC
  */
 public class RecipeDTO implements Serializable {
-    private String a;
-    private String b;
-    private String c;
-    private boolean d;
+    private String recipeID;
+    private String recipeName;
+    private String caloRecipe;
+    private String description;
+    private String imgUrl;
+    private String difficulty;
 
     public RecipeDTO() {
     }
 
-    public RecipeDTO(String a, String b, String c, boolean d) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
-    }
-
-    
-    /**
-     * @return the a
-     */
-    public String getA() {
-        return a;
+    public RecipeDTO(String recipeID, String recipeName, String caloRecipe, String description, String imgUrl, String difficulty) {
+        this.recipeID = recipeID;
+        this.recipeName = recipeName;
+        this.caloRecipe = caloRecipe;
+        this.description = description;
+        this.imgUrl = imgUrl;
+        this.difficulty = difficulty;
     }
 
     /**
-     * @param a the a to set
+     * @return the recipeID
      */
-    public void setA(String a) {
-        this.a = a;
+    public String getRecipeID() {
+        return recipeID;
     }
 
     /**
-     * @return the b
+     * @param recipeID the recipeID to set
      */
-    public String getB() {
-        return b;
+    public void setRecipeID(String recipeID) {
+        this.recipeID = recipeID;
     }
 
     /**
-     * @param b the b to set
+     * @return the recipeName
      */
-    public void setB(String b) {
-        this.b = b;
+    public String getRecipeName() {
+        return recipeName;
     }
 
     /**
-     * @return the c
+     * @param recipeName the recipeName to set
      */
-    public String getC() {
-        return c;
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     /**
-     * @param c the c to set
+     * @return the caloRecipe
      */
-    public void setC(String c) {
-        this.c = c;
+    public String getCaloRecipe() {
+        return caloRecipe;
     }
 
     /**
-     * @return the d
+     * @param caloRecipe the caloRecipe to set
      */
-    public boolean isD() {
-        return d;
+    public void setCaloRecipe(String caloRecipe) {
+        this.caloRecipe = caloRecipe;
     }
 
     /**
-     * @param d the d to set
+     * @return the description
      */
-    public void setD(boolean d) {
-        this.d = d;
+    public String getDescription() {
+        return description;
     }
-    
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the imgUrl
+     */
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    /**
+     * @param imgUrl the imgUrl to set
+     */
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    /**
+     * @return the difficulty
+     */
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    /**
+     * @param difficulty the difficulty to set
+     */
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
     
 }

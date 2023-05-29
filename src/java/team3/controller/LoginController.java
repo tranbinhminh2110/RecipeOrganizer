@@ -22,9 +22,10 @@ import team3.repipe.RecipeDAO;
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
-    private final String INVALID_PAGE = "invalid.html";
+    private final String INVALID_PAGE = "index.html";
     private final String HOME_PAGE = "homePage.jsp";
-
+    private final String LOGIN_PAGE = "login.jsp";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,11 +40,11 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String button = request.getParameter("btAction");
         String url = INVALID_PAGE;
-        String username = request.getParameter("txtUsername");
+        String userName = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
         try {
             RecipeDAO dao = new RecipeDAO();
-            boolean result = dao.checkLogin(username, password);
+            boolean result = dao.checkLogin(userName, password);
             if (result) {
                 url = HOME_PAGE;
             }
