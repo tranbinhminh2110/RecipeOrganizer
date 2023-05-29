@@ -9,7 +9,7 @@
         <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
         <!-- Title -->
-        <title>RecipeOrganize | Home</title>
+        <title>Recipe Organize | Home</title>
 
         <!-- Favicon -->
         <link rel="icon" href="img/core-img/favicon.ico">
@@ -85,8 +85,8 @@
                         <!-- Menu -->
                         <nav class="classy-navbar justify-content-between" id="deliciousNav">
 
-                            <!--                         Logo 
-                                                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>-->
+                            <!-- Logo -->
+                            <a class="nav-brand" href="homePage.jsp"><img src="img/core-img/logo.png" alt=""></a>
 
                             <!-- Navbar Toggler -->
                             <div class="classy-navbar-toggler">
@@ -104,56 +104,31 @@
                                 <!-- Nav Start -->
                                 <div class="classynav">
                                     <ul>
-                                        <li class="active"><a href="index.html">Home</a></li>
+                                        <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="#">Pages</a>
                                             <ul class="dropdown">
-                                                <li><a href="index.html">Home</a></li>
+                                                <li><a href="homePage.jsp">Home</a></li>
                                                 <li><a href="about.html">About Us</a></li>
                                                 <li><a href="blog-post.html">Blog Post</a></li>
-                                                <li><a href="receipe-post.html">Receipe Post</a></li>
+                                                <li><a href="receipe-post.html">Recipe Post</a></li>
                                                 <li><a href="contact.html">Contact</a></li>
                                                 <li><a href="elements.html">Elements</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Mega Menu</a>
+                                        <li><a href="#">Menu</a>
                                             <div class="megamenu">
-                                                <ul class="single-mega cn-col-4">
-                                                    <li class="title">Catagory</li>
-                                                    <li><a href="index.html">Home</a></li>
-                                                    <li><a href="about.html">About Us</a></li>
-                                                    <li><a href="blog-post.html">Blog Post</a></li>
-                                                    <li><a href="receipe-post.html">Receipe Post</a></li>
-                                                    <li><a href="contact.html">Contact</a></li>
-                                                    <li><a href="elements.html">Elements</a></li>
+                                                <ul class="dropdown">
+                                                    <li><a href="homePage.jsp">Rice</a></li>
+                                                    <li><a href="about.html">Noodles</a></li>
+                                                    <li><a href="blog-post.html">Cake</a></li>
+                                                    <li><a href="receipe-post.html">Drinks</a></li>
+                                                    <li><a href="contact.html">Dessert</a></li>
+                                                    <li><a href="elements.html">International dishes</a></li>
                                                 </ul>
-                                                <ul class="single-mega cn-col-4">
-                                                    <li class="title">Catagory</li>
-                                                    <li><a href="index.html">Home</a></li>
-                                                    <li><a href="about.html">About Us</a></li>
-                                                    <li><a href="blog-post.html">Blog Post</a></li>
-                                                    <li><a href="receipe-post.html">Receipe Post</a></li>
-                                                    <li><a href="contact.html">Contact</a></li>
-                                                    <li><a href="elements.html">Elements</a></li>
-                                                </ul>
-                                                <ul class="single-mega cn-col-4">
-                                                    <li class="title">Catagory</li>
-                                                    <li><a href="index.html">Home</a></li>
-                                                    <li><a href="about.html">About Us</a></li>
-                                                    <li><a href="blog-post.html">Blog Post</a></li>
-                                                    <li><a href="receipe-post.html">Receipe Post</a></li>
-                                                    <li><a href="contact.html">Contact</a></li>
-                                                    <li><a href="elements.html">Elements</a></li>
-                                                </ul>
-                                                <div class="single-mega cn-col-4">
-                                                    <div class="receipe-slider owl-carousel">
-                                                        <a href="#"><img src="img/bg-img/bg1.jpg" alt=""></a>
-                                                        <a href="#"><img src="img/bg-img/bg6.jpg" alt=""></a>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </li>
-                                        <li><a href="receipe-post.html">Receipies</a></li>
-                                        <li><a href="receipe-post.html">4 Vegans</a></li>
+                                        <li><a href="receipe-post.html">Recipes</a></li>
+                                        <li><a href="receipe-post.html">Healthy Food</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                         <li><a href="login.jsp">Login</a></li>
                                     </ul>
@@ -176,14 +151,29 @@
         <!-- ##### Hero Area Start ##### -->
         <section class="hero-area">
             <div class="hero-slides owl-carousel">
+                
                 <!-- Single Hero Slide -->
                 <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg1.jpg);">
                     <div class="container h-100">
                         <div class="row h-100 align-items-center">
                             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                                 <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
-                                    <h2 data-animation="fadeInUp" data-delay="300ms">Delicios Homemade Burger</h2>
-                                    <p data-animation="fadeInUp" data-delay="700ms">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tristique nisl vitae luctus sollicitudin. Fusce consectetur sem eget dui tristique, ac posuere arcu varius.</p>
+                                    <h2 data-animation="fadeInUp" data-delay="300ms">Com tam</h2>
+                                    <p data-animation="fadeInUp" data-delay="700ms">Broken rice is considered a specialty dish of Saigon people. Each plate of hot, fragrant broken rice is always the first choice for quick but nutritious meals.</p>
+                                    <a href="#" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Hero Slide -->
+                <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg6.jpg);">
+                    <div class="container h-100">
+                        <div class="row h-100 align-items-center">
+                            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                                <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
+                                    <h2 data-animation="fadeInUp" data-delay="300ms">Pho bo</h2>
+                                    <p data-animation="fadeInUp" data-delay="700ms">Pho is a famous Vietnamese dish loved by many people, it will be even more delicious when cooked at home for the family to enjoy. The taste of beef is sweet and nutritious, the noodles are chewy and chewy, and the broth is rich, mixed with the aroma of herbs. Speaking of which, I'm already hungry, don't wait long, let's go to the kitchen to do it right away.</p>
                                     <a href="#" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
                                 </div>
                             </div>
@@ -191,20 +181,6 @@
                     </div>
                 </div>
 
-                <!-- Single Hero Slide -->
-                <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg6.jpg);">
-                    <div class="container h-100">
-                        <div class="row h-100 align-items-center">
-                            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                                <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
-                                    <h2 data-animation="fadeInUp" data-delay="300ms">Delicios Homemade Burger</h2>
-                                    <p data-animation="fadeInUp" data-delay="700ms">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tristique nisl vitae luctus sollicitudin. Fusce consectetur sem eget dui tristique, ac posuere arcu varius.</p>
-                                    <a href="#" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Single Hero Slide -->
                 <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg7.jpg);">
@@ -212,8 +188,8 @@
                         <div class="row h-100 align-items-center">
                             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                                 <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
-                                    <h2 data-animation="fadeInUp" data-delay="300ms">Delicios Homemade Burger</h2>
-                                    <p data-animation="fadeInUp" data-delay="700ms">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tristique nisl vitae luctus sollicitudin. Fusce consectetur sem eget dui tristique, ac posuere arcu varius.</p>
+                                    <h2 data-animation="fadeInUp" data-delay="300ms">Milk tea</h2>
+                                    <p data-animation="fadeInUp" data-delay="700ms">Milk tea is the favorite drink of most young people today, not only because of the sweet aroma of tea with milk but also with the diverse combination of unique types of pearls. Today, we will tell you how to make pearl milk tea at home very simple that everyone knows. Go to the kitchen and do it right away!</p>
                                     <a href="#" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
                                 </div>
                             </div>
@@ -234,7 +210,7 @@
                             <img src="img/bg-img/bg2.jpg" alt="">
                             <!-- Content -->
                             <div class="top-cta-content">
-                                <h3>Strawberry Cake</h3>
+                                <h3>Cake</h3>
                                 <h6>Simple &amp; Delicios</h6>
                                 <a href="receipe-post.html" class="btn delicious-btn">See Full Receipe</a>
                             </div>
@@ -246,7 +222,7 @@
                             <img src="img/bg-img/bg3.jpg" alt="">
                             <!-- Content -->
                             <div class="top-cta-content">
-                                <h3>Chinesse Noodles</h3>
+                                <h3>International dishes</h3>
                                 <h6>Simple &amp; Delicios</h6>
                                 <a href="receipe-post.html" class="btn delicious-btn">See Full Receipe</a>
                             </div>
@@ -263,7 +239,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-heading">
-                            <h3>The best Receipies</h3>
+                            <h3>The best Recipes</h3>
                         </div>
                     </div>
                 </div>
@@ -275,7 +251,7 @@
                             <img src="img/bg-img/r1.jpg" alt="">
                             <div class="receipe-content">
                                 <a href="receipe-post.html">
-                                    <h5>Sushi Easy Receipy</h5>
+                                    <h5>Bun bo Hue</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -294,7 +270,7 @@
                             <img src="img/bg-img/r2.jpg" alt="">
                             <div class="receipe-content">
                                 <a href="receipe-post.html">
-                                    <h5>Homemade Burger</h5>
+                                    <h5>Bun dau mam tom</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -332,7 +308,7 @@
                             <img src="img/bg-img/r4.jpg" alt="">
                             <div class="receipe-content">
                                 <a href="receipe-post.html">
-                                    <h5>Calabasa soup</h5>
+                                    <h5>Pumpkin soup</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -351,7 +327,7 @@
                             <img src="img/bg-img/r5.jpg" alt="">
                             <div class="receipe-content">
                                 <a href="receipe-post.html">
-                                    <h5>Homemade Breakfast</h5>
+                                    <h5>Soursop tea</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -394,8 +370,8 @@
                     <div class="col-12">
                         <!-- Cta Content -->
                         <div class="cta-content text-center">
-                            <h2>Gluten Free Receipies</h2>
-                            <p>Fusce nec ante vitae lacus aliquet vulputate. Donec scelerisque accumsan molestie. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras sed accumsan neque. Ut vulputate, lectus vel aliquam congue, risus leo elementum nibh</p>
+                            <h2>Healthy Food Recipes</h2>
+                            <p>Healthy foods are foods that are healthy, safe and healthy for the user's body. Using organic foods, natural foods, free of harmful impurities, minimal processing to keep the essence of food are the principles of healthy food. As a result, healthy food brings positive values to users' health.</p>
                             <a href="#" class="btn delicious-btn">Discover all the receipies</a>
                         </div>
                     </div>
@@ -418,9 +394,9 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>May 10, 2023</span>
                                 <a href="receipe-post.html">
-                                    <h5>Homemade italian pasta</h5>
+                                    <h5>Vegan Smoothie</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -429,7 +405,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>586 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -443,9 +419,9 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>May 29, 2023</span>
                                 <a href="receipe-post.html">
-                                    <h5>Baked Bread</h5>
+                                    <h5>Seaweed dried brown rice</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -454,7 +430,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>205 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -468,7 +444,7 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>May 15, 2023</span>
                                 <a href="receipe-post.html">
                                     <h5>Scalops on salt</h5>
                                 </a>
@@ -479,7 +455,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>351 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -493,7 +469,7 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>April 04, 2023</span>
                                 <a href="receipe-post.html">
                                     <h5>Fruits on plate</h5>
                                 </a>
@@ -504,7 +480,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>256 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -518,9 +494,9 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>May 10, 2023</span>
                                 <a href="receipe-post.html">
-                                    <h5>Macaroons</h5>
+                                    <h5>Pan fried chicken breast</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -529,7 +505,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>492 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -543,9 +519,9 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>May 01, 2023</span>
                                 <a href="receipe-post.html">
-                                    <h5>Chocolate tart</h5>
+                                    <h5>Passion fruit juice</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -554,7 +530,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>456 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -568,9 +544,9 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>March 29, 2023</span>
                                 <a href="receipe-post.html">
-                                    <h5>Berry Desert</h5>
+                                    <h5>Berry Dessert</h5>
                                 </a>
                                 <div class="ratings">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -579,7 +555,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>289 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -593,7 +569,7 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>March 20, 2023</span>
                                 <a href="receipe-post.html">
                                     <h5>Zucchini Grilled on peper</h5>
                                 </a>
@@ -604,7 +580,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>397 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -618,7 +594,7 @@
                             </div>
                             <!-- Receipe Content -->
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
+                                <span>March 13, 2023</span>
                                 <a href="receipe-post.html">
                                     <h5>Chicken Salad</h5>
                                 </a>
@@ -629,7 +605,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
-                                <p>2 Comments</p>
+                                <p>687 Comments</p>
                             </div>
                         </div>
                     </div>
@@ -649,8 +625,8 @@
                             <h4>Nothing is better than going home to family and eating good food and relaxing</h4>
                             <p>John Smith</p>
                             <div class="date-comments d-flex justify-content-between">
-                                <div class="date">January 04, 2018</div>
-                                <div class="comments">2 Comments</div>
+                                <div class="date">March 04, 2023</div>
+                                <div class="comments">1056 Comments</div>
                             </div>
                         </div>
                     </div>
@@ -665,7 +641,7 @@
                                     <input type="email" name="email" placeholder="Subscribe to newsletter">
                                     <button type="submit" class="btn delicious-btn w-100">Subscribe</button>
                                 </form>
-                                <p>Fusce nec ante vitae lacus aliquet vulputate. Donec sceleri sque accumsan molestie. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</p>
+                                <p>With just 5 minutes of operation, you have access to recipes from all over the world. So what are you waiting for without following our newsletter.</p>
                             </div>
                         </div>
                     </div>
@@ -773,9 +749,9 @@
                             <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                         </div>
                         <!-- Footer Logo -->
-                        <!--                    <div class="footer-logo">
-                                                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-                                            </div>-->
+                        <div class="footer-logo">
+                            <a href="homePage.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                        </div>
 
                     </div>
                 </div>
