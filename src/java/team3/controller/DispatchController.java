@@ -24,6 +24,7 @@ public class DispatchController extends HttpServlet {
     private final String HOME_PAGE = "homePage.jsp";
     private final String LOGIN_CONTROLLER = "LoginController";
     private final String SEARCH_RECIPE = "SearchRecipe";
+    private final String SIGNUP_CONTROLLER = "SignUpController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,6 +46,8 @@ public class DispatchController extends HttpServlet {
                url = LOGIN_CONTROLLER;
            } else if (button.equals("Search")) {
                url = SEARCH_RECIPE;
+           }else if(button.equals("SIGNUP")) {
+               url = SIGNUP_CONTROLLER;
            }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

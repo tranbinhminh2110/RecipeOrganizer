@@ -1,49 +1,59 @@
-<%-- 
-    Document   : registration
-    Created on : May 29, 2023, 2:50:58 PM
-    Author     : AS
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sign Up Page</title>
+        <title>Creative Colorlib SignUp Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!-- Custom Theme files -->
+        <link href="style_signup.css" rel="stylesheet" type="text/css" media="all" />
+        <!-- //Custom Theme files -->
+        <!-- web font -->
+        <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+        <!-- //web font -->
     </head>
     <body>
-        <form action="signup" method="POST" class="form-signup">
-            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Sign up</h1>
-            <div class="aleart alert-danger" role="alert">
-                ${mes}
+        <!-- main -->
+        <div class="main-w3layouts wrapper">
+            <h1>Creative SignUp Form</h1>
+            <div class="main-agileinfo">
+                <div class="agileits-top">
+                    <form action="DispatchController" method="post">
+                        <input class="text" type="text" name="txtusername" placeholder="Username" required="">
+                        <input class="text w3lpass" type="password" name="txtpassword" placeholder="Password" required="">
+                        <input class="text w3lpass" type="password" name="txtrepassword" placeholder="Confirm Password" required="">
+                        <input class="text w3lpass" type="text" name="txtfullname" placeholder="FullName" required="">
+                        <input class="text w3lpass" type="text" name="txtphone" placeholder="Phone" required="">
+                        <div class="wthree-text">
+                            <label class="anim">
+                                <input type="checkbox" class="checkbox" required="">
+                                <span>I Agree To The Terms & Conditions</span>
+                            </label>
+                            <div class="clear"> </div>
+                        </div>
+                        <input type="submit" value="SIGNUP" name="btAction">
+                    </form>
+                    <p>Don't have an Account? <a href="login.jsp"> Login Now!</a></p>
+                </div>
             </div>
-                
-            <table>
-                <tr>
-                    <td>Username</td>
-                    <td><input type="text" name ="txtusername"></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" name ="txtpassword"></td>
-                </tr>
-                <tr>
-                    <td>RePassword</td>
-                    <td><input type="password" name ="txtrepassword"></td>
-                </tr>
-                <tr>
-                    <td>FullName</td>
-                    <td><input type="text" name ="txtfullname"></td>
-                </tr>
-                <tr>
-                    <td>Phone</td>
-                    <td><input type="text" name ="txtphone"></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" value ="Sign up" name="action"></td>
-                </tr>
-                
-            </table>
-        </form>
+            <ul class="colorlib-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
     </body>
 </html>

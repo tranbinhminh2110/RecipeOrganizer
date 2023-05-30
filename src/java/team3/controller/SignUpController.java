@@ -20,7 +20,7 @@ import team3.repipe.RecipeDAO;
  *
  * @author AS
  */
-@WebServlet(name = "SignUpController", urlPatterns = {"/signup"})
+@WebServlet(name = "SignUpController", urlPatterns = {"/SignUpController"})
 public class SignUpController extends HttpServlet {
 
     /**
