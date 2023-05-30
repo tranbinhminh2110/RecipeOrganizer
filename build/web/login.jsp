@@ -14,13 +14,13 @@
               rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/css.css">
-        <!--Specify app's client ID--> 
+        Specify app's client ID 
         <meta name="google-signin-client_id" content="555035018766-035ln8ai7e46bk1gltin1pmc3s9uv6g5.apps.googleusercontent.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <!--Google Platform library-->
+        Google Platform library
         <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <!--Google Recaptcha-->
+        Google Recaptcha
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
     <body>
@@ -30,25 +30,24 @@
                 <div class="box-header">
                     <h2>Log In</h2>
                 </div>
-                <form action="mainController" method = "post" class="formlogin">
+                <form action="DispatchController" method = "post" class="formlogin">
                 <font style='color:red;'><%= (request.getAttribute("WARNING")==null)?"":(String)request.getAttribute("WARNING") %> </font>
 
                      <table>
                     <tr>
                         <td>Username</td>
-                        <td><input type="text" name ="txtusername"></td>
+                        <td><input type="text" name ="txtUsername"></td>
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input type="password" name ="txtpassword"></td>
+                        <td><input type="password" name ="txtPassword"></td>
                     </tr>
-                   <tr>
-                        <td colspan="2"><input type="submit" value ="login" name="action"></td>
+                    <tr>
+                        <td colspan="2"><input type="submit" value ="Login" name="btAction"></td>
                     </tr>
-                   <tr>
-                        <td colspan="2"><input type="checkbox" value ="savelogin" name="savelogin">Stayed signed in</td>
-                   </tr>
+                    
                    </table>
+                
                 </form>		
                 <div class="small">
                     <p>Don’t you have an account? <a href="registration.jsp">Sign up</a></p>

@@ -20,8 +20,7 @@ public class DBUtils implements Serializable {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String url = "jdbc:sqlserver:"
                 + "//localhost:1433"
-                + ";databaseName=RecipeOrganize"
-                + ";instanceName=SQLEXPRESS";
+                + ";databaseName=RecipeOrganize";
         Connection con = DriverManager.getConnection(url, "sa", "12345");
         return con;
     }

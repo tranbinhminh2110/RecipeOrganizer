@@ -24,6 +24,7 @@ import team3.repipe.RecipeDAO;
 public class LoginController extends HttpServlet {
     private final String INVALID_PAGE = "index.html";
     private final String HOME_PAGE = "homePage.jsp";
+    private final String ADMIN = "admin.jsp";   
     private final String LOGIN_PAGE = "login.jsp";
     
     /**
@@ -46,7 +47,7 @@ public class LoginController extends HttpServlet {
             RecipeDAO dao = new RecipeDAO();
             boolean result = dao.checkLogin(userName, password);
             if (result) {
-                url = HOME_PAGE;
+                url = ADMIN;
             }
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
