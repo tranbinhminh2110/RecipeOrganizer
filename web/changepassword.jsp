@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Thay đổi mật khẩu</h1>
+        <h1>Change Password</h1>
 
         <% String message = (String) request.getAttribute("message"); %>
         <% if (message != null) {%>
