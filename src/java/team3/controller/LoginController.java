@@ -14,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import team3.repipe.RecipeDAO;
+import javax.servlet.http.HttpSession;
+import team3.recipe.RecipeOrganizeDAO;
+import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
@@ -22,11 +24,12 @@ import team3.repipe.RecipeDAO;
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
-    private final String INVALID_PAGE = "index.html";
-    private final String HOME_PAGE = "homePage.jsp";
-    private final String ADMIN = "admin.jsp";   
+
+    private final String INVALID_PAGE = "invalid.html";
+    private final String ADMIN_PAGE = "admin.jsp";
     private final String LOGIN_PAGE = "login.jsp";
-    
+    private final String USER_PAGE = "user.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,15 +42,25 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String button = request.getParameter("btAction");
+
         String url = INVALID_PAGE;
         String userName = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
+        boolean invalid = false;
+
         try {
-            RecipeDAO dao = new RecipeDAO();
-            boolean result = dao.checkLogin(userName, password);
-            if (result) {
-                url = ADMIN;
+            RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+            RecipeOrganizeDTO result = dao.checkLogin(userName, password);
+            if (result != null && result.getRole() == true) {
+                url = ADMIN_PAGE;
+            } else if (result != null && result.getRole() == false) {
+                url = USER_PAGE;
+            } else {
+                url = LOGIN_PAGE;
+                invalid = true;
+
+                request.setAttribute("WRONG", invalid);
+
             }
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();

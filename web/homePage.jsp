@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="team3.recipe.RecipeOrganizeDTO"%>
+<%@page import="team3.recipe.RecipeOrganizeDTO"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +16,7 @@
         <title>Recipe Organize | Home</title>
 
         <!-- Favicon -->
-        <link rel="icon" href="img/core-img/favicon.ico">
+        <link rel="icon" href="img/recipe/favicon.ico">
 
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="style.css">
@@ -23,7 +27,7 @@
         <!-- Preloader -->
         <div id="preloader">
             <i class="circle-preloader"></i>
-            <img src="img/core-img/salad.png" alt="">
+            <img src="img/recipe/salad.png" alt="">
         </div>
 
         <!-- Search Wrapper -->
@@ -86,7 +90,7 @@
                         <nav class="classy-navbar justify-content-between" id="deliciousNav">
 
                             <!-- Logo -->
-                            <a class="nav-brand" href="homePage.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                            <a class="nav-brand" href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
 
                             <!-- Navbar Toggler -->
                             <div class="classy-navbar-toggler">
@@ -151,7 +155,7 @@
         <!-- ##### Hero Area Start ##### -->
         <section class="hero-area">
             <div class="hero-slides owl-carousel">
-                
+
                 <!-- Single Hero Slide -->
                 <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg1.jpg);">
                     <div class="container h-100">
@@ -239,122 +243,46 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-heading">
-                            <h3>The best Recipes</h3>
-                        </div>
-                    </div>
-                </div>
+                            <h3>The Best Recipes</h3>
 
-                <div class="row">
-                    <!-- Single Best Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-best-receipe-area mb-30">
-                            <img src="img/bg-img/r1.jpg" alt="">
-                            <div class="receipe-content">
-                                <a href="receipe-post.html">
-                                    <h5>Bun bo Hue</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                            <div class="row">
+                                <%
+                                    List<RecipeOrganizeDTO> SEARCHRESULTS = (List<RecipeOrganizeDTO>) request.getAttribute("SEARCHRESULTS");
+                                    if (SEARCHRESULTS != null) {
+                                        for (RecipeOrganizeDTO recipe : SEARCHRESULTS) {
+                                            int rating = recipe.getAvgRating();
+                                            if (rating >= 4) {
+                                %>
+                                <div class="col-12 col-sm-6 col-lg-4">
+                                    <div class="single-best-receipe-area mb-30">
+                                        <img src="<%= recipe.getImgUrl()%>" alt="">
+                                        <div class="receipe-content">
+                                            <a href="receipe-post.html">
+                                                <h5><%= recipe.getRecipeName()%></h5>
+                                            </a>
+                                            <div class="ratings">
+                                                <%
+                                                    for (int i = 0; i < rating; i++) {
+                                                %>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <% } %>
+                                                <%
+                                                    int remainingStars = 5 - rating;
+                                                    for (int i = 0; i < remainingStars; i++) {
+                                                %>
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Best Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-best-receipe-area mb-30">
-                            <img src="img/bg-img/r2.jpg" alt="">
-                            <div class="receipe-content">
-                                <a href="receipe-post.html">
-                                    <h5>Bun dau mam tom</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Best Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-best-receipe-area mb-30">
-                            <img src="img/bg-img/r3.jpg" alt="">
-                            <div class="receipe-content">
-                                <a href="receipe-post.html">
-                                    <h5>Vegan Smoothie</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Best Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-best-receipe-area mb-30">
-                            <img src="img/bg-img/r4.jpg" alt="">
-                            <div class="receipe-content">
-                                <a href="receipe-post.html">
-                                    <h5>Pumpkin soup</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Best Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-best-receipe-area mb-30">
-                            <img src="img/bg-img/r5.jpg" alt="">
-                            <div class="receipe-content">
-                                <a href="receipe-post.html">
-                                    <h5>Soursop tea</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Best Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-best-receipe-area mb-30">
-                            <img src="img/bg-img/r6.jpg" alt="">
-                            <div class="receipe-content">
-                                <a href="receipe-post.html">
-                                    <h5>Healthy Fruit Desert</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
+                                <%
+                                        }
+                                    }
+                                } else {
+                                %>
+                                <p>No recipes found.</p>
+                                <% }%>
                             </div>
                         </div>
                     </div>
@@ -370,11 +298,60 @@
                     <div class="col-12">
                         <!-- Cta Content -->
                         <div class="cta-content text-center">
-                            <h2>Healthy Food Recipes</h2>
-                            <p>Healthy foods are foods that are healthy, safe and healthy for the user's body. Using organic foods, natural foods, free of harmful impurities, minimal processing to keep the essence of food are the principles of healthy food. As a result, healthy food brings positive values to users' health.</p>
+                            <h2>Gluten Free Receipies</h2>
+                            <p>Fusce nec ante vitae lacus aliquet vulputate. Donec scelerisque accumsan molestie. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras sed accumsan neque. Ut vulputate, lectus vel aliquam congue, risus leo elementum nibh</p>
                             <a href="#" class="btn delicious-btn">Discover all the receipies</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <!-- ##### CTA Area End ##### -->
+
+        <!-- ##### Small Receipe Area Start ##### -->
+        <section class="small-receipe-area section-padding-80-0">
+            <div class="container">
+                <div class="row">
+                    <%
+                        if (SEARCHRESULTS != null) {
+                            for (RecipeOrganizeDTO recipe : SEARCHRESULTS) {
+                                int rating = recipe.getAvgRating();
+                                if (rating < 4) {
+                    %>
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="single-small-receipe-area d-flex">
+                            <div class="receipe-thumb">
+                                <img src="<%= recipe.getImgUrl()%>" alt="">
+                            </div>
+                            <div class="receipe-content">
+                                <span>January 04, 2018</span>
+                                <a href="receipe-post.html">
+                                    <h5><%= recipe.getRecipeName()%></h5>
+                                </a>
+                                <div class="ratings">
+                                    <%
+                                        for (int i = 0; i < rating; i++) {
+                                    %>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <% } %>
+                                    <%
+                                        int remainingStars = 5 - rating;
+                                        for (int i = 0; i < remainingStars; i++) {
+                                    %>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <% } %>
+                                </div>
+                                <p>2 Comments</p>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                            }
+                        }
+                    } else {
+                    %>
+                    <p>No recipes found.</p>
+                    <% }%>
                 </div>
             </div>
         </section>
@@ -750,7 +727,7 @@
                         </div>
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="homePage.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                            <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
                         </div>
 
                     </div>

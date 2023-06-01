@@ -8,13 +8,18 @@ package team3.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Properties;
+import java.util.Random;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import team3.repipe.AccountDTO;
-import team3.repipe.RecipeDAO;
+import team3.error_package.RegistrationCreateError;
+import team3.recipe.RecipeOrganizeDAO;
 
 /**
  *
@@ -22,6 +27,10 @@ import team3.repipe.RecipeDAO;
  */
 @WebServlet(name = "SignUpController", urlPatterns = {"/SignUpController"})
 public class SignUpController extends HttpServlet {
+
+    private final String LOGIN_PAGE = "login.jsp";
+    private final String INVALID_PAGE = "invalid.html";
+    private final String REGISTRATION_PAGE = "registration.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +44,78 @@ public class SignUpController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String user = request.getParameter("txtusername");
-        String pass = request.getParameter("txtpassword");
-        String repass = request.getParameter("txtrepassword");
-        String fullname = request.getParameter("txtfullname");
-        long phone = Long.parseLong(request.getParameter("txtphone"));
-        if (!pass.equals(repass)) {
-            response.sendRedirect("registration.jsp");
-        } else {
-            RecipeDAO dao = new RecipeDAO();
+        PrintWriter out = response.getWriter();
 
-            AccountDTO b = dao.checkAccountExist(user);
-            if (b == null) {
-                int id = dao.createID();
-                dao.signUp(id, user, pass, fullname, phone);
-                response.sendRedirect("login.jsp");
-            } else {
-                request.setAttribute("mess", "UserName is Existed!");
-                request.getRequestDispatcher("registration.jsp").forward(request, response);
+        String url = INVALID_PAGE;
+        String username = request.getParameter("txtusername");
+        String password = request.getParameter("txtpassword");
+        String confirm = request.getParameter("txtrepassword");
+        String fullName = request.getParameter("txtfullname");
+        String phone = request.getParameter("txtphone");
+        
+        RegistrationCreateError errors = new RegistrationCreateError();
+        boolean foundError = false;
+        boolean signup_success = false;
+        try {
+            if (username.trim().length() < 1 || username.trim().length() > 30) {
+                foundError = true;
+                errors.setUsernameLengthError("Username length requires 1 - 30 characters");
             }
+            
+            if (password.trim().length() < 1 || password.trim().length() > 30) {
+                foundError = true;
+                errors.setPasswordLengError("Password length requires 1 - 30 characters");
+            } 
+            else if (!confirm.trim().equals(password.trim())) {
+                foundError = true;
+                errors.setConfirmError("Confirm must match password");
+            }
+
+            if (fullName.trim().length() < 1 || fullName.trim().length() > 50) {
+                foundError = true;
+                errors.setFullNameLengthError("Fullname length requires 1 - 50 characters");
+            }
+
+            if (phone.trim().length() != 10) {
+                foundError = true;
+                errors.setPhoneLengthError("Phone number must have 10 digits");
+            }
+
+            if (foundError) {
+                url = REGISTRATION_PAGE;
+                request.setAttribute("ERROR", errors);
+            } else {
+                Random random = new Random();
+                int randomNumber = random.nextInt(1000); // Số ngẫu nhiên từ 0 đến 999
+                String formattedNumber = String.format("%03d", randomNumber); // Định dạng thành 3 chữ số
+                String token = "token" + formattedNumber;                
+                RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                boolean result = dao.SignUp(username, password, fullName, phone, 1, false, token);
+            
+                if (result) {
+                    url = LOGIN_PAGE;
+                    signup_success = true;
+                    request.setAttribute("SIGNUP_SUCCESS", signup_success);
+           
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            log(ex.getMessage());
+        } catch (NamingException ex) {
+            log("Create Account     Naming" + ex.getMessage());
+        } catch (SQLException ex) {
+            log("Create Account     SQL" + ex.getMessage());
+            String msg = ex.getMessage();
+            if (msg.contains("duplicate")) {
+                errors.setExistedUsernameError(username + " have existed");
+                request.setAttribute("ERROR", errors);
+                url = REGISTRATION_PAGE;
+            }
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            out.close();
         }
     }
 

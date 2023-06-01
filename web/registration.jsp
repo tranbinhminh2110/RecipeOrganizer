@@ -1,59 +1,106 @@
-<!--
-Author: Colorlib
-Author URL: https://colorlib.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<%-- 
+    Document   : registration
+    Created on : May 29, 2023, 2:50:58 PM
+    Author     : AS
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Creative Colorlib SignUp Form</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-        <!-- Custom Theme files -->
-        <link href="style_signup.css" rel="stylesheet" type="text/css" media="all" />
-        <!-- //Custom Theme files -->
-        <!-- web font -->
-        <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-        <!-- //web font -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Sign Up Page</title>
+        <script src="js/signup_error.js"></script>
     </head>
     <body>
-        <!-- main -->
-        <div class="main-w3layouts wrapper">
-            <h1>Creative SignUp Form</h1>
-            <div class="main-agileinfo">
-                <div class="agileits-top">
-                    <form action="DispatchController" method="post">
-                        <input class="text" type="text" name="txtusername" placeholder="Username" required="">
-                        <input class="text w3lpass" type="password" name="txtpassword" placeholder="Password" required="">
-                        <input class="text w3lpass" type="password" name="txtrepassword" placeholder="Confirm Password" required="">
-                        <input class="text w3lpass" type="text" name="txtfullname" placeholder="FullName" required="">
-                        <input class="text w3lpass" type="text" name="txtphone" placeholder="Phone" required="">
-                        <div class="wthree-text">
-                            <label class="anim">
-                                <input type="checkbox" class="checkbox" required="">
-                                <span>I Agree To The Terms & Conditions</span>
-                            </label>
-                            <div class="clear"> </div>
-                        </div>
-                        <input type="submit" value="SIGNUP" name="btAction">
-                    </form>
-                    <p>Don't have an Account? <a href="login.jsp"> Login Now!</a></p>
-                </div>
+        <form action="DispatchController" method="POST" class="form-signup">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Sign up</h1>
+            <div class="aleart alert-danger" role="alert">
+                ${mes}
             </div>
-            <ul class="colorlib-bubbles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
+
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td><input type="text" name ="txtusername" value="${param.txtusername}" placeholder="1 - 30 characters"> 
+                        <font color="red">
+                        <c:set var="errors" value="${requestScope.ERROR}" />
+                        <c:if test="${not empty errors}">
+                            <c:if test="${not empty errors.usernameLengthError}">
+                                ${errors.usernameLengthError} <br/>
+                            </c:if>
+                            <c:if test="${not empty errors.existedUsernameError}">
+                                ${errors.existedUsernameError} <br/>
+                            </c:if>
+                        </c:if>
+                        </font>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name ="txtpassword" value="${param.txtpassword}" placeholder="1 - 30 characters">
+                        <font color="red">
+                        <c:set var="errors" value="${requestScope.ERROR}" />
+                        <c:if test="${not empty errors}">
+                            <c:if test="${not empty errors.passwordLengError}">
+                                ${errors.passwordLengError} <br/>
+                            </c:if>
+                        </c:if>
+                        </font>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Comfirm</td>
+                    <td><input type="password" name ="txtrepassword" value="" placeholder="confirm password">
+                        <font color="red">
+                        <c:set var="errors" value="${requestScope.ERROR}" />
+                        <c:if test="${not empty errors}">
+                            <c:if test="${not empty errors.confirmError}">
+                                ${errors.confirmError} <br/>
+                            </c:if>
+                        </c:if>
+                        </font>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>FullName</td>
+                    <td><input type="text" name ="txtfullname" value="${param.txtfullname}" placeholder="1 - 50 characters">
+                        <font color="red">
+                        <c:set var="errors" value="${requestScope.ERROR}" />
+                        <c:if test="${not empty errors}">
+                            <c:if test="${not empty errors.fullNameLengthError}">
+                                ${errors.fullNameLengthError} <br/>
+                            </c:if>
+                        </c:if>
+                        </font>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><input type="text" name ="txtphone" value="${param.txtphone}" placeholder="must have 10 digits">
+                        <font color="red">
+                        <c:set var="errors" value="${requestScope.ERROR}" />
+                        <c:if test="${not empty errors}">
+                            <c:if test="${not empty errors.phoneLengthError}">
+                                ${errors.phoneLengthError} <br/>
+                            </c:if>
+                        </c:if>
+                        </font>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value ="Sign up" name="btAction"></td>
+                </tr>
+
+            </table>
+        </form>
     </body>
 </html>
+
+

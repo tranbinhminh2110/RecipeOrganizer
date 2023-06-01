@@ -24,8 +24,7 @@ public class DispatchController extends HttpServlet {
     private final String HOME_PAGE = "homePage.jsp";
     private final String LOGIN_CONTROLLER = "LoginController";
     private final String SEARCH_RECIPE = "SearchRecipe";
-    private final String SIGNUP_CONTROLLER = "SignUpController";
-
+    private final String SIGN_UP_CONTROLLER = "SignUpController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,20 +35,21 @@ public class DispatchController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NullPointerException {
         response.setContentType("text/html;charset=UTF-8");
         
         String url = HOME_PAGE;
-        String button = request.getParameter("btAction");
+        String button = "";
+        button = request.getParameter("btAction");
         try {
             if (button.equals("Login")) {
                url = LOGIN_CONTROLLER;
            } else if (button.equals("Search")) {
                url = SEARCH_RECIPE;
-           }else if(button.equals("SIGNUP")) {
-               url = SIGNUP_CONTROLLER;
+           } else if (button.equals("Sign up")) {
+               url = SIGN_UP_CONTROLLER;
            }
-        } finally {
+        }finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

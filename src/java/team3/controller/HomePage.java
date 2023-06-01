@@ -15,8 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import team3.repipe.RecipeDAO;
-import team3.repipe.RecipeDTO;
+import team3.recipe.RecipeOrganizeDAO;
+import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
@@ -40,8 +40,8 @@ public class HomePage extends HttpServlet {
         String url = HOME_PAGE;
         
         try {
-                RecipeDAO dao = new RecipeDAO();
-                List<RecipeDTO> results = dao.getRecipeAll();
+                RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                List<RecipeOrganizeDTO> results = dao.getAllRecipe();
                 request.setAttribute("SEARCHRESULTS", results);
                 url = HOME_PAGE;
         } finally {
