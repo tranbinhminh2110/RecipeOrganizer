@@ -7,25 +7,24 @@ package team3.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import team3.recipe.RecipeOrganizeDAO;
+import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
  * @author THIS PC
  */
-@WebServlet(name = "DispatchController", urlPatterns = {"/DispatchController"})
-public class DispatchController extends HttpServlet {
-
-    private final String HOME_PAGE = "homePage.jsp";
-    private final String LOGIN_CONTROLLER = "LoginController";
-    private final String SEARCH_RECIPE = "SearchRecipe";
-    private final String SIGN_UP_CONTROLLER = "SignUpController";
-    private final String CHANGE_PASS_CONTROLLER = "ChangePassController";
+@WebServlet(name = "ChangePassController", urlPatterns = {"/ChangePassController"})
+public class ChangePassController extends HttpServlet {
+    private final String LOGIN_PAGE = "login.jsp";
+    private final String CHANGE_PASSWORD_PAGE = "changepassword.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,23 +35,30 @@ public class DispatchController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, NullPointerException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String url = HOME_PAGE;
-        String button = "";
-        button = request.getParameter("btAction");
+        String userName = request.getParameter("txtUsername");
+        String currentPassword = request.getParameter("txtCurrentPassword");
+        String newPassword = request.getParameter("txtNewPassword");
+        String url = CHANGE_PASSWORD_PAGE;
         try {
-            if (button.equals("Login")) {
-               url = LOGIN_CONTROLLER;
-           } else if (button.equals("Search")) {
-               url = SEARCH_RECIPE;
-           } else if (button.equals("Sign up")) {
-               url = SIGN_UP_CONTROLLER;
-           } else if (button.equals("Save")) {
-               url = CHANGE_PASS_CONTROLLER;
-           }
-        }finally {
+            RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+            RecipeOrganizeDTO isLogin = dao.checkLogin(userName, currentPassword);
+            if (isLogin != null) {
+                RecipeOrganizeDAO.changePassword(userName, newPassword);
+                request.setAttribute("message", "Đổi mật khẩu thành công!");
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+            } else {
+                request.setAttribute("message", "Mật khẩu hiện tại không đúng. Vui lòng kiểm tra lại!");
+                RequestDispatcher rd = request.getRequestDispatcher("changepassword.jsp");
+                rd.forward(request, response);
+            }
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
