@@ -7,28 +7,18 @@ package team3.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import team3.recipe.RecipeOrganizeDAO;
-import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
- * @author THIS PC
+ * @author MSI BH
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
-
-    private final String INVALID_PAGE = "invalid.html";
-    private final String ADMIN_PAGE = "admin.jsp";
-    private final String LOGIN_PAGE = "login.jsp";
-    private final String USER_PAGE = "user.jsp";
+@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
+public class NewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,39 +32,17 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String url = INVALID_PAGE;
-        String userName = request.getParameter("txtUsername");
-        String password = request.getParameter("txtPassword");
-        boolean invalid = false;
-        boolean ban_acc = false;
-        try {
-            RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            RecipeOrganizeDTO result = dao.checkLogin(userName, password);
-            if (result != null) {
-                if (result.getStatus() == 1) {
-                    if (result.getRole() == true) {
-                        url = ADMIN_PAGE;
-                    } else if (result.getRole() == false) {
-                        url = USER_PAGE;
-                    }
-                } else {
-                    url = LOGIN_PAGE;
-                    ban_acc = true;
-                    request.setAttribute("BAN_ACC", ban_acc);
-                }
-            } else {
-                url = LOGIN_PAGE;
-                invalid = true;
-                request.setAttribute("WRONG", invalid);
-            }
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NewServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

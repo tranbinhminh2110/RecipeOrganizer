@@ -22,7 +22,7 @@
 
             <table>
                 <tr>
-                    <td>Username</td>
+                    <td>Username*</td>
                     <td><input type="text" name ="txtusername" value="${param.txtusername}" placeholder="1 - 30 characters"> 
                         <font color="red">
                         <c:set var="errors" value="${requestScope.ERROR}" />
@@ -39,7 +39,7 @@
 
                 </tr>
                 <tr>
-                    <td>Password</td>
+                    <td>Password*</td>
                     <td><input type="password" name ="txtpassword" value="${param.txtpassword}" placeholder="1 - 30 characters">
                         <font color="red">
                         <c:set var="errors" value="${requestScope.ERROR}" />
@@ -53,7 +53,7 @@
 
                 </tr>
                 <tr>
-                    <td>Comfirm</td>
+                    <td>Comfirm*</td>
                     <td><input type="password" name ="txtrepassword" value="" placeholder="confirm password">
                         <font color="red">
                         <c:set var="errors" value="${requestScope.ERROR}" />
@@ -67,7 +67,7 @@
 
                 </tr>
                 <tr>
-                    <td>FullName</td>
+                    <td>FullName*</td>
                     <td><input type="text" name ="txtfullname" value="${param.txtfullname}" placeholder="1 - 50 characters">
                         <font color="red">
                         <c:set var="errors" value="${requestScope.ERROR}" />
@@ -82,12 +82,26 @@
                 </tr>
                 <tr>
                     <td>Phone</td>
-                    <td><input type="text" name ="txtphone" value="${param.txtphone}" placeholder="must have 10 digits">
+                    <td><input type="text" name ="txtphone" value="${param.txtphone}">
                         <font color="red">
                         <c:set var="errors" value="${requestScope.ERROR}" />
                         <c:if test="${not empty errors}">
                             <c:if test="${not empty errors.phoneLengthError}">
                                 ${errors.phoneLengthError} <br/>
+                            </c:if>
+                        </c:if>
+                        </font>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Email*</td>
+                    <td><input type="text" name ="txtemail" value="${param.txtemail}" placeholder="your email">
+                        <font color="red">
+                        <c:set var="errors" value="${requestScope.ERROR}" />
+                        <c:if test="${not empty errors}">
+                            <c:if test="${not empty errors.emailError}">
+                                ${errors.emailError} <br/>
                             </c:if>
                         </c:if>
                         </font>

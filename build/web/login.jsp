@@ -59,20 +59,30 @@
                         alert("Tài khoản hoặc mật khẩu không đúng.");
                     }
                 </script>
+                
+                <c:if test="${requestScope.BAN_ACC}">
+                    <c:set var="ban_acc" value="${requestScope.BAN_ACC}" scope="request" />
+                </c:if>
+                <script>
+                    var result1 = ${ban_acc};
+                    if (result1) {
+                        alert("Tài khoản đã bị cấm bởi admin.");
+                    }
+                </script>
 
                 <c:if test="${requestScope.SIGNUP_SUCCESS}">
                     <c:set var="signup_successfully" value="${requestScope.SIGNUP_SUCCESS}" scope="request" />
                 </c:if>
                 <script>
-                    var results = ${signup_successfully};
-                    if (results) {
+                    var result2 = ${signup_successfully};
+                    if (result2) {
                         alert("Đăng ký thành công.");
                     }
                 </script>
 
                 <div class="small">
                     <p>Don’t you have an account? <a href="registration.jsp">Sign up</a></p>
-                    <p><a href="changepassword.jsp">Change Pass</a></p>
+                    <p><a href="forgot_password.jsp">Forgot password?</a></p>
                 </div>
                 <br/>
 

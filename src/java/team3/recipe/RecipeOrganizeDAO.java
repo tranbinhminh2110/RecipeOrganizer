@@ -53,8 +53,8 @@ public class RecipeOrganizeDAO implements Serializable {
                     boolean role = rs.getBoolean("role");
                     int status = rs.getInt("status");
                     String token = rs.getString("token");
-
-                    result = new RecipeOrganizeDTO(userID, userName, password, fullName, phone, status, role, token);
+                    String email = rs.getString("email");
+                    result = new RecipeOrganizeDTO(userID, userName, password, fullName, phone, status, role, token, email);
 
                 }
             }
@@ -126,34 +126,36 @@ public class RecipeOrganizeDAO implements Serializable {
         }
 
     }
-     */
-    Connection conn = null;
+*/
+   Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-
-    public List<RecipeOrganizeDTO> getAllRecipe() {
+    
+    public List<RecipeOrganizeDTO> getAllRecipe(){
         List<RecipeOrganizeDTO> list = new ArrayList<>();
         String query = "SELECT * from recipe";
         try {
             conn = new DBUtils().getConnection();
             ps = conn.prepareCall(query);;
             rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new RecipeOrganizeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
-            }
-        } catch (Exception e) {
+        while(rs.next()){
+            list.add(new RecipeOrganizeDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7)));
         }
-
-        return list;
+        } catch (Exception e){
+        }
+        
+                return list;
     }
 
-    public boolean SignUp(String username, String password, String fullname, String phone, int status, boolean role, String token)
+    
+
+    public boolean SignUp(String username, String password, String fullname, String phone, int status, boolean role, String token, String email)
             throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
 
-        String query = "INSERT into account(userName, password, fullName, phone, status, role, token)"
-                + " Values(?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT into account(userName, password, fullName, phone, status, role, token, email)"
+                + " Values(?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             con = DBUtils.getConnection();
             stm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);// phần userID là tăng dần ko cần phải tự tay chèn
@@ -164,8 +166,9 @@ public class RecipeOrganizeDAO implements Serializable {
             stm.setInt(5, status);
             stm.setBoolean(6, role);
             stm.setString(7, token);
+            stm.setString(8, email);
             int row = stm.executeUpdate();
-
+        
             if (row > 0) {
                 return true;
             }
@@ -181,26 +184,10 @@ public class RecipeOrganizeDAO implements Serializable {
         return false;
 
     }
-
-    public static void changePassword(String username, String newPassword) throws SQLException, ClassNotFoundException {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            con = DBUtils.getConnection();
-            String sql = "UPDATE account SET password = ? WHERE userName = ?";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, newPassword);
-            pstmt.setString(2, username);
-            pstmt.executeUpdate();
-        } finally {
-            if (pstmt != null) {
-                pstmt.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
+  
     }
+        
+    
 
-}
+
+

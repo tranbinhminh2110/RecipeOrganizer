@@ -25,7 +25,7 @@ public class DispatchController extends HttpServlet {
     private final String LOGIN_CONTROLLER = "LoginController";
     private final String SEARCH_RECIPE = "SearchRecipe";
     private final String SIGN_UP_CONTROLLER = "SignUpController";
-    private final String CHANGE_PASS_CONTROLLER = "ChangePassController";
+    private final String RESET_PASSWORD_CONTROLLER = "ResetPasswordController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,23 +36,25 @@ public class DispatchController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, NullPointerException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String url = HOME_PAGE;
         String button = "";
         button = request.getParameter("btAction");
         try {
             if (button.equals("Login")) {
-               url = LOGIN_CONTROLLER;
-           } else if (button.equals("Search")) {
-               url = SEARCH_RECIPE;
-           } else if (button.equals("Sign up")) {
-               url = SIGN_UP_CONTROLLER;
-           } else if (button.equals("Save")) {
-               url = CHANGE_PASS_CONTROLLER;
-           }
-        }finally {
+                url = LOGIN_CONTROLLER;
+            } else if (button.equals("Search")) {
+                url = SEARCH_RECIPE;
+            } else if (button.equals("Sign up")) {
+                url = SIGN_UP_CONTROLLER;
+            } else if (button.equals("Send")) {
+                url = RESET_PASSWORD_CONTROLLER;
+            }
+        } catch (NullPointerException ex) {
+            ex.getMessage();
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

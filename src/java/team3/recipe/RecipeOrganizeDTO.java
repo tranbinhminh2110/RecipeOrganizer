@@ -22,6 +22,7 @@ public class RecipeOrganizeDTO implements Serializable {
     private int status;
     private boolean role;
     private String token;
+    private String email;
     
     // khởi tạo biến cho good's recipe
     private int recipeID;
@@ -37,7 +38,7 @@ public class RecipeOrganizeDTO implements Serializable {
     }
 
     // khởi tạo hàm khởi tạo accounts
-    public RecipeOrganizeDTO(int userID, String userName, String password, String fullName, String phone, int status, boolean role, String token) {
+    public RecipeOrganizeDTO(int userID, String userName, String password, String fullName, String phone, int status, boolean role, String token, String email) {
      
         this.userID = userID;
         this.userName = userName;
@@ -47,6 +48,7 @@ public class RecipeOrganizeDTO implements Serializable {
         this.status = status;
         this.role = role;
         this.token = token;
+        this.email = email;
     }
 
     public RecipeOrganizeDTO(int recipeID, String recipeName, String caloRecipe, String description, String imgUrl, int avgRating, String difficulty) {
@@ -58,25 +60,6 @@ public class RecipeOrganizeDTO implements Serializable {
         this.avgRating = avgRating;
         this.difficulty = difficulty;
     }
-
-    public RecipeOrganizeDTO(int userID, String userName, String password, String fullName, String phone, int status, boolean role, String token, int recipeID, String recipeName, String caloRecipe, String description, String imgUrl, int avgRating, String difficulty) {
-        this.userID = userID;
-        this.userName = userName;
-        this.password = password;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.status = status;
-        this.role = role;
-        this.token = token;
-        this.recipeID = recipeID;
-        this.recipeName = recipeName;
-        this.caloRecipe = caloRecipe;
-        this.description = description;
-        this.imgUrl = imgUrl;
-        this.avgRating = avgRating;
-        this.difficulty = difficulty;
-    }
-
 
     
 
@@ -128,7 +111,7 @@ public class RecipeOrganizeDTO implements Serializable {
         this.status = status;
     }
 
-    public boolean isRole() {
+    public boolean getRole() {
         return role;
     }
 
@@ -200,10 +183,16 @@ public class RecipeOrganizeDTO implements Serializable {
         this.difficulty = difficulty;
     }
 
-    // khởi tạo hàm khởi tạo for all
-
-    public boolean getRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+
+    
 
 }

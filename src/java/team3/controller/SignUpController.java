@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.regex.Pattern;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,6 +53,7 @@ public class SignUpController extends HttpServlet {
         String confirm = request.getParameter("txtrepassword");
         String fullName = request.getParameter("txtfullname");
         String phone = request.getParameter("txtphone");
+        String email = request.getParameter("txtemail");
         
         RegistrationCreateError errors = new RegistrationCreateError();
         boolean foundError = false;
@@ -76,11 +78,21 @@ public class SignUpController extends HttpServlet {
                 errors.setFullNameLengthError("Fullname length requires 1 - 50 characters");
             }
 
-            if (phone.trim().length() != 10) {
+            if (phone.trim().length() != 10 && phone.trim().length() != 0) {
                 foundError = true;
                 errors.setPhoneLengthError("Phone number must have 10 digits");
+            } else if (phone.trim().length() == 0) {
+                phone = null;
             }
-
+            
+            String email_pattern = "^[A-Za-z0-9]+@[A-Za-z0-9.-]+$";
+            Pattern pattern = Pattern.compile(email_pattern);
+            boolean isValidEmail = pattern.matcher(email).matches();
+            if (isValidEmail == false) {
+                foundError = true;
+                errors.setEmailError("Email is invalid");
+            }
+            
             if (foundError) {
                 url = REGISTRATION_PAGE;
                 request.setAttribute("ERROR", errors);
@@ -90,7 +102,7 @@ public class SignUpController extends HttpServlet {
                 String formattedNumber = String.format("%03d", randomNumber); // Định dạng thành 3 chữ số
                 String token = "token" + formattedNumber;                
                 RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-                boolean result = dao.SignUp(username, password, fullName, phone, 1, false, token);
+                boolean result = dao.SignUp(username, password, fullName, phone, 1, false, token, email);
             
                 if (result) {
                     url = LOGIN_PAGE;

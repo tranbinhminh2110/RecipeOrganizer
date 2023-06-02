@@ -11,7 +11,8 @@ CREATE TABLE account (
   phone VARCHAR(12) NULL,
   status INT NOT NULL,
   role bit NOT NULL,
-  token NVARCHAR(50) NOT NULL
+  token NVARCHAR(50) NOT NULL,
+  email VARCHAR(100)NOT NULL
 );
 
 
@@ -70,10 +71,10 @@ CREATE TABLE category (
   FOREIGN KEY (recipeID) REFERENCES recipe(recipeID)
 );
 -- Chèn dữ liệu vào bảng account
-INSERT INTO account (userName, password, fullName, phone, status, role, token)
-VALUES ('admin', '123', 'John Doe', '1234567890', 1, 1, 'token123'),
-       ('jane456', 'password456', 'Jane Smith', '9876543210', 1, 0, 'token456'),
-	   ('mary789', 'password789', 'Mary Johnson', '5555555555', 1, 0, 'token789');
+INSERT INTO account (userName, password, fullName, phone, status, role, token, email)
+VALUES ('admin', '123', 'John Doe', '1234567890', 1, 1, 'token123', 'abc@gmail.com'),
+       ('jane456', 'password456', 'Jane Smith', '9876543210', 1, 0, 'token456', 'abcd@gmail.com'),
+	   ('mary789', 'password789', 'Mary Johnson', '5555555555', 1, 0, 'token789', 'abcde@gmail.com');
 
 -- Chèn dữ liệu vào bảng recipe
 INSERT INTO recipe (recipeID, recipeName, caloRecipe, description, imgUrl, avgRating, difficulty)
