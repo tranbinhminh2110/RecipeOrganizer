@@ -126,28 +126,26 @@ public class RecipeOrganizeDAO implements Serializable {
         }
 
     }
-*/
-   Connection conn = null;
+     */
+    Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    
-    public List<RecipeOrganizeDTO> getAllRecipe(){
+
+    public List<RecipeOrganizeDTO> getAllRecipe() {
         List<RecipeOrganizeDTO> list = new ArrayList<>();
         String query = "SELECT * from recipe";
         try {
             conn = new DBUtils().getConnection();
             ps = conn.prepareCall(query);;
             rs = ps.executeQuery();
-        while(rs.next()){
-            list.add(new RecipeOrganizeDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7)));
+            while (rs.next()) {
+                list.add(new RecipeOrganizeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+            }
+        } catch (Exception e) {
         }
-        } catch (Exception e){
-        }
-        
-                return list;
-    }
 
-    
+        return list;
+    }
 
     public boolean SignUp(String username, String password, String fullname, String phone, int status, boolean role, String token, String email)
             throws SQLException, NamingException, ClassNotFoundException {
@@ -168,7 +166,7 @@ public class RecipeOrganizeDAO implements Serializable {
             stm.setString(7, token);
             stm.setString(8, email);
             int row = stm.executeUpdate();
-        
+
             if (row > 0) {
                 return true;
             }
@@ -184,10 +182,26 @@ public class RecipeOrganizeDAO implements Serializable {
         return false;
 
     }
-  
+
+    public static void changePassword(String username, String newPassword) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DBUtils.getConnection();
+            String sql = "UPDATE account SET password = ? WHERE userName = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, username);
+            pstmt.executeUpdate();
+        } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
-        
-    
 
-
-
+}

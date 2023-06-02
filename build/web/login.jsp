@@ -83,6 +83,7 @@
                 <div class="small">
                     <p>Don’t you have an account? <a href="registration.jsp">Sign up</a></p>
                     <p><a href="forgot_password.jsp">Forgot password?</a></p>
+                    <p><a href="changepassword.jsp">Change Password</a></p>
                 </div>
                 <br/>
 
