@@ -15,6 +15,7 @@
               rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/css.css">
+        <link rel="stylesheet" href="login.css">
         Specify app's client ID 
         <meta name="google-signin-client_id" content="555035018766-035ln8ai7e46bk1gltin1pmc3s9uv6g5.apps.googleusercontent.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
