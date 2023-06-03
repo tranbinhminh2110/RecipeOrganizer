@@ -56,7 +56,7 @@ public class DispatchController extends HttpServlet {
                 url = RESET_PASSWORD_CONTROLLER;
             }
         } catch (NullPointerException ex) {
-            ex.getMessage();
+         
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

@@ -71,7 +71,7 @@ public class ResetPasswordController extends HttpServlet {
                 }
             }
         } catch (NullPointerException ex) {
-            ex.printStackTrace();
+           
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
