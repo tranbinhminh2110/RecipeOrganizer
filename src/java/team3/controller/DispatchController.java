@@ -25,9 +25,8 @@ public class DispatchController extends HttpServlet {
     private final String LOGIN_CONTROLLER = "LoginController";
     private final String SEARCH_RECIPE = "SearchRecipe";
     private final String SIGN_UP_CONTROLLER = "SignUpController";
+    private final String SEND_EMAIL_TO_GET_TOKEN_CONTROLLER = "SendEmailToGetTokenController";
     private final String RESET_PASSWORD_CONTROLLER = "ResetPasswordController";
-    private final String CHANGE_PASS_CONTROLLER = "ChangePasswordController";
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,11 +51,10 @@ public class DispatchController extends HttpServlet {
             } else if (button.equals("Sign up")) {
                 url = SIGN_UP_CONTROLLER;
             } else if (button.equals("Send")) {
+                url = SEND_EMAIL_TO_GET_TOKEN_CONTROLLER;
+            }else if (button.equals("Reset")) {
                 url = RESET_PASSWORD_CONTROLLER;
-            } else if (button.equals("Save")) {
-               url = CHANGE_PASS_CONTROLLER;
-           }
-
+            }
         } catch (NullPointerException ex) {
             ex.getMessage();
         } finally {

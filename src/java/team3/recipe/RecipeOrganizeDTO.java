@@ -37,6 +37,15 @@ public class RecipeOrganizeDTO implements Serializable {
     public RecipeOrganizeDTO() {
     }
 
+    // hàm khởi tạo để get token từ email 
+    public RecipeOrganizeDTO(int userID, String token, String email) {
+        this.userID = userID;
+        this.token = token;
+        this.email = email;
+    }
+
+    
+    
     // khởi tạo hàm khởi tạo accounts
     public RecipeOrganizeDTO(int userID, String userName, String password, String fullName, String phone, int status, boolean role, String token, String email) {
      

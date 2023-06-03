@@ -12,7 +12,7 @@ CREATE TABLE account (
   status INT NOT NULL,
   role bit NOT NULL,
   token NVARCHAR(50) NOT NULL,
-  email VARCHAR(100)NOT NULL
+  email VARCHAR(100) UNIQUE NOT NULL
 );
 
 
@@ -73,7 +73,7 @@ CREATE TABLE category (
 -- Chèn dữ liệu vào bảng account
 INSERT INTO account (userName, password, fullName, phone, status, role, token, email)
 VALUES ('admin', '123', 'John Doe', '1234567890', 1, 1, 'token123', 'abc@gmail.com'),
-       ('jane456', 'password456', 'Jane Smith', '9876543210', 1, 0, 'token456', 'abcd@gmail.com'),
+       ('jane456', 'password456', 'Jane Smith', '9876543210', 0, 0, 'token456', 'abcd@gmail.com'),
 	   ('mary789', 'password789', 'Mary Johnson', '5555555555', 1, 0, 'token789', 'abcde@gmail.com');
 
 -- Chèn dữ liệu vào bảng recipe

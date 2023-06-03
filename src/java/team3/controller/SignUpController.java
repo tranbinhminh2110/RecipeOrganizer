@@ -54,21 +54,23 @@ public class SignUpController extends HttpServlet {
         String fullName = request.getParameter("txtfullname");
         String phone = request.getParameter("txtphone");
         String email = request.getParameter("txtemail");
-        
+
+        RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
         RegistrationCreateError errors = new RegistrationCreateError();
         boolean foundError = false;
         boolean signup_success = false;
+        boolean existed_email = false;
+
         try {
             if (username.trim().length() < 1 || username.trim().length() > 30) {
                 foundError = true;
                 errors.setUsernameLengthError("Username length requires 1 - 30 characters");
             }
-            
+
             if (password.trim().length() < 1 || password.trim().length() > 30) {
                 foundError = true;
                 errors.setPasswordLengError("Password length requires 1 - 30 characters");
-            } 
-            else if (!confirm.trim().equals(password.trim())) {
+            } else if (!confirm.trim().equals(password.trim())) {
                 foundError = true;
                 errors.setConfirmError("Confirm must match password");
             }
@@ -84,15 +86,27 @@ public class SignUpController extends HttpServlet {
             } else if (phone.trim().length() == 0) {
                 phone = null;
             }
-            
+
             String email_pattern = "^[A-Za-z0-9]+@[A-Za-z0-9.-]+$";
             Pattern pattern = Pattern.compile(email_pattern);
             boolean isValidEmail = pattern.matcher(email).matches();
+            List<String> list = dao.getEmailToCheck(email);
+            for (String checkemail : list) {
+                if (email.trim().equals(checkemail)) {
+                    existed_email = true;
+                    request.setAttribute("EXSITED_EMAIL", existed_email);
+                    break;
+                }
+
+            }
             if (isValidEmail == false) {
                 foundError = true;
-                errors.setEmailError("Email is invalid");
+                errors.setEmailError("Invalid Email");
+            } else if (isValidEmail && existed_email) {
+                foundError = true;
+                errors.setExistedEmailError("Existed Email");
             }
-            
+
             if (foundError) {
                 url = REGISTRATION_PAGE;
                 request.setAttribute("ERROR", errors);
@@ -100,15 +114,12 @@ public class SignUpController extends HttpServlet {
                 Random random = new Random();
                 int randomNumber = random.nextInt(1000); // Số ngẫu nhiên từ 0 đến 999
                 String formattedNumber = String.format("%03d", randomNumber); // Định dạng thành 3 chữ số
-                String token = "token" + formattedNumber;                
-                RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                String token = "token" + formattedNumber;
                 boolean result = dao.SignUp(username, password, fullName, phone, 1, false, token, email);
-            
                 if (result) {
                     url = LOGIN_PAGE;
                     signup_success = true;
                     request.setAttribute("SIGNUP_SUCCESS", signup_success);
-           
                 }
             }
 

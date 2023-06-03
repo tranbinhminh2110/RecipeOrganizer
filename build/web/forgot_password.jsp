@@ -3,7 +3,7 @@
     Created on : Jun 1, 2023, 7:39:04 PM
     Author     : MSI BH
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,20 +16,62 @@
         <p>Enter your email address and we will send you code to reset your password.</p>
         <form action="DispatchController" method="POST">
             <table>
-                        <tr>
-                            <td>Email</td>
-                            <td><input type="text" name ="txtemail">
-                            <input type="submit" value ="Send" name="btAction">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Code</td>
-                            <td><input type="password" name ="txttoken"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><input type="submit" value ="Reset" name="btAction"></td>
-                        </tr>
-                    </table>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name ="txtemail" value="${param.txtemail}" placeholder="Enter your email">
+                        <input type="submit" value ="Send" name="btAction">
+                        <font color="red">
+                        <c:set var="errors" value="${requestScope.ERROR}" />
+                        <c:if test="${not empty errors}">
+                            <c:if test="${not empty errors.emailError}">
+                                ${errors.emailError} <br/>
+                            </c:if>
+                            <c:if test="${not empty errors.inexistingEmailError}">
+                                <p>${errors.inexistingEmailError} <br/></p>
+                                <p>Don’t you have an account? <a href="registration.jsp">Sign up</a></p>
+                            </c:if>
+                        </c:if>
+                        </font>
+                    </td>              
+                </tr>
+
+                <tr>
+                    <td>Code</td>
+                    <td><input type="password" name ="txttoken" value="${param.txttoken}" placeholder="Enter your token">
+                        <font color="red">
+                        <c:set var="invalid_code" value="${requestScope.INVALID_CODE}" />
+                        <c:if test="${not empty invalid_code}">                           
+                            ${invalid_code} <br/>
+                        </c:if>
+                        </font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name ="txtpassword" value="${param.txtpassword}" placeholder="New password">
+                        <font color="red">
+                        <c:set var="invalid_password" value="${requestScope.INVALID_PASSWORD}" />
+                        <c:if test="${not empty invalid_password}">                           
+                            ${invalid_password} <br/>
+                        </c:if>
+                        </font>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value ="Reset" name="btAction"></td>
+                </tr>
+            </table>
         </form>
+        <c:if test="${requestScope.SEND_SUCCESS}">
+            <c:set var="send_success" value="${requestScope.SEND_SUCCESS}" scope="request" />
+        </c:if>
+        <script>
+                    var result = ${send_success};
+                    if (result) {
+                        alert("Gửi mail thành công.");
+                    }
+        </script>
+
+
     </body>
 </html>

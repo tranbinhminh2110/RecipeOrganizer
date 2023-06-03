@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="team3.recipe.RecipeOrganizeDTO"%>
 <%@page import="team3.recipe.RecipeOrganizeDTO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +25,17 @@
     </head>
 
     <body>
+
+        <c:if test="${requestScope.RESET_PASSWORD_SUCCESS}">
+            <c:set var="reset_password_success" value="${requestScope.RESET_PASSWORD_SUCCESS}" scope="request" />
+        </c:if>
+        <script>
+                    var result = ${reset_password_success};
+                    if (result) {
+                        alert("Reset your password successfully.");
+                    }
+        </script>
+
         <!-- Preloader -->
         <div id="preloader">
             <i class="circle-preloader"></i>
@@ -298,8 +310,9 @@
                     <div class="col-12">
                         <!-- Cta Content -->
                         <div class="cta-content text-center">
-                            <h2>Healthy Food Recipes</h2>
-                            <p>Healthy foods are foods that are healthy, safe and healthy for the user's body. Using organic foods, natural foods, free of harmful impurities, minimal processing to keep the essence of food are the principles of healthy food. As a result, healthy food brings positive values to users' health.</p>                            <a href="#" class="btn delicious-btn">Discover all the receipies</a>
+                            <h2>Gluten Free Receipies</h2>
+                            <p>Fusce nec ante vitae lacus aliquet vulputate. Donec scelerisque accumsan molestie. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras sed accumsan neque. Ut vulputate, lectus vel aliquam congue, risus leo elementum nibh</p>
+                            <a href="#" class="btn delicious-btn">Discover all the receipies</a>
                         </div>
                     </div>
                 </div>

@@ -12,14 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sign Up Page</title>
         <script src="js/signup_error.js"></script>
-        <link rel="stylesheet" href="registration.css">
     </head>
     <body>
-        <div class="signup-header">
-            <h1>Sign Up</h1>
-        </div>
         <form action="DispatchController" method="POST" class="form-signup">
-<!--            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Sign up</h1>-->
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Sign up</h1>
             <div class="aleart alert-danger" role="alert">
                 ${mes}
             </div>
@@ -107,8 +103,12 @@
                             <c:if test="${not empty errors.emailError}">
                                 ${errors.emailError} <br/>
                             </c:if>
+                                <c:if test="${not empty errors.existedEmailError}">
+                                ${errors.existedEmailError} <br/>
+                            </c:if>
                         </c:if>
                         </font>
+                        
                     </td>
 
                 </tr>

@@ -19,6 +19,8 @@ public class RegistrationCreateError implements Serializable{
     private String fullNameLengthError;
     private String phoneLengthError;
     private String emailError;
+    private String existedEmailError;
+    private String inexistingEmailError;
     
     public String getUsernameLengthError() {
         return usernameLengthError;
@@ -74,6 +76,22 @@ public class RegistrationCreateError implements Serializable{
 
     public void setEmailError(String emailError) {
         this.emailError = emailError;
+    }
+
+    public String getExistedEmailError() {
+        return existedEmailError;
+    }
+
+    public void setExistedEmailError(String existedEmailError) {
+        this.existedEmailError = existedEmailError;
+    }
+
+    public String getInexistingEmailError() {
+        return inexistingEmailError;
+    }
+
+    public void setInexistingEmailError(String inexistingEmailError) {
+        this.inexistingEmailError = inexistingEmailError;
     }
 
     
