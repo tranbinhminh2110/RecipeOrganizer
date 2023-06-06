@@ -85,6 +85,8 @@ public class SendEmailToGetTokenController extends HttpServlet {
                 url = RESET_PASSWORD_PAGE;
                 request.setAttribute("ERROR", errors);
             } else {
+                int count = 1;//biến đếm để set trạng thái của trang forgot_password.jsp
+                request.setAttribute("COUNT", count);
                 url = RESET_PASSWORD_PAGE;
                 // Email team 3
                 final String team3_email = "doanphamdangkhoitd2@gmail.com";

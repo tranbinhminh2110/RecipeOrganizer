@@ -35,6 +35,9 @@
                     </td>              
                 </tr>
 
+         
+                <c:if test="${requestScope.COUNT == 1}">
+                     <c:if test="${empty errors.emailError and empty errors.inexistingEmailError}">
                 <tr>
                     <td>Code</td>
                     <td><input type="password" name ="txttoken" value="${param.txttoken}" placeholder="Enter your token">
@@ -60,6 +63,9 @@
                 <tr>
                     <td colspan="2"><input type="submit" value ="Reset" name="btAction"></td>
                 </tr>
+                </c:if>
+                </c:if>
+                
             </table>
         </form>
         <c:if test="${requestScope.SEND_SUCCESS}">

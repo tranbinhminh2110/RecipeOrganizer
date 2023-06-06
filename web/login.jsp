@@ -19,10 +19,8 @@
         <meta name="google-signin-client_id" content="555035018766-035ln8ai7e46bk1gltin1pmc3s9uv6g5.apps.googleusercontent.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        Google Platform library
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        Google Recaptcha
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        
+        
     </head>
     <body>
 
@@ -88,8 +86,7 @@
 
                 <!--Sign in google button-->             
                 <div id="my-signin2" data-onsuccess="onSignIn"></div>  
-                <!--Recaptcha-->
-                <div class="g-recaptcha" data-sitekey="6Lfgcr4gAAAAACF-d6wRjCIvvYwqn8cwCLyNy9HP"></div> 
+                
             </div>		
         </div>
         <!--Sign in google function-->
@@ -121,5 +118,8 @@
             }
         </script>
         <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+        
+        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8084/RecipeOrgainze/login-google&response_type=code
+    &client_id=416998610666-lbm6raon0at7tl6ldiiippgtsfbfq10e.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>  
     </body>
 </html>
