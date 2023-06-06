@@ -7,28 +7,22 @@ package team3.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import team3.recipe.RecipeOrganizeDAO;
+import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
- * @author THIS PC
+ * @author AS
  */
-@WebServlet(name = "DispatchController", urlPatterns = {"/DispatchController"})
-public class DispatchController extends HttpServlet {
+@WebServlet(name = "SearchController", urlPatterns = {"/SearchController"})
+public class SearchController extends HttpServlet {
 
-    private final String HOME_PAGE = "homePage.jsp";
-    private final String LOGIN_CONTROLLER = "LoginController";
-    private final String SEARCH_RECIPE = "SearchRecipe";
-    private final String SIGN_UP_CONTROLLER = "SignUpController";
-    private final String SEND_EMAIL_TO_GET_TOKEN_CONTROLLER = "SendEmailToGetTokenController";
-    private final String RESET_PASSWORD_CONTROLLER = "ResetPasswordController";
-    private final String CHANGE_PASS_CONTROLLER = "ChangePasswordController";
-    private final String SEARCH_CONTROLLER = "SearchController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,30 +35,16 @@ public class DispatchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String url = HOME_PAGE;
-        String button = request.getParameter("btAction");
+        request.setCharacterEncoding("UTF-8");
+        String searchValue = request.getParameter("txtSearch");
         try {
-            if (button.equals("Login")) {
-                url = LOGIN_CONTROLLER;
-            } else if (button.equals("Search")) {
-                url = SEARCH_RECIPE;
-            } else if (button.equals("Sign up")) {
-                url = SIGN_UP_CONTROLLER;
-            } else if (button.equals("Send")) {
-                url = SEND_EMAIL_TO_GET_TOKEN_CONTROLLER;
-            } else if (button.equals("Reset")) {
-                url = RESET_PASSWORD_CONTROLLER;
-            } else if (button.equals("Save")) {
-               url = CHANGE_PASS_CONTROLLER;
-            } else if(button.equals("search")){
-               url = SEARCH_CONTROLLER;
-           }
-        } catch (NullPointerException ex) {
-         
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+            List<RecipeOrganizeDTO> list = dao.searchRecipe(searchValue);
+            request.setAttribute("listP", list);
+            request.getRequestDispatcher("searchRecipe.jsp").forward(request, response);
+            request.setAttribute("txtS", searchValue);
+        }catch(Exception e){
+            
         }
     }
 

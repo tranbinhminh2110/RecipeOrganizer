@@ -10,12 +10,14 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Login page</title>      
+        <title>Login page</title>   
+        <link rel="icon" href="img/recipe/favicon.ico">
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
               rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/css.css">
-       
+        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     </head>
     <body>
@@ -38,7 +40,7 @@
                             <td><input type="password" name ="txtPassword"></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><input type="submit" value ="Login" name="btAction"></td>
+                        <td colspan="2"><input type="submit" value ="Login" name="btAction"></td>
                         </tr>
 
                     </table>
@@ -85,16 +87,27 @@
                 </script>
 
                 <div class="small">
-                    <p>Don’t you have an account? <a href="registration.jsp">Sign up</a></p>
-                    <p><a href="forgot_password.jsp">Forgot password?</a></p>
+                    <p>Don’t you have an account? <a href="registration.jsp" style="color: green;">Sign up</a></p><br/>
+                    <p><a href="forgot_password.jsp" style="color: green;">Forgot password?</a></p>
+                    <p><a href="changepassword.jsp" style="color: green;">Change Password</a></p><br/>
+                    <button><a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8084/RecipeOrgainze/login-google&response_type=code
+                   &client_id=416998610666-lbm6raon0at7tl6ldiiippgtsfbfq10e.apps.googleusercontent.com&approval_prompt=force" class="google-login-button">
+                            <i class="fab fa-google"></i> Login with google</a> </button>
                 </div>
                 <br/>
 
-                
+                <style>
+                    .google-login-button {
+                        display: inline-block;
+                        background-color: #dd4b39;
+                        color: #fff;
+                        padding: 10px 20px;
+                        text-decoration: none;
+                        border-radius: 4px;
+                        font-weight: bold;
+                    }
+                </style>
 
-        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8084/RecipeOrgainze/login-google&response_type=code
-           &client_id=416998610666-lbm6raon0at7tl6ldiiippgtsfbfq10e.apps.googleusercontent.com&approval_prompt=force">  
-         <button>Sign in with google</button>
-        </a>  
-    </body>
-</html>
+                
+                </body>
+                </html>

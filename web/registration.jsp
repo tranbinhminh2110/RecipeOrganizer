@@ -9,9 +9,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="img/recipe/favicon.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sign Up Page</title>
         <script src="js/signup_error.js"></script>
+        <link rel="stylesheet" href="registration.css">
     </head>
     <body>
         <form action="DispatchController" method="POST" class="form-signup">

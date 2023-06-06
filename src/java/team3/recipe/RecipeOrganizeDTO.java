@@ -12,8 +12,7 @@ import java.io.Serializable;
  * @author THIS PC
  */
 public class RecipeOrganizeDTO implements Serializable {
-    // khởi tạo biến cho accounts
-    
+    // khởi tạo biến cho accounts   
     private int userID;
     private String userName;
     private String password;
@@ -24,7 +23,7 @@ public class RecipeOrganizeDTO implements Serializable {
     private String token;
     private String email;
     
-    // khởi tạo biến cho good's recipe
+    // khởi tạo biến cho recipe
     private int recipeID;
     private String recipeName;
     private String caloRecipe;
@@ -33,6 +32,11 @@ public class RecipeOrganizeDTO implements Serializable {
     private int avgRating;
     private String difficulty;
 
+    // khởi tạo biến cho category
+    private int categoryID;
+    private String categoryName;
+    
+    
     // khởi tạo hàm khởi tạo ko tham số
     public RecipeOrganizeDTO() {
     }
@@ -46,7 +50,7 @@ public class RecipeOrganizeDTO implements Serializable {
 
     
     
-    // khởi tạo hàm khởi tạo accounts
+    // hàm khởi tạo cho accounts
     public RecipeOrganizeDTO(int userID, String userName, String password, String fullName, String phone, int status, boolean role, String token, String email) {
      
         this.userID = userID;
@@ -60,6 +64,7 @@ public class RecipeOrganizeDTO implements Serializable {
         this.email = email;
     }
 
+    //hàm khởi tạo cho recipe
     public RecipeOrganizeDTO(int recipeID, String recipeName, String caloRecipe, String description, String imgUrl, int avgRating, String difficulty) {
         this.recipeID = recipeID;
         this.recipeName = recipeName;
@@ -70,6 +75,12 @@ public class RecipeOrganizeDTO implements Serializable {
         this.difficulty = difficulty;
     }
 
+    //hàm khởi tạo cho category
+
+    public RecipeOrganizeDTO(int categoryID, String categoryName) {
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
+    }
     
 
     public int getUserID() {
@@ -200,8 +211,21 @@ public class RecipeOrganizeDTO implements Serializable {
         this.email = email;
     }
 
-    
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     
-
 }

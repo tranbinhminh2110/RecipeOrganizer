@@ -8,14 +8,12 @@ package team3.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import team3.recipe.RecipeOrganizeDAO;
 import team3.recipe.RecipeOrganizeDTO;
 
@@ -23,13 +21,10 @@ import team3.recipe.RecipeOrganizeDTO;
  *
  * @author THIS PC
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
-
-    private final String INVALID_PAGE = "invalid.html";
-    private final String ADMIN_PAGE = "admin.jsp";
+@WebServlet(name = "ChangePasswordController", urlPatterns = {"/ChangePasswordController"})
+public class ChangePasswordController extends HttpServlet {
     private final String LOGIN_PAGE = "login.jsp";
-    private final String USER_PAGE = "user.jsp";
+    private final String CHANGE_PASSWORD_PAGE = "changepassword.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,61 +38,22 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String url = INVALID_PAGE;
         String userName = request.getParameter("txtUsername");
-        String password = request.getParameter("txtPassword");
-        String email;
-        if (request.getAttribute("email_name") == null) {
-            email = null;
-        } else {
-            email = request.getAttribute("email_name").toString();
-        }
-        boolean invalid = false;
-        boolean ban_acc = false;
-        boolean invalid_gmail = false;
+        String currentPassword = request.getParameter("txtCurrentPassword");
+        String newPassword = request.getParameter("txtNewPassword");
+        String url = CHANGE_PASSWORD_PAGE;
         try {
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            RecipeOrganizeDTO result = dao.checkLogin(userName, password);
-            RecipeOrganizeDTO results = dao.loginByGmail(email);
-            if (email == null) {
-                if (result != null) {
-                    if (result.getStatus() == 1) {
-                        if (result.getRole() == true) {
-                            url = ADMIN_PAGE;
-                        } else if (result.getRole() == false) {
-                            url = USER_PAGE;
-                        }
-                    } else {
-                        url = LOGIN_PAGE;
-                        ban_acc = true;
-                        request.setAttribute("BAN_ACC", ban_acc);
-                    }
-                } else {
-                    url = LOGIN_PAGE;
-                    invalid = true;
-                    request.setAttribute("WRONG", invalid);
-                }
+            RecipeOrganizeDTO isLogin = dao.checkLogin(userName, currentPassword);
+            if (isLogin != null) {
+                RecipeOrganizeDAO.changePassword(userName, newPassword);
+                request.setAttribute("message", "Change password successfully!");
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
             } else {
-                if (results != null) {
-
-                    if (results.getStatus() == 1) {
-                        if (results.getRole() == true) {
-                            url = ADMIN_PAGE;
-                        } else if (results.getRole() == false) {
-                            url = USER_PAGE;
-                        }
-                    } else {
-                        url = LOGIN_PAGE;
-                        ban_acc = true;
-                        request.setAttribute("BAN_ACC", ban_acc);
-                    }
-
-                } else {
-                    url = LOGIN_PAGE;
-                    invalid_gmail = true;
-                    request.setAttribute("GMAIL_HAVEN_NOT_IN_DATABASE", invalid_gmail);
-                }
+                request.setAttribute("message", "The current password is incorrect. Please check again!");
+                RequestDispatcher rd = request.getRequestDispatcher("changepassword.jsp");
+                rd.forward(request, response);
             }
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -108,6 +64,7 @@ public class LoginController extends HttpServlet {
             rd.forward(request, response);
         }
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

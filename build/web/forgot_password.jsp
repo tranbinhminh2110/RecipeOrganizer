@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="img/recipe/favicon.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reset Password</title>
     </head>
