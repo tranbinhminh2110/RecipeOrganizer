@@ -126,29 +126,25 @@ public class RecipeOrganizeDAO implements Serializable {
         }
 
     }
-*/
-   
-    
-    public List<RecipeOrganizeDTO> getAllRecipe(){
+     */
+    public List<RecipeOrganizeDTO> getAllRecipe() {
         Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<RecipeOrganizeDTO> list = new ArrayList<>();
         String query = "SELECT * from recipe";
         try {
             conn = new DBUtils().getConnection();
             ps = conn.prepareCall(query);;
             rs = ps.executeQuery();
-        while(rs.next()){
-            list.add(new RecipeOrganizeDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7)));
+            while (rs.next()) {
+                list.add(new RecipeOrganizeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+            }
+        } catch (Exception e) {
         }
-        } catch (Exception e){
-        }
-        
-                return list;
-    }
 
-    
+        return list;
+    }
 
     public boolean SignUp(String username, String password, String fullname, String phone, int status, boolean role, String token, String email)
             throws SQLException, NamingException, ClassNotFoundException {
@@ -169,7 +165,7 @@ public class RecipeOrganizeDAO implements Serializable {
             stm.setString(7, token);
             stm.setString(8, email);
             int row = stm.executeUpdate();
-        
+
             if (row > 0) {
                 return true;
             }
@@ -185,24 +181,24 @@ public class RecipeOrganizeDAO implements Serializable {
         return false;
 
     }
-  
+
     public List<String> getEmailToCheck(String email) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         List<String> list = new ArrayList<>();
         String query = "Select email "
-                        + "From account "
-                        + "Where email = ? ";
-                        
+                + "From account "
+                + "Where email = ? ";
+
         try {
             con = new DBUtils().getConnection();
             stm = con.prepareStatement(query);
             stm.setString(1, email);
             rs = stm.executeQuery();
-      
+
             while (rs.next()) {
-                
+
                 list.add(rs.getString("email"));
             }
         } finally {
@@ -218,23 +214,22 @@ public class RecipeOrganizeDAO implements Serializable {
         }
         return list;
     }
-    
+
     public RecipeOrganizeDTO getTokenToResetPassword(String email) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         RecipeOrganizeDTO result = null;
         String query = "Select userID, token, email "
-                        + "From account "
-                        + "Where email = ? ";
-  
-                        
+                + "From account "
+                + "Where email = ? ";
+
         try {
             con = new DBUtils().getConnection();
             stm = con.prepareStatement(query);
             stm.setString(1, email);
             rs = stm.executeQuery();
-      
+
             if (rs.next()) {
                 int userID = rs.getInt("userID");
                 String token = rs.getString("token");
@@ -253,8 +248,8 @@ public class RecipeOrganizeDAO implements Serializable {
         }
         return result;
     }
-    
-        public boolean resetPassword(String password, String email, String token) throws ClassNotFoundException, SQLException {
+
+    public boolean resetPassword(String password, String email, String token) throws ClassNotFoundException, SQLException {
 
         Connection con = null;
         PreparedStatement stm = null;
@@ -285,10 +280,53 @@ public class RecipeOrganizeDAO implements Serializable {
         }
         return false;
     }
-    
+
+    public RecipeOrganizeDTO loginByGmail(String email)
+            throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        RecipeOrganizeDTO result = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Select * "
+                        + "From account "
+                        + "Where email = ? ";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+
+                    int userID = rs.getInt("userID");
+                    String userName = rs.getString("userName");
+                    String password = rs.getString("password");
+                    String fullName = rs.getString("fullName");
+                    String phone = rs.getString("phone");
+                    boolean role = rs.getBoolean("role");
+                    int status = rs.getInt("status");
+                    String token = rs.getString("token");
+                    result = new RecipeOrganizeDTO(userID, userName, password, fullName, phone, status, role, token, email);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
     }
-        
-    
 
-
-
+}

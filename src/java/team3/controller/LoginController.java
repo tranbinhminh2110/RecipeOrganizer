@@ -8,6 +8,7 @@ package team3.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,27 +47,52 @@ public class LoginController extends HttpServlet {
         String url = INVALID_PAGE;
         String userName = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
+        String email = request.getAttribute("email_name").toString();
         boolean invalid = false;
         boolean ban_acc = false;
+        boolean invalid_gmail = false;
         try {
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
             RecipeOrganizeDTO result = dao.checkLogin(userName, password);
-            if (result != null) {
-                if (result.getStatus() == 1) {
-                    if (result.getRole() == true) {
-                        url = ADMIN_PAGE;
-                    } else if (result.getRole() == false) {
-                        url = USER_PAGE;
+            RecipeOrganizeDTO results = dao.loginByGmail(email);
+            if (email == null) {
+                if (result != null) {
+                    if (result.getStatus() == 1) {
+                        if (result.getRole() == true) {
+                            url = ADMIN_PAGE;
+                        } else if (result.getRole() == false) {
+                            url = USER_PAGE;
+                        }
+                    } else {
+                        url = LOGIN_PAGE;
+                        ban_acc = true;
+                        request.setAttribute("BAN_ACC", ban_acc);
                     }
                 } else {
                     url = LOGIN_PAGE;
-                    ban_acc = true;
-                    request.setAttribute("BAN_ACC", ban_acc);
+                    invalid = true;
+                    request.setAttribute("WRONG", invalid);
                 }
             } else {
-                url = LOGIN_PAGE;
-                invalid = true;
-                request.setAttribute("WRONG", invalid);
+                if (results != null) {
+
+                    if (results.getStatus() == 1) {
+                        if (results.getRole() == true) {
+                            url = ADMIN_PAGE;
+                        } else if (results.getRole() == false) {
+                            url = USER_PAGE;
+                        }
+                    } else {
+                        url = LOGIN_PAGE;
+                        ban_acc = true;
+                        request.setAttribute("BAN_ACC", ban_acc);
+                    }
+
+                } else {
+                    url = LOGIN_PAGE;
+                    invalid_gmail = true;
+                    request.setAttribute("GMAIL_HAVEN_NOT_IN_DATABASE", invalid_gmail);
+                }
             }
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();

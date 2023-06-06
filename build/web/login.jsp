@@ -15,12 +15,8 @@
               rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/css.css">
-        Specify app's client ID 
-        <meta name="google-signin-client_id" content="555035018766-035ln8ai7e46bk1gltin1pmc3s9uv6g5.apps.googleusercontent.com">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        
-        
+       
+
     </head>
     <body>
 
@@ -78,48 +74,27 @@
                     }
                 </script>
 
+                <c:if test="${requestScope.GMAIL_HAVEN_NOT_IN_DATABASE}">
+                    <c:set var="gmail_have_not_in_database" value="${requestScope.GMAIL_HAVEN_NOT_IN_DATABASE}" scope="request" />
+                </c:if>
+                <script>
+                    var result3 = ${gmail_have_not_in_database};
+                    if (result3) {
+                        alert("Bạn chưa đăng ký tài khoản");
+                    }
+                </script>
+
                 <div class="small">
                     <p>Don’t you have an account? <a href="registration.jsp">Sign up</a></p>
                     <p><a href="forgot_password.jsp">Forgot password?</a></p>
                 </div>
                 <br/>
 
-                <!--Sign in google button-->             
-                <div id="my-signin2" data-onsuccess="onSignIn"></div>  
                 
-            </div>		
-        </div>
-        <!--Sign in google function-->
-        <script>
-            function onSuccess(googleUser) {
-                console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-            }
-            function onFailure(error) {
-                console.log(error);
-            }
-            function renderButton() {
-                gapi.signin2.render('my-signin2', {
-                    'scope': 'profile email',
-                    'width': 240,
-                    'height': 50,
-                    'longtitle': true,
-                    'theme': 'dark',
-                    'onsuccess': onSuccess,
-                    'onfailure': onFailure
-                });
-            }
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                console.log('ID: ' + profile.getId());
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail());
-                window.location.href = 'loginServlet?action=Google&name=' + reponse.name + '&email=' + response.email + '&id=' + response.id;
-            }
-        </script>
-        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-        
+
         <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8084/RecipeOrgainze/login-google&response_type=code
-    &client_id=416998610666-lbm6raon0at7tl6ldiiippgtsfbfq10e.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>  
+           &client_id=416998610666-lbm6raon0at7tl6ldiiippgtsfbfq10e.apps.googleusercontent.com&approval_prompt=force">  
+         <button>Sign in with google</button>
+        </a>  
     </body>
 </html>

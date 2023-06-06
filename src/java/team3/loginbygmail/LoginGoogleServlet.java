@@ -33,14 +33,14 @@ public class LoginGoogleServlet extends HttpServlet {
         } else {
             String accessToken = GoogleUtils.getToken(code);
             GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
-            request.setAttribute("id", googlePojo.getId());
-            request.setAttribute("name", googlePojo.getName());
-            request.setAttribute("verified_email", googlePojo.isVerified_email());
-            request.setAttribute("given_name", googlePojo.getGiven_name());
-            request.setAttribute("family_name", googlePojo.getFamily_name());
-            request.setAttribute("picture", googlePojo.getPicture());
-            request.setAttribute("email", googlePojo.getEmail());
-            RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
+//            request.setAttribute("id", googlePojo.getId());
+//            request.setAttribute("name", googlePojo.getName());
+//            request.setAttribute("verified_email", googlePojo.isVerified_email());
+//            request.setAttribute("given_name", googlePojo.getGiven_name());
+//            request.setAttribute("family_name", googlePojo.getFamily_name());
+//            request.setAttribute("picture", googlePojo.getPicture());
+            request.setAttribute("email_name", googlePojo.getEmail());
+            RequestDispatcher dis = request.getRequestDispatcher("LoginController");
             dis.forward(request, response);
         }
     }
