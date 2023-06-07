@@ -7,29 +7,22 @@ package team3.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import team3.recipe.RecipeOrganizeDAO;
+import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
  * @author THIS PC
  */
-@WebServlet(name = "DispatchController", urlPatterns = {"/DispatchController"})
-public class DispatchController extends HttpServlet {
-
-    private final String HOME_PAGE = "homePage.jsp";
-    private final String LOGIN_CONTROLLER = "LoginController";
-    private final String SEARCH_RECIPE = "SearchRecipe";
-    private final String SIGN_UP_CONTROLLER = "SignUpController";
-    private final String SEND_EMAIL_TO_GET_TOKEN_CONTROLLER = "SendEmailToGetTokenController";
-    private final String RESET_PASSWORD_CONTROLLER = "ResetPasswordController";
-    private final String CHANGE_PASS_CONTROLLER = "ChangePasswordController";
-    private final String SEARCH_CONTROLLER = "SearchController";
-    private final String UPDATE_PROFILE_CONTROLLER = "UpdateProfileServlet";
+@WebServlet(name = "ProfileController", urlPatterns = {"/ProfileController"})
+public class ProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,36 +36,32 @@ public class DispatchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
 
-        String url = HOME_PAGE;
-        String button = request.getParameter("btAction");
-        try {
-            if (button.equals("Login")) {
-                url = LOGIN_CONTROLLER;
-            } else if (button.equals("Search")) {
-                url = SEARCH_RECIPE;
-            } else if (button.equals("Sign up")) {
-                url = SIGN_UP_CONTROLLER;
-            } else if (button.equals("Send")) {
-                url = SEND_EMAIL_TO_GET_TOKEN_CONTROLLER;
-            } else if (button.equals("Reset")) {
-                url = RESET_PASSWORD_CONTROLLER;
-            } else if (button.equals("Save")) {
-                url = CHANGE_PASS_CONTROLLER;
-            } else if (button.equals("search")) {
-                url = SEARCH_CONTROLLER;
-            } else if (button.equals("Update")) {
-                url = UPDATE_PROFILE_CONTROLLER;
+        if (session != null && session.getAttribute("user") != null) {
+            RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("user");
+            String userName = user.getUserName();
+            RecipeOrganizeDTO profile = null;
+
+            try {
+                RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                profile = dao.getProfile(userName);
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
             }
-        } catch (NullPointerException ex) {
 
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            if (profile != null) {
+                request.setAttribute("profile", profile);
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            }
+        } else {
+            response.sendRedirect(request.getContextPath() + "login.jsp");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

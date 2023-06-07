@@ -8,10 +8,8 @@ package team3.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,15 +19,11 @@ import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
- * @author THIS PC
+ * @author tranb
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
-
-    private final String INVALID_PAGE = "invalid.html";
-    private final String ADMIN_PAGE = "admin.jsp";
-    private final String LOGIN_PAGE = "login.jsp";
-    private final String USER_PAGE = "user.jsp";
+public class UpdateProfileServlet extends HttpServlet {
+    private final String PROFILE_CONTROLLER = "profile.jsp";
+    private final String UPDATE_PROFILE_CONTROLLER = "updateprofile.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,63 +37,27 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String url = INVALID_PAGE;
+        String url = UPDATE_PROFILE_CONTROLLER;
+        RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+        
         String userName = request.getParameter("txtUsername");
-        String password = request.getParameter("txtPassword");
-        String email;
-        if (request.getAttribute("email_name") == null) {
-            email = null;
-        } else {
-            email = request.getAttribute("email_name").toString();
-        }
-        boolean invalid = false;
-        boolean ban_acc = false;
-        boolean invalid_gmail = false;
+        String fullName = request.getParameter("txtFullname");
+        String phone = request.getParameter("txtPhone");
+        String email = request.getParameter("txtEmail");
+       
         try {
-            RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            RecipeOrganizeDTO result = dao.checkLogin(userName, password);
-            RecipeOrganizeDTO results = dao.loginByGmail(email);
-            if (email == null) {
-                if (result != null) {
-                    if (result.getStatus() == 1) {
-                        HttpSession session = request.getSession();
-                        session.setAttribute("user", result);
-                        if (result.getRole() == true) {
-                            url = ADMIN_PAGE;
-                        } else if (result.getRole() == false) {
-                            url = USER_PAGE;
-                        }
-                    } else {
-                        url = LOGIN_PAGE;
-                        ban_acc = true;
-                        request.setAttribute("BAN_ACC", ban_acc);
-                    }
-                } else {
-                    url = LOGIN_PAGE;
-                    invalid = true;
-                    request.setAttribute("WRONG", invalid);
+            
+            boolean update = dao.searchAccount(fullName, phone, email);
+            if (update == false) {
+                boolean result = RecipeOrganizeDAO.updateProfileAccount(userName, fullName, phone, email);
+                if( result){
+                    request.setAttribute("message", "update successfully!");
+                    url = PROFILE_CONTROLLER;
                 }
+                
             } else {
-                if (results != null) {
-
-                    if (results.getStatus() == 1) {
-                        if (results.getRole() == true) {
-                            url = ADMIN_PAGE;
-                        } else if (results.getRole() == false) {
-                            url = USER_PAGE;
-                        }
-                    } else {
-                        url = LOGIN_PAGE;
-                        ban_acc = true;
-                        request.setAttribute("BAN_ACC", ban_acc);
-                    }
-
-                } else {
-                    url = LOGIN_PAGE;
-                    invalid_gmail = true;
-                    request.setAttribute("GMAIL_HAVEN_NOT_IN_DATABASE", invalid_gmail);
-                }
+                request.setAttribute("message", "Data existed. Please check again!");
+                url = UPDATE_PROFILE_CONTROLLER;
             }
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -110,6 +68,7 @@ public class LoginController extends HttpServlet {
             rd.forward(request, response);
         }
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -149,5 +108,4 @@ public class LoginController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

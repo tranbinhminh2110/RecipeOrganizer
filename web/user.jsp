@@ -13,5 +13,8 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <div class="small">
+            <p><a href="profile.jsp">Profile</a></p>
+        </div>
     </body>
 </html>

@@ -397,6 +397,118 @@ public class RecipeOrganizeDAO implements Serializable {
             }
         }       return list;
     }
+    public boolean searchAccount(String fullName, String phone, String email )
+            throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
 
-    
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Select * "
+                        + "From account "
+                        + "Where fullName = ? or phone = ? or email = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1,fullName);
+                stm.setString(2,phone);
+                stm.setString(3,email);
+
+                rs = stm.executeQuery();
+
+                if (rs.next())
+                    return true;
+            }
+
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean updateProfileAccount(String userName, String fullName, String phone, String email) 
+            throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE  account "
+                        + "SET fullName = ? , phone = ? , email = ? "
+                        + "WHERE userName = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(4, userName);
+                stm.setString(1, fullName);
+                stm.setString(2, phone);
+                stm.setString(3, email);
+                
+                int rs = stm.executeUpdate();
+                if (rs > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return false;
+    }
+
+    public RecipeOrganizeDTO getProfile(String userName) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        RecipeOrganizeDTO result = null;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT * FROM account WHERE userName = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, userName);
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+                    int userID = rs.getInt("userID");
+                    String password = rs.getString("password");
+                    String fullName = rs.getString("fullName");
+                    String phone = rs.getString("phone");
+                    boolean role = rs.getBoolean("role");
+                    int status = rs.getInt("status");
+                    String token = rs.getString("token");
+                    String email = rs.getString("email");
+                    result = new RecipeOrganizeDTO(userID, userName, password, fullName, phone, status, role, token, email);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
+    }
 }
+    
+
