@@ -87,7 +87,7 @@
                 </script>
 
                 <div class="small">
-                    <p>Don’t you have an account? <a href="registration.jsp" style="color: green;">Sign up</a></p><br/>
+                    <p>Don’t you have an account? <a href="registration.jsp" style="color: green;">Sign up</a></p>
                     <p><a href="forgot_password.jsp" style="color: green;">Forgot password?</a></p>
                     <button><a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8084/RecipeOrgainze/login-google&response_type=code
                    &client_id=416998610666-lbm6raon0at7tl6ldiiippgtsfbfq10e.apps.googleusercontent.com&approval_prompt=force" class="google-login-button">

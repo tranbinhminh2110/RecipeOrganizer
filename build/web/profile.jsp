@@ -25,6 +25,12 @@
 
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="style.css">
+        <style>
+            body{
+                margin-top:20px;
+                background:#f8f8f8
+            }
+        </style> 
     </head>
     <body>
         <!-- Preloader -->
@@ -62,7 +68,7 @@
                                 <div id="breakingNewsTicker" class="ticker">
                                     <ul>
                                         <li><a href="#">Hello World!</a></li>
-                                        <li><a href="#">Welcome to Recipe Organize.</a></li>
+                                        <li><a href="#">Welcome to Recipe Organize! </a></li>
                                         <li><a href="#">Hello Delicious!</a></li>
                                     </ul>
                                 </div>
@@ -151,35 +157,184 @@
                     </div>
                 </div>
             </div>
+
+            <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb4.jpg);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="breadcumb-text text-center">
+                                <h2>Profile</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <br>
         </header>
         <header>
-            <h1>Account Information</h1>
             <%
                 RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("user");
                 if (user != null) {
-            %>
-            <form action="ProfileController" method = "post">
-                <table>
-                    <tr>
-                        <td>Full Name:</td>
-                        <td><%= user.getFullName()%></td>
-                    </tr>
-                    <tr>
-                        <td>Phone:</td>
-                        <td><%= user.getPhone()%></td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td><%= user.getEmail()%></td>
-                    </tr>
-                    <!--                <tr>
-                                        <td colspan="2"><input type="submit" value ="Update" name="btAction"></td>
-                                    </tr>-->
-                </table>
-            </form>   
-            <p><a href="updateprofile.jsp" style="color: green;">Update Profile</a></p>
-            <p><a href="changepassword.jsp" style="color: green;">Change Password</a></p><br/>
 
+            %>
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+            <div class="container">
+                <div class="row flex-lg-nowrap">
+
+                    <div class="col">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="e-profile">
+
+                                            <form action="ProfileController" method = "post"> 
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-auto mb-3">
+                                                        <div class="mx-auto" style="width: 140px;">
+                                                            <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                                                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                                                        <div class="text-center text-sm-left mb-2 mb-sm-0">
+                                                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= user.getFullName()%></h4>
+                                                            <p class="mb-0"><%= user.getUserName()%></p>
+                                                            <p class="mb-0"><%= user.getPhone()%></p>
+                                                            <div class="text-muted"><%= user.getEmail()%></small></div>
+                                                            <div class="mt-2">
+                                                                <button class="btn btn-primary" type="button">
+                                                                    <i class="fa fa-fw fa-camera"></i>
+                                                                    <span>Change Photo</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-center text-sm-right">
+                                                            <span class="badge badge-secondary">User</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
+                                            <% String message = (String) request.getAttribute("message"); %>
+                                            <% if (message != null) {%>
+                                            <p><%= message%></p>
+                                            <% }%>                                            
+                                            <ul class="nav nav-tabs">
+                                                <li class="nav-item"><a href="" class="active nav-link">Update Profile</a></li>
+                                            </ul>
+                                            <div class="tab-content pt-3">
+                                                <div class="tab-pane active">
+                                                    <form action="DispatchController" method="post" class="form" novalidate="">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>Full Name</label>
+                                                                            <input class="form-control" type="text" name="txtFullname" placeholder="Sign in here">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>Phone</label>
+                                                                            <input class="form-control" type="text" name="txtPhone" placeholder="Sign in here"">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>Email</label>
+                                                                            <input class="form-control" type="text" name="txtEmail" placeholder="user@example.com">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Username</label>
+                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="submit" value ="Update" name="btAction" class="btn btn-primary">
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="tab-content pt-3">
+                                                <div class="tab-pane active">
+                                                    <form action="DispatchController" method="post" class="form" novalidate="">
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-6 mb-3">
+                                                                <div class="mb-2"><b>Change Password</b></div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>Username</label>
+                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>Current Password</label>
+                                                                            <input class="form-control" type="password" name="txtCurrentPassword" placeholder="Enter a current password">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>New Password</label>
+                                                                            <input class="form-control" type="password" name="txtNewPassword" placeholder="Enter a new password">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col d-flex justify-content-end">
+                                                                <input type="submit" value ="Save" name="btAction" class="btn btn-primary">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-3 mb-3">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="px-xl-3">
+                                            <button class="btn btn-block btn-secondary">
+                                                <i class="fa fa-sign-out"></i>
+                                                <span>Logout</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title font-weight-bold">Support</h6>
+                                        <p class="card-text">Get fast, free help from our friendly assistants.</p>
+                                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <%
             } else {
             %>

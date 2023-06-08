@@ -52,7 +52,7 @@ public class ChangePasswordController extends HttpServlet {
                 rd.forward(request, response);
             } else {
                 request.setAttribute("message", "The current password is incorrect. Please check again!");
-                RequestDispatcher rd = request.getRequestDispatcher("changepassword.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
                 rd.forward(request, response);
             }
         } catch (ClassNotFoundException ex) {

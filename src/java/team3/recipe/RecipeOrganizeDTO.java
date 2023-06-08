@@ -81,6 +81,12 @@ public class RecipeOrganizeDTO implements Serializable {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
     }
+
+//    RecipeOrganizeDTO(String fullName, String phone, String email) {
+//        this.fullName = fullName;
+//        this.phone = phone;
+//        this.email = email;
+//    }
     
 
     public int getUserID() {

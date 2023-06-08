@@ -22,8 +22,9 @@ import team3.recipe.RecipeOrganizeDTO;
  * @author tranb
  */
 public class UpdateProfileServlet extends HttpServlet {
+
     private final String PROFILE_CONTROLLER = "profile.jsp";
-    private final String UPDATE_PROFILE_CONTROLLER = "updateprofile.jsp";
+//    private final String UPDATE_PROFILE_CONTROLLER = "updateprofile.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,27 +38,28 @@ public class UpdateProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = UPDATE_PROFILE_CONTROLLER;
+        String url = PROFILE_CONTROLLER;
         RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-        
+
         String userName = request.getParameter("txtUsername");
         String fullName = request.getParameter("txtFullname");
         String phone = request.getParameter("txtPhone");
         String email = request.getParameter("txtEmail");
-       
+
         try {
-            
+
             boolean update = dao.searchAccount(fullName, phone, email);
             if (update == false) {
                 boolean result = RecipeOrganizeDAO.updateProfileAccount(userName, fullName, phone, email);
-                if( result){
-                    request.setAttribute("message", "update successfully!");
+                if (result) {
+                    request.setAttribute("message", "Update successfully!");
                     url = PROFILE_CONTROLLER;
+                    dao.searchAccount(fullName, phone, email);
                 }
-                
+
             } else {
                 request.setAttribute("message", "Data existed. Please check again!");
-                url = UPDATE_PROFILE_CONTROLLER;
+                url = PROFILE_CONTROLLER;
             }
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -68,7 +70,6 @@ public class UpdateProfileServlet extends HttpServlet {
             rd.forward(request, response);
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
