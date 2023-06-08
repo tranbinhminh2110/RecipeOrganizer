@@ -314,7 +314,7 @@ public final class homePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("        <!-- ##### Best Receipe Area Start ##### -->\r\n");
       out.write("        <section class=\"best-receipe-area\">\r\n");
-      out.write("            <div class=\"container\" href = \"HomePage.java\">\r\n");
+      out.write("            <div class=\"container\" >\r\n");
       out.write("                <div class=\"row\">\r\n");
       out.write("                    <div class=\"col-12\">\r\n");
       out.write("                        <div class=\"section-heading\">\r\n");

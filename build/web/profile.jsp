@@ -199,9 +199,9 @@
                                                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= user.getFullName()%></h4>
-                                                            <p class="mb-0"><%= user.getUserName()%></p>
-                                                            <p class="mb-0"><%= user.getPhone()%></p>
-                                                            <div class="text-muted"><%= user.getEmail()%></small></div>
+                                                            <p class="mb-0">Username: <%= user.getUserName()%></p>
+                                                            <p class="mb-0">Phone: <%= user.getPhone()%></p>
+                                                            <p class="mb-0">Email: <%= user.getEmail()%></p>
                                                             <div class="mt-2">
                                                                 <button class="btn btn-primary" type="button">
                                                                     <i class="fa fa-fw fa-camera"></i>
