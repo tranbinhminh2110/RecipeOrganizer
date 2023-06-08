@@ -209,9 +209,6 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <div class="text-center text-sm-right">
-                                                            <span class="badge badge-secondary">User</span>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </form>
@@ -312,16 +309,19 @@
                             </div>
 
                             <div class="col-12 col-md-3 mb-3">
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="px-xl-3">
-                                            <button class="btn btn-block btn-secondary">
-                                                <i class="fa fa-sign-out"></i>
-                                                <span>Logout</span>
-                                            </button>
+                                <form action="DispatchController" method ="post">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="px-xl-3">
+                                                <button class="btn btn-block btn-secondary">
+                                                    <i class="fa fa-sign-out"></i>
+                                                    <span>Log out</span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+
                                 <div class="card">
                                     <div class="card-body">
                                         <h6 class="card-title font-weight-bold">Support</h6>

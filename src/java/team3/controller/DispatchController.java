@@ -23,6 +23,7 @@ public class DispatchController extends HttpServlet {
 
     private final String HOME_PAGE = "homePage.jsp";
     private final String LOGIN_CONTROLLER = "LoginController";
+    private final String LOGOUT_CONTROLLER = "LogoutController";
     private final String SEARCH_RECIPE = "SearchRecipe";
     private final String SIGN_UP_CONTROLLER = "SignUpController";
     private final String SEND_EMAIL_TO_GET_TOKEN_CONTROLLER = "SendEmailToGetTokenController";
@@ -63,6 +64,8 @@ public class DispatchController extends HttpServlet {
                 url = SEARCH_CONTROLLER;
             } else if (button.equals("Update")) {
                 url = UPDATE_PROFILE_CONTROLLER;
+            }else if (button.equals("Log out")) {
+                url = LOGOUT_CONTROLLER;
             }
         } catch (NullPointerException ex) {
 
