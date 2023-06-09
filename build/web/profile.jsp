@@ -67,9 +67,15 @@
                             <div class="breaking-news">
                                 <div id="breakingNewsTicker" class="ticker">
                                     <ul>
-                                        <li><a href="#">Hello World!</a></li>
-                                        <li><a href="#">Welcome to Recipe Organize! </a></li>
-                                        <li><a href="#">Hello Delicious!</a></li>
+                                        <c:if test="${not empty sessionScope.ADMIN}">
+                                            <c:set var="customer" value="${sessionScope.ADMIN}" scope="request" />
+                                        </c:if>
+                                        <c:if test="${not empty sessionScope.USER}">
+                                            <c:set var="customer" value="${sessionScope.USER}" scope="request" />
+                                        </c:if>
+                                        <li><a href="#">Hello ${customer.fullName}</a></li>
+                                        <li><a href="#">Welcome to Recipe Organize</a></li>
+                                        <li><a href="#">Hi Delicious!</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -142,7 +148,7 @@
                                         <li><a href="receipe-post.html">Recipes</a></li>
                                         <li><a href="receipe-post.html">Healthy Food</a></li>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="login.jsp">Login</a></li>
+                                        <li><a href="login.jsp">Logout</a></li>
                                     </ul>
 
                                     <!-- Newsletter Form -->
@@ -172,8 +178,10 @@
         </header>
         <header>
             <%
-                RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("user");
-                if (user != null) {
+                RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+                if (user != null || admin != null) {
+                    if (user != null) {
 
             %>
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -212,249 +220,287 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                            <%
+                                                } else { 
+                                            %>
+                                            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+                                            <div class="container">
+                                                <div class="row flex-lg-nowrap">
 
-
-                                            <% String message = (String) request.getAttribute("message"); %>
-                                            <% if (message != null) {%>
-                                            <p><%= message%></p>
-                                            <% }%>                                            
-                                            <ul class="nav nav-tabs">
-                                                <li class="nav-item"><a href="" class="active nav-link">Update Profile</a></li>
-                                            </ul>
-                                            <div class="tab-content pt-3">
-                                                <div class="tab-pane active">
-                                                    <form action="DispatchController" method="post" class="form" novalidate="">
+                                                    <div class="col">
                                                         <div class="row">
-                                                            <div class="col">
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="form-group">
-                                                                            <label>Full Name</label>
-                                                                            <input class="form-control" type="text" name="txtFullname" placeholder="Sign in here">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <div class="form-group">
-                                                                            <label>Phone</label>
-                                                                            <input class="form-control" type="text" name="txtPhone" placeholder="Sign in here"">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="form-group">
-                                                                            <label>Email</label>
-                                                                            <input class="form-control" type="text" name="txtEmail" placeholder="user@example.com">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Username</label>
-                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <input type="submit" value ="Update" name="btAction" class="btn btn-primary">
-                                                                </div>
-                                                            </div> 
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                                            <div class="col mb-3">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="e-profile">
 
-                                            </div>
+                                                                            <form action="ProfileController" method = "post"> 
+                                                                                <div class="row">
+                                                                                    <div class="col-12 col-sm-auto mb-3">
+                                                                                        <div class="mx-auto" style="width: 140px;">
+                                                                                            <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                                                                                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                                                                                        <div class="text-center text-sm-left mb-2 mb-sm-0">
+                                                                                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= admin.getFullName()%></h4>
+                                                                                            <p class="mb-0">Username: <%= admin.getUserName()%></p>
+                                                                                            <p class="mb-0">Phone: <%= admin.getPhone()%></p>
+                                                                                            <p class="mb-0">Email: <%= admin.getEmail()%></p>
+                                                                                            <div class="mt-2">
+                                                                                                <button class="btn btn-primary" type="button">
+                                                                                                    <i class="fa fa-fw fa-camera"></i>
+                                                                                                    <span>Change Photo</span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                            <% } %>
+                                                                            <% String message = (String) request.getAttribute("message"); %>
+                                                                            <% if (message != null) {%>
+                                                                            <p><%= message%></p>
+                                                                            <% }%>                                            
+                                                                            <ul class="nav nav-tabs">
+                                                                                <li class="nav-item"><a href="" class="active nav-link">Update Profile</a></li>
+                                                                            </ul>
+                                                                            <div class="tab-content pt-3">
+                                                                                <div class="tab-pane active">
+                                                                                    <form action="DispatchController" method="post" class="form" novalidate="">
+                                                                                        <div class="row">
+                                                                                            <div class="col">
+                                                                                                <div class="row">
+                                                                                                    <div class="col">
+                                                                                                        <div class="form-group">
+                                                                                                            <label>Full Name</label>
+                                                                                                            <input class="form-control" type="text" name="txtFullname" placeholder="Sign in here">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col">
+                                                                                                        <div class="form-group">
+                                                                                                            <label>Phone</label>
+                                                                                                            <input class="form-control" type="text" name="txtPhone" placeholder="Sign in here"">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="row">
+                                                                                                    <div class="col">
+                                                                                                        <div class="form-group">
+                                                                                                            <label>Email</label>
+                                                                                                            <input class="form-control" type="text" name="txtEmail" placeholder="user@example.com">
+                                                                                                        </div>
+                                                                                                        <div class="form-group">
+                                                                                                            <label>Username</label>
+                                                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                    <input type="submit" value ="Update" name="btAction" class="btn btn-primary">
+                                                                                                </div>
+                                                                                            </div> 
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
 
-                                            <div class="tab-content pt-3">
-                                                <div class="tab-pane active">
-                                                    <form action="DispatchController" method="post" class="form" novalidate="">
-                                                        <div class="row">
-                                                            <div class="col-12 col-sm-6 mb-3">
-                                                                <div class="mb-2"><b>Change Password</b></div>
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="form-group">
-                                                                            <label>Username</label>
-                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="form-group">
-                                                                            <label>Current Password</label>
-                                                                            <input class="form-control" type="password" name="txtCurrentPassword" placeholder="Enter a current password">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="form-group">
-                                                                            <label>New Password</label>
-                                                                            <input class="form-control" type="password" name="txtNewPassword" placeholder="Enter a new password">
+                                                                            </div>
+
+                                                                            <div class="tab-content pt-3">
+                                                                                <div class="tab-pane active">
+                                                                                    <form action="DispatchController" method="post" class="form" novalidate="">
+                                                                                        <div class="row">
+                                                                                            <div class="col-12 col-sm-6 mb-3">
+                                                                                                <div class="mb-2"><b>Change Password</b></div>
+                                                                                                <div class="row">
+                                                                                                    <div class="col">
+                                                                                                        <div class="form-group">
+                                                                                                            <label>Username</label>
+                                                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="row">
+                                                                                                    <div class="col">
+                                                                                                        <div class="form-group">
+                                                                                                            <label>Current Password</label>
+                                                                                                            <input class="form-control" type="password" name="txtCurrentPassword" placeholder="Enter a current password">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="row">
+                                                                                                    <div class="col">
+                                                                                                        <div class="form-group">
+                                                                                                            <label>New Password</label>
+                                                                                                            <input class="form-control" type="password" name="txtNewPassword" placeholder="Enter a new password">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <div class="col d-flex justify-content-end">
+                                                                                                <input type="submit" value ="Save" name="btAction" class="btn btn-primary">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col d-flex justify-content-end">
-                                                                <input type="submit" value ="Save" name="btAction" class="btn btn-primary">
+
+                                                            <div class="col-12 col-md-3 mb-3">
+                                                                <form action="DispatchController" method ="post">
+                                                                    <div class="card mb-3">
+                                                                        <div class="card-body">
+                                                                            <div class="px-xl-3">
+                                                                                <button class="btn btn-block btn-secondary">
+                                                                                    <i class="fa fa-sign-out"></i>
+                                                                                    <span>Back</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <h6 class="card-title font-weight-bold">Support</h6>
+                                                                        <p class="card-text">Get fast, free help from our friendly assistants.</p>
+                                                                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </form>
 
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                            <%
+                                            } else {
+                                            %>
+                                            <p>Cannot find user with username <%= request.getParameter("txtUsername")%></p>
+                                            <%
+                                                }
+                                            %>
 
-                            <div class="col-12 col-md-3 mb-3">
-                                <form action="DispatchController" method ="post">
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <div class="px-xl-3">
-                                                <button class="btn btn-block btn-secondary">
-                                                    <i class="fa fa-sign-out"></i>
-                                                    <span>Log out</span>
-                                                </button>
+
+                                            </header>
+                                            <!-- ##### Follow Us Instagram Area Start ##### -->
+                                            <div class="follow-us-instagram">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h5>Follow Us Instragram</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Instagram Feeds -->
+                                                <div class="insta-feeds d-flex flex-wrap">
+                                                    <!-- Single Insta Feeds -->
+                                                    <div class="single-insta-feeds">
+                                                        <img src="img/bg-img/insta1.jpg" alt="">
+                                                        <!-- Icon -->
+                                                        <div class="insta-icon">
+                                                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Single Insta Feeds -->
+                                                    <div class="single-insta-feeds">
+                                                        <img src="img/bg-img/insta2.jpg" alt="">
+                                                        <!-- Icon -->
+                                                        <div class="insta-icon">
+                                                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Single Insta Feeds -->
+                                                    <div class="single-insta-feeds">
+                                                        <img src="img/bg-img/insta3.jpg" alt="">
+                                                        <!-- Icon -->
+                                                        <div class="insta-icon">
+                                                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Single Insta Feeds -->
+                                                    <div class="single-insta-feeds">
+                                                        <img src="img/bg-img/insta4.jpg" alt="">
+                                                        <!-- Icon -->
+                                                        <div class="insta-icon">
+                                                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Single Insta Feeds -->
+                                                    <div class="single-insta-feeds">
+                                                        <img src="img/bg-img/insta5.jpg" alt="">
+                                                        <!-- Icon -->
+                                                        <div class="insta-icon">
+                                                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Single Insta Feeds -->
+                                                    <div class="single-insta-feeds">
+                                                        <img src="img/bg-img/insta6.jpg" alt="">
+                                                        <!-- Icon -->
+                                                        <div class="insta-icon">
+                                                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Single Insta Feeds -->
+                                                    <div class="single-insta-feeds">
+                                                        <img src="img/bg-img/insta7.jpg" alt="">
+                                                        <!-- Icon -->
+                                                        <div class="insta-icon">
+                                                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                            <!-- ##### Follow Us Instagram Area End ##### -->
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h6 class="card-title font-weight-bold">Support</h6>
-                                        <p class="card-text">Get fast, free help from our friendly assistants.</p>
-                                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                            <!-- ##### Footer Area Start ##### -->
+                                            <footer class="footer-area">
+                                                <div class="container h-100">
+                                                    <div class="row h-100">
+                                                        <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
+                                                            <!-- Footer Social Info -->
+                                                            <div class="footer-social-info text-right">
+                                                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                                            </div>
+                                                            <!-- Footer Logo -->
+                                                            <div class="footer-logo">
+                                                                <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
+                                                            </div>
 
-                    </div>
-                </div>
-            </div>
-            <%
-            } else {
-            %>
-            <p>Cannot find user with username <%= request.getParameter("txtUsername")%></p>
-            <%
-                }
-            %>
-
-
-        </header>
-        <!-- ##### Follow Us Instagram Area Start ##### -->
-        <div class="follow-us-instagram">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h5>Follow Us Instragram</h5>
-                    </div>
-                </div>
-            </div>
-            <!-- Instagram Feeds -->
-            <div class="insta-feeds d-flex flex-wrap">
-                <!-- Single Insta Feeds -->
-                <div class="single-insta-feeds">
-                    <img src="img/bg-img/insta1.jpg" alt="">
-                    <!-- Icon -->
-                    <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <!-- Single Insta Feeds -->
-                <div class="single-insta-feeds">
-                    <img src="img/bg-img/insta2.jpg" alt="">
-                    <!-- Icon -->
-                    <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <!-- Single Insta Feeds -->
-                <div class="single-insta-feeds">
-                    <img src="img/bg-img/insta3.jpg" alt="">
-                    <!-- Icon -->
-                    <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <!-- Single Insta Feeds -->
-                <div class="single-insta-feeds">
-                    <img src="img/bg-img/insta4.jpg" alt="">
-                    <!-- Icon -->
-                    <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <!-- Single Insta Feeds -->
-                <div class="single-insta-feeds">
-                    <img src="img/bg-img/insta5.jpg" alt="">
-                    <!-- Icon -->
-                    <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <!-- Single Insta Feeds -->
-                <div class="single-insta-feeds">
-                    <img src="img/bg-img/insta6.jpg" alt="">
-                    <!-- Icon -->
-                    <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <!-- Single Insta Feeds -->
-                <div class="single-insta-feeds">
-                    <img src="img/bg-img/insta7.jpg" alt="">
-                    <!-- Icon -->
-                    <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ##### Follow Us Instagram Area End ##### -->
-
-        <!-- ##### Footer Area Start ##### -->
-        <footer class="footer-area">
-            <div class="container h-100">
-                <div class="row h-100">
-                    <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
-                        <!-- Footer Social Info -->
-                        <div class="footer-social-info text-right">
-                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </div>
-                        <!-- Footer Logo -->
-                        <div class="footer-logo">
-                            <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- ##### All Javascript Files ##### -->
-        <!-- jQuery-2.2.4 js -->
-        <script src="js/jquery/jquery-2.2.4.min.js"></script>
-        <!-- Popper js -->
-        <script src="js/bootstrap/popper.min.js"></script>
-        <!-- Bootstrap js -->
-        <script src="js/bootstrap/bootstrap.min.js"></script>
-        <!-- All Plugins js -->
-        <script src="js/plugins/plugins.js"></script>
-        <!-- Active js -->
-        <script src="js/active.js"></script>
-    </body>
-</html>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </footer>
+                                            <!-- ##### All Javascript Files ##### -->
+                                            <!-- jQuery-2.2.4 js -->
+                                            <script src="js/jquery/jquery-2.2.4.min.js"></script>
+                                            <!-- Popper js -->
+                                            <script src="js/bootstrap/popper.min.js"></script>
+                                            <!-- Bootstrap js -->
+                                            <script src="js/bootstrap/bootstrap.min.js"></script>
+                                            <!-- All Plugins js -->
+                                            <script src="js/plugins/plugins.js"></script>
+                                            <!-- Active js -->
+                                            <script src="js/active.js"></script>
+                                            </body>
+                                            </html>

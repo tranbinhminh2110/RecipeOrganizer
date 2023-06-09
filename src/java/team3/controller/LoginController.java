@@ -27,9 +27,8 @@ import team3.recipe.RecipeOrganizeDTO;
 public class LoginController extends HttpServlet {
 
     private final String INVALID_PAGE = "invalid.html";
-    private final String ADMIN_PAGE = "admin.jsp";
     private final String LOGIN_PAGE = "login.jsp";
-    private final String USER_PAGE = "user.jsp";
+    private final String HOME_PAGE = "homePage.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,15 +59,16 @@ public class LoginController extends HttpServlet {
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
             RecipeOrganizeDTO result = dao.checkLogin(userName, password);
             RecipeOrganizeDTO results = dao.loginByGmail(email);
+            HttpSession session = request.getSession(true);
             if (email == null) {
                 if (result != null) {
                     if (result.getStatus() == 1) {
-                        HttpSession session = request.getSession();
-                        session.setAttribute("user", result);
                         if (result.getRole() == true) {
-                            url = ADMIN_PAGE;
+                            session.setAttribute("ADMIN", result);
+                            url = HOME_PAGE;
                         } else if (result.getRole() == false) {
-                            url = USER_PAGE;
+                            session.setAttribute("USER", result);
+                            url = HOME_PAGE;
                         }
                     } else {
                         url = LOGIN_PAGE;
@@ -85,9 +85,11 @@ public class LoginController extends HttpServlet {
 
                     if (results.getStatus() == 1) {
                         if (results.getRole() == true) {
-                            url = ADMIN_PAGE;
+                            session.setAttribute("ADMIN", results);
+                            url = HOME_PAGE;
                         } else if (results.getRole() == false) {
-                            url = USER_PAGE;
+                            session.setAttribute("USER", results);
+                            url = HOME_PAGE;
                         }
                     } else {
                         url = LOGIN_PAGE;

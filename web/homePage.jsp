@@ -71,25 +71,31 @@
                             <div class="breaking-news">
                                 <div id="breakingNewsTicker" class="ticker">
                                     <ul>
-                                        <li><a href="#">Hello World!</a></li>
-                                        <li><a href="#">Welcome to Recipe Organize.</a></li>
-                                        <li><a href="#">Hello Delicious!</a></li>
+                                        <c:if test="${not empty sessionScope.ADMIN}">
+                                            <c:set var="customer" value="${sessionScope.ADMIN}" scope="request" />
+                                        </c:if>
+                                        <c:if test="${not empty sessionScope.USER}">
+                                            <c:set var="customer" value="${sessionScope.USER}" scope="request" />
+                                        </c:if>
+                                        <li><a href="#">Hello ${customer.fullName}</a></li>
+                                        <li><a href="#">Welcome to Recipe Organize</a></li>
+                                        <li><a href="#">Hi Delicious!</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Top Social Info -->
-                        <div class="col-12 col-sm-6">
-                            <div class="top-social-info text-right">
-                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="top-social-info text-right">
+                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -117,6 +123,7 @@
                                     <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                                 </div>
 
+                                
                                 <!-- Nav Start -->
                                 <div class="classynav">
                                     <ul>
@@ -146,7 +153,24 @@
                                         <li><a href="receipe-post.html">Recipes</a></li>
                                         <li><a href="receipe-post.html">Healthy Food</a></li>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="login.jsp">Login</a></li>
+                                            <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
+                                            <li><a href="login.jsp">Login</a></li>
+                                            </c:if>
+                                        <c:if test="${not empty sessionScope.ADMIN or not empty sessionScope.USER}">    
+                                        
+                                        <li><a href="#">User</a>
+                                            <div class="megamenu">
+                                                <ul class="dropdown">
+                                                    <li><a href="profile.jsp">Profile</a></li>
+                                                    <li><a href="setting_interface.jsp">Setting</a></li>
+                                                    <c:if test="${not empty sessionScope.ADMIN}">
+                                                    <li><a href="account_management.jsp">Management Account</a></li>
+                                                    </c:if>
+                                                    <li><a href="login.jsp">Logout</a> </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                            </c:if>                                        
                                     </ul>
 
                                     <!-- Newsletter Form -->
@@ -251,7 +275,7 @@
 
         <!-- ##### Best Receipe Area Start ##### -->
         <section class="best-receipe-area">
-            <div class="container" >
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="section-heading">
