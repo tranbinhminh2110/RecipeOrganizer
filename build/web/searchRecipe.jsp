@@ -95,7 +95,7 @@
                                                 </ul>
                                             </div>
                                         </li>
-                                        <li><a href="receipe-post.html">Recipes</a></li>
+                                        <li><a href="searchRecipe.jsp">Recipes</a></li>
                                         <li><a href="receipe-post.html">Healthy Food</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                         <li><a href="login.jsp">Login</a></li>

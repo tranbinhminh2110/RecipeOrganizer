@@ -166,7 +166,7 @@
                                                     <c:if test="${not empty sessionScope.ADMIN}">
                                                     <li><a href="account_management.jsp">Management Account</a></li>
                                                     </c:if>
-                                                    <li><a href="login.jsp">Logout</a> </li>
+                                                    <li><a href="LogoutController">Logout</a> </li>
                                                 </ul>
                                             </div>
                                         </li>

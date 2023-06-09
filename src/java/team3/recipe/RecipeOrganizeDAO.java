@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
 import javax.naming.NamingException;
+import team3.DTO.CategoryDTO;
+import team3.DTO.RecipeDTO;
 import team3.util.DBUtils;
 import team3.recipe.RecipeOrganizeDTO;
 
@@ -74,11 +76,11 @@ public class RecipeOrganizeDAO implements Serializable {
         return result;
     }
 
-    public List<RecipeOrganizeDTO> searchRecipe(String txtSearch) throws ClassNotFoundException, SQLException {
+    public List<RecipeDTO> searchRecipe(String txtSearch) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        List<RecipeOrganizeDTO> list = new ArrayList<>();
+        List<RecipeDTO> list = new ArrayList<>();
         try {
             String query = "SELECT *\n"
                     + "FROM recipe\n"
@@ -88,7 +90,7 @@ public class RecipeOrganizeDAO implements Serializable {
             stm.setString(1, "%" + txtSearch + "%");
             rs = stm.executeQuery();
             while (rs.next()) {
-                RecipeOrganizeDTO o = new RecipeOrganizeDTO(
+                RecipeDTO o = new RecipeDTO(
                          rs.getInt(1),
                          rs.getString(2),
                          rs.getString(3),
@@ -112,18 +114,18 @@ public class RecipeOrganizeDAO implements Serializable {
         }
         return list;
     }
-    public List<RecipeOrganizeDTO> getAllRecipe() {
+    public List<RecipeDTO> getAllRecipe() {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<RecipeOrganizeDTO> list = new ArrayList<>();
+        List<RecipeDTO> list = new ArrayList<>();
         String query = "SELECT * from recipe";
         try {
             conn = new DBUtils().getConnection();
             ps = conn.prepareCall(query);;
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new RecipeOrganizeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new RecipeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
             }
         } catch (Exception e) {
         }
@@ -335,8 +337,8 @@ public class RecipeOrganizeDAO implements Serializable {
         }
     }
     
-    public ArrayList<RecipeOrganizeDTO> getAllCategories() throws ClassNotFoundException, SQLException {
-        ArrayList<RecipeOrganizeDTO> list = new ArrayList<>();
+    public ArrayList<CategoryDTO> getAllCategories() throws ClassNotFoundException, SQLException {
+        ArrayList<CategoryDTO> list = new ArrayList<>();
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -351,7 +353,7 @@ public class RecipeOrganizeDAO implements Serializable {
                     while (rs.next()) {
                         int categoryID = rs.getInt(1);
                         String categoryName = rs.getString(2);
-                        RecipeOrganizeDTO o = new RecipeOrganizeDTO(categoryID, categoryName);
+                        CategoryDTO o = new CategoryDTO(categoryID, categoryName);
                         list.add(o);
                     }
                 }
@@ -370,32 +372,24 @@ public class RecipeOrganizeDAO implements Serializable {
         return list;
     }
     
-    public List<RecipeOrganizeDTO> getRecipeByCategory(String categoryID) throws ClassNotFoundException, SQLException {
-        List<RecipeOrganizeDTO> list = new ArrayList<>();
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        
+    public List<RecipeDTO> getRecipeByCategory(String categoryID) {
+        List<RecipeDTO> list = new ArrayList<>();
+        String query = "SELECT r.* FROM recipe r JOIN category c ON r.recipeID = c.recipeID WHERE c.categoryID = ?";
         try {
-            String query = "SELECT r.* FROM recipe r JOIN category c ON r.recipeID = c.recipeID WHERE c.categoryID = ?";
-            con = new DBUtils().getConnection();
-            stm = con.prepareCall(query);
-            stm.setString(1, categoryID);
-            rs = stm.executeQuery();
+            Connection conn = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            conn = new DBUtils().getConnection();
+            ps = conn.prepareCall(query);
+            ps.setString(1, categoryID);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new RecipeOrganizeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new RecipeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
             }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }       return list;
+        } catch (Exception e) {
+        }
+
+        return list;
     }
     public static boolean searchAccount(String fullName, String phone, String email )
             throws ClassNotFoundException, SQLException {

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import team3.DTO.RecipeDTO;
 import team3.recipe.RecipeOrganizeDAO;
 import team3.recipe.RecipeOrganizeDTO;
 
@@ -39,7 +40,7 @@ public class SearchController extends HttpServlet {
         String searchValue = request.getParameter("txtSearch");
         try {
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            List<RecipeOrganizeDTO> list = dao.searchRecipe(searchValue);
+            List<RecipeDTO> list = dao.searchRecipe(searchValue);
             request.setAttribute("listP", list);
             request.getRequestDispatcher("searchRecipe.jsp").forward(request, response);
             request.setAttribute("txtS", searchValue);

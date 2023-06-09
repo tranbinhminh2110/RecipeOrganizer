@@ -8,9 +8,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href="img/recipe/favicon.ico">
+        <link rel="icon" href="img/recipe/favicon.ico">       
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reset Password</title>
+        <link rel="stylesheet" type="text/css" href="forgot_password.css">
     </head>
     <body>
         <h1>Reset your password</h1>
@@ -36,47 +37,47 @@
                     </td>              
                 </tr>
 
-         
+
                 <c:if test="${requestScope.COUNT == 1}">
-                     <c:if test="${empty errors.emailError and empty errors.inexistingEmailError}">
-                <tr>
-                    <td>Code</td>
-                    <td><input type="password" name ="txttoken" value="${param.txttoken}" placeholder="Enter your token">
-                        <font color="red">
-                        <c:set var="invalid_code" value="${requestScope.INVALID_CODE}" />
-                        <c:if test="${not empty invalid_code}">                           
-                            ${invalid_code} <br/>
-                        </c:if>
-                        </font>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" name ="txtpassword" value="${param.txtpassword}" placeholder="New password">
-                        <font color="red">
-                        <c:set var="invalid_password" value="${requestScope.INVALID_PASSWORD}" />
-                        <c:if test="${not empty invalid_password}">                           
-                            ${invalid_password} <br/>
-                        </c:if>
-                        </font>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" value ="Reset" name="btAction"></td>
-                </tr>
+                    <c:if test="${empty errors.emailError and empty errors.inexistingEmailError}">
+                        <tr>
+                            <td>Code</td>
+                            <td><input type="password" name ="txttoken" value="${param.txttoken}" placeholder="Enter your token">
+                                <font color="red">
+                                <c:set var="invalid_code" value="${requestScope.INVALID_CODE}" />
+                                <c:if test="${not empty invalid_code}">                           
+                                    ${invalid_code} <br/>
+                                </c:if>
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" name ="txtpassword" value="${param.txtpassword}" placeholder="New password">
+                                <font color="red">
+                                <c:set var="invalid_password" value="${requestScope.INVALID_PASSWORD}" />
+                                <c:if test="${not empty invalid_password}">                           
+                                    ${invalid_password} <br/>
+                                </c:if>
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" value ="Reset" name="btAction"></td>
+                        </tr>
+                    </c:if>
                 </c:if>
-                </c:if>
-                
+
             </table>
         </form>
         <c:if test="${requestScope.SEND_SUCCESS}">
             <c:set var="send_success" value="${requestScope.SEND_SUCCESS}" scope="request" />
         </c:if>
         <script>
-                    var result = ${send_success};
-                    if (result) {
-                        alert("Gửi mail thành công.");
-                    }
+            var result = ${send_success};
+            if (result) {
+                alert("Gửi mail thành công.");
+            }
         </script>
 
 

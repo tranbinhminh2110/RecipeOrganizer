@@ -181,7 +181,7 @@
                 RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
                 RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
                 if (user != null || admin != null) {
-                    if (user != null && admin == null) {
+                    if (user != null) {
 
             %>
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

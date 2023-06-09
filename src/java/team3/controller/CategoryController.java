@@ -1,3 +1,7 @@
+
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,16 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import team3.recipe.RecipeOrganizeDAO;
-import team3.recipe.RecipeOrganizeDTO;
+import team3.DTO.RecipeDTO;
+import team3.DTO.AccountDTO;
+import team3.DTO.CategoryDTO;
 
 /**
  *
  * @author dangt
  */
+@WebServlet(name = "CategoryController", urlPatterns = {"/CategoryController"})
 public class CategoryController extends HttpServlet {
 
     /**
@@ -39,9 +47,9 @@ public class CategoryController extends HttpServlet {
         try {
             String categoryID = request.getParameter("categoryID");
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            ArrayList<RecipeOrganizeDTO> listCategories = dao.getAllCategories();
-            List<RecipeOrganizeDTO> listRecipe = dao.getAllRecipe();
-            List<RecipeOrganizeDTO> list = dao.getRecipeByCategory(categoryID);
+            ArrayList<CategoryDTO> listCategories = dao.getAllCategories();
+            List<RecipeDTO> listRecipe = dao.getAllRecipe();
+            List<RecipeDTO> list = dao.getRecipeByCategory(categoryID);
             
             try (PrintWriter out = response.getWriter()){
                 if (categoryID != null && !categoryID.isEmpty()) {
