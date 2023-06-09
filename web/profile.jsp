@@ -148,7 +148,7 @@
                                         <li><a href="receipe-post.html">Recipes</a></li>
                                         <li><a href="receipe-post.html">Healthy Food</a></li>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="login.jsp">Logout</a></li>
+                                        <li><a href="LogoutController">Logout</a></li>
                                     </ul>
 
                                     <!-- Newsletter Form -->
@@ -181,7 +181,7 @@
                 RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
                 RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
                 if (user != null || admin != null) {
-                    if (user != null) {
+                    if (user != null && admin == null) {
 
             %>
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

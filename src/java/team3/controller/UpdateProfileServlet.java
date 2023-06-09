@@ -39,39 +39,47 @@ public class UpdateProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = PROFILE_CONTROLLER;
-        RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
 
-        String userName = request.getParameter("txtUsername");
-        String fullName = request.getParameter("txtFullname");
-        String phone = request.getParameter("txtPhone");
-        String email = request.getParameter("txtEmail");
+        HttpSession session = request.getSession(false);
 
-        try {
+        if (session != null && session.getAttribute("USER") != null) {
+            RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+            String userName = request.getParameter("txtUsername");
+            String fullName = request.getParameter("txtFullname");
+            String phone = request.getParameter("txtPhone");
+            String email = request.getParameter("txtEmail");
 
-            boolean update = dao.searchAccount(fullName, phone, email);
-            if (update == false) {
-                boolean result = RecipeOrganizeDAO.updateProfileAccount(userName, fullName, phone, email);
-                if (result) {
-                    request.setAttribute("message", "Update successfully!");
+            try {
+                RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                boolean update = dao.searchAccount(fullName, phone, email);
+                if (update == false) {
+                    boolean result = RecipeOrganizeDAO.updateProfileAccount(userName, fullName, phone, email);
+                    user.setFullName(fullName);
+                    user.setPhone(phone);
+                    user.setEmail(email);
+                    session.setAttribute("USER", user);
+                    if (result) {
+                        request.setAttribute("message", "Update successfully!");
+                        url = PROFILE_CONTROLLER;
+                        dao.searchAccount(fullName, phone, email);
+                    }
+
+                } else {
+                    request.setAttribute("message", "Data existed. Please check again!");
                     url = PROFILE_CONTROLLER;
-                    dao.searchAccount(fullName, phone, email);
                 }
-
-            } else {
-                request.setAttribute("message", "Data existed. Please check again!");
-                url = PROFILE_CONTROLLER;
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

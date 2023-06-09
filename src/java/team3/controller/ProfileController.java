@@ -38,24 +38,26 @@ public class ProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
 
-        if (session != null && session.getAttribute("user") != null) {
-            RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("user");
-            String userName = user.getUserName();
-            RecipeOrganizeDTO profile = null;
-
-            try {
-                RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-                profile = dao.getProfile(userName);
-            } catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
-            }
-
-            if (profile != null) {
-                request.setAttribute("profile", profile);
-                request.getRequestDispatcher("profile.jsp").forward(request, response);
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            }
+        if (session != null && session.getAttribute("USER") != null) {
+            RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+            request.setAttribute("USER", user);
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
+//            String userName = user.getUserName();
+//            RecipeOrganizeDTO profile = null;
+//
+//            try {
+//                RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+//                profile = dao.getProfile(userName);
+//            } catch (ClassNotFoundException | SQLException e) {
+//                e.printStackTrace();
+//            }
+//
+//            if (profile != null) {
+//                request.setAttribute("profile", profile);
+//                request.getRequestDispatcher("profile.jsp").forward(request, response);
+//            } else {
+//                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//            }
         } else {
             response.sendRedirect(request.getContextPath() + "login.jsp");
         }
