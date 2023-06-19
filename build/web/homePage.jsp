@@ -50,9 +50,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form action="#" method="post">
-                            <input type="search" name="search" placeholder="Type any keywords...">
-                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        <form action="SearchController" method="post">
+                            <input type="search" name="txtSearch" placeholder="Type any keywords...">
+                            <button type="submit" name="btAction" value="search"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                                                 <li><a href="homePage.jsp">Home</a></li>
                                                 <li><a href="about.html">About Us</a></li>
                                                 <li><a href="blog-post.html">Blog Post</a></li>
-                                                <li><a href="receipe-post.html">Recipe Post</a></li>
+                                                <li><a href="recipePost.jsp">Recipe Post</a></li>
                                                 <li><a href="contact.html">Contact</a></li>
                                                 <li><a href="elements.html">Elements</a></li>
                                             </ul>
@@ -150,7 +150,7 @@
                                                 </ul>
                                             </div>
                                         </li>
-                                        <li><a href="searchRecipe.jsp">Recipes</a></li>
+                                        <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="searchRecipe.jsp">Healthy Food</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">

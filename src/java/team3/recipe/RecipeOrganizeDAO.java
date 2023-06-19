@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
@@ -91,13 +92,14 @@ public class RecipeOrganizeDAO implements Serializable {
             rs = stm.executeQuery();
             while (rs.next()) {
                 RecipeDTO o = new RecipeDTO(
-                         rs.getInt(1),
-                         rs.getString(2),
-                         rs.getString(3),
-                         rs.getString(4),
-                         rs.getString(5),
-                         rs.getInt(6),
-                         rs.getString(7)
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8)
                 );
                 list.add(o);
             }
@@ -114,6 +116,7 @@ public class RecipeOrganizeDAO implements Serializable {
         }
         return list;
     }
+
     public List<RecipeDTO> getAllRecipe() {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -125,7 +128,7 @@ public class RecipeOrganizeDAO implements Serializable {
             ps = conn.prepareCall(query);;
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new RecipeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new RecipeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8)));
             }
         } catch (Exception e) {
         }
@@ -336,7 +339,7 @@ public class RecipeOrganizeDAO implements Serializable {
             }
         }
     }
-    
+
     public ArrayList<CategoryDTO> getAllCategories() throws ClassNotFoundException, SQLException {
         ArrayList<CategoryDTO> list = new ArrayList<>();
         Connection con = null;
@@ -347,8 +350,8 @@ public class RecipeOrganizeDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT categoryID, categoryName\n"
                         + "FROM category";
-                 stm = con.prepareStatement(sql);
-                 rs = stm.executeQuery();
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
                 if (rs != null) {
                     while (rs.next()) {
                         int categoryID = rs.getInt(1);
@@ -371,7 +374,7 @@ public class RecipeOrganizeDAO implements Serializable {
         }
         return list;
     }
-    
+
     public List<RecipeDTO> getRecipeByCategory(String categoryID) {
         List<RecipeDTO> list = new ArrayList<>();
         String query = "SELECT r.* FROM recipe r JOIN category c ON r.recipeID = c.recipeID WHERE c.categoryID = ?";
@@ -384,14 +387,22 @@ public class RecipeOrganizeDAO implements Serializable {
             ps.setString(1, categoryID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new RecipeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new RecipeDTO(rs.getInt(1)
+                        , rs.getString(2)
+                        , rs.getString(3)
+                        , rs.getString(4)
+                        , rs.getString(5)
+                        , rs.getInt(6)
+                        , rs.getString(7)
+                        , rs.getString(8)));
             }
         } catch (Exception e) {
         }
 
         return list;
     }
-    public static boolean searchAccount(String fullName, String phone, String email )
+
+    public static boolean searchAccount(String fullName, String phone, String email)
             throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -404,18 +415,19 @@ public class RecipeOrganizeDAO implements Serializable {
                         + "From account "
                         + "Where fullName = ? or phone = ? or email = ? ";
                 stm = con.prepareStatement(sql);
-                stm.setString(1,fullName);
-                stm.setString(2,phone);
-                stm.setString(3,email);
+                stm.setString(1, fullName);
+                stm.setString(2, phone);
+                stm.setString(3, email);
 
                 rs = stm.executeQuery();
 
-                if (rs.next())
+                if (rs.next()) {
                     return true;
+                }
             }
 
         } finally {
-            if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
             if (stm != null) {
@@ -428,7 +440,7 @@ public class RecipeOrganizeDAO implements Serializable {
 
         return false;
     }
-    
+
 //        public static RecipeOrganizeDTO searchAccount(String fullName, String phone, String email)
 //            throws ClassNotFoundException, SQLException {
 //        RecipeOrganizeDTO result = null;
@@ -468,8 +480,7 @@ public class RecipeOrganizeDAO implements Serializable {
 //
 //        return result;
 //    }
-
-    public static boolean updateProfileAccount(String userName, String fullName, String phone, String email) 
+    public static boolean updateProfileAccount(String userName, String fullName, String phone, String email)
             throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -484,14 +495,14 @@ public class RecipeOrganizeDAO implements Serializable {
                 stm.setString(1, fullName);
                 stm.setString(2, phone);
                 stm.setString(3, email);
-                
+
                 int rs = stm.executeUpdate();
                 if (rs > 0) {
                     return true;
                 }
             }
         } finally {
-            
+
             if (stm != null) {
                 stm.close();
             }
@@ -543,6 +554,129 @@ public class RecipeOrganizeDAO implements Serializable {
 
         return result;
     }
-}
-    
 
+    public List<RecipeOrganizeDTO> searchRecipeID(String recipeID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<RecipeOrganizeDTO> listP = new ArrayList<>();
+        try {
+            String query = "SELECT [recipeID],[recipeName],[caloRecipe],[description],[imgUrl],[avgRating],[difficulty],[ingredient_table] FROM [dbo].[recipe] WHERE recipeID = ?";
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(query);
+            stm.setString(1, recipeID);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                RecipeOrganizeDTO o = new RecipeOrganizeDTO(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8)
+                );
+                listP.add(o);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return listP;
+    }
+    public List<RecipeOrganizeDTO> getCommentsByProductId(String recipeID) throws SQLException {
+    List<RecipeOrganizeDTO> comments = new ArrayList<>();
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    try {
+        conn = DBUtils.getConnection();
+        ps = conn.prepareStatement("SELECT * FROM feedback WHERE recipeID = ?");
+        ps.setString(1, recipeID); // Gán giá trị cho tham số truy vấn
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            int feedbackID = rs.getInt("feedbackID");
+            String userName = rs.getString("userName");
+            String comment = rs.getString("comment");
+            Timestamp feedbackDate = rs.getTimestamp("feedbackDate");
+            RecipeOrganizeDTO feedback = new RecipeOrganizeDTO(feedbackID, userName, comment, feedbackDate);
+            comments.add(feedback);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) {
+            rs.close();
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    }
+    return comments;
+}
+
+public boolean saveComment(String userName, String recipeID, String comment, Timestamp feedbackDate) throws SQLException, ClassNotFoundException {
+    boolean success = false;
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    try {
+        // Get database connection
+        con = DBUtils.getConnection();
+
+        // Create SQL query with parameters
+        String sql = "INSERT INTO feedback (userName, recipeID, comment, feedbackDate) VALUES (?, ?, ?, ?)";
+
+        // Create PreparedStatement object from SQL query
+        ps = con.prepareStatement(sql);
+
+        // Set values for the parameters
+        ps.setString(1, userName);
+        ps.setString(2, recipeID);
+        ps.setString(3, comment);
+        ps.setTimestamp(4, feedbackDate);
+
+        // Execute the query and get the result
+        int result = ps.executeUpdate();
+
+        // Check the result
+        if (result > 0) {
+            // Query executed successfully
+            success = true;
+        }
+    } finally {
+        // Close the resources
+        if (rs != null) {
+            rs.close();
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+    }
+    return success;
+
+
+}
+public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+        String recipeID = "1";
+         List<RecipeOrganizeDTO> categories = dao.searchRecipeID(recipeID);
+        for (RecipeOrganizeDTO o : categories) {
+            System.out.println(o);
+    }
+    }
+}

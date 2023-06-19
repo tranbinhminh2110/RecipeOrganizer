@@ -41,11 +41,15 @@ public class SearchController extends HttpServlet {
         try {
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
             List<RecipeDTO> list = dao.searchRecipe(searchValue);
-            request.setAttribute("listP", list);
+            if (list == null || list.isEmpty()) {
+                request.setAttribute("nof", "No found!!!!");
+            } else {
+                request.setAttribute("listP", list);
+            }
             request.getRequestDispatcher("searchRecipe.jsp").forward(request, response);
-            request.setAttribute("txtS", searchValue);
-        }catch(Exception e){
-            
+
+        } catch (Exception e) {
+
         }
     }
 

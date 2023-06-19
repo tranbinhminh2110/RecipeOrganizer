@@ -17,13 +17,12 @@ public class RecipeDTO {
     private String imgUrl;
     private int avgRating;
     private String difficulty;
+    private String ingredient_table;
 
     public RecipeDTO() {
     }
-    //Contructor cua category
-    
 
-    public RecipeDTO(int recipeID, String recipeName, String caloRecipe, String description, String imgUrl, int avgRating, String difficulty) {
+    public RecipeDTO(int recipeID, String recipeName, String caloRecipe, String description, String imgUrl, int avgRating, String difficulty, String ingredient_table) {
         this.recipeID = recipeID;
         this.recipeName = recipeName;
         this.caloRecipe = caloRecipe;
@@ -31,7 +30,18 @@ public class RecipeDTO {
         this.imgUrl = imgUrl;
         this.avgRating = avgRating;
         this.difficulty = difficulty;
+        this.ingredient_table = ingredient_table;
     }
+
+    public String getIngredient_table() {
+        return ingredient_table;
+    }
+
+    public void setIngredient_table(String ingredient_table) {
+        this.ingredient_table = ingredient_table;
+    }
+
+    
 
     public int getRecipeID() {
         return recipeID;
@@ -91,8 +101,9 @@ public class RecipeDTO {
 
     @Override
     public String toString() {
-        return "DTO{" + "recipeID=" + recipeID + ", recipeName=" + recipeName + ", caloRecipe=" + caloRecipe + ", description=" + description + ", imgUrl=" + imgUrl + ", avgRating=" + avgRating + ", difficulty=" + difficulty + '}';
+        return "RecipeDTO{" + "recipeID=" + recipeID + ", recipeName=" + recipeName + ", caloRecipe=" + caloRecipe + ", description=" + description + ", imgUrl=" + imgUrl + ", avgRating=" + avgRating + ", difficulty=" + difficulty + ", ingredient_table=" + ingredient_table + '}';
     }
+    
     
     
 }
