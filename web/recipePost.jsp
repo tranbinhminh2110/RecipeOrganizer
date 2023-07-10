@@ -225,7 +225,7 @@
                             <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
                             <div class="card-body">
                                 <div>
-                                    <h3 class="card-title view-title"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
+                                    <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
                                 </div>
                                 <div><p class="card-text calo"><b>${o.caloRecipe}</b></p></div>
                                 <div><p class="card-text show_txt" id="description">${o.description}</p></div>

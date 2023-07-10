@@ -1,0 +1,49 @@
+
+.meal-frame {
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.meal-title {
+  color: green;
+  font-family: Times New Roman;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.meal-items {
+  display: flex;
+  justify-content: center;
+}
+
+.meal-item {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.meal-item img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.meal-item a {
+  text-decoration: none;
+  color: black;
+}
+
+.meal-item h4 {
+  font-family: Times New Roman;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.meal-item p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
