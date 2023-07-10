@@ -13,6 +13,7 @@ public final class recipePost_jsp extends org.apache.jasper.runtime.HttpJspBase
   private static java.util.List<String> _jspx_dependants;
 
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_if_test;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -22,10 +23,12 @@ public final class recipePost_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   public void _jspInit() {
     _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_c_if_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
     _jspx_tagPool_c_forEach_var_items.release();
+    _jspx_tagPool_c_if_test.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -78,6 +81,11 @@ public final class recipePost_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"style.css\">\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
+      out.write("                    <!-- Preloader -->\n");
+      out.write("            <div id=\"preloader\">\n");
+      out.write("                <i class=\"circle-preloader\"></i>\n");
+      out.write("                <img src=\"img/recipe/salad.png\" alt=\"\">\n");
+      out.write("            </div>\n");
       out.write("        <!-- Search Wrapper -->\n");
       out.write("        <div class=\"search-wrapper\">\n");
       out.write("            <!-- Close Btn -->\n");
@@ -125,32 +133,18 @@ public final class recipePost_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <div class=\"classynav\">\n");
       out.write("                                    <ul>\n");
       out.write("                                        <li class=\"active\"><a href=\"homePage.jsp\">Home</a></li>\n");
-      out.write("                                        <li><a href=\"#\">Pages</a>\n");
-      out.write("                                            <ul class=\"dropdown\">\n");
-      out.write("                                                <li><a href=\"homePage.jsp\">Home</a></li>\n");
-      out.write("                                                <li><a href=\"about.html\">About Us</a></li>\n");
-      out.write("                                                <li><a href=\"blog-post.html\">Blog Post</a></li>\n");
-      out.write("                                                <li><a href=\"receipe-post.html\">Recipe Post</a></li>\n");
-      out.write("                                                <li><a href=\"contact.html\">Contact</a></li>\n");
-      out.write("                                                <li><a href=\"elements.html\">Elements</a></li>\n");
-      out.write("                                            </ul>\n");
-      out.write("                                        </li>\n");
-      out.write("                                        <li><a href=\"#\">Menu</a>\n");
-      out.write("                                            <div class=\"megamenu\">\n");
-      out.write("                                                <ul class=\"dropdown\">\n");
-      out.write("                                                    <li><a href=\"homePage.jsp\">Rice</a></li>\n");
-      out.write("                                                    <li><a href=\"about.html\">Noodles</a></li>\n");
-      out.write("                                                    <li><a href=\"blog-post.html\">Cake</a></li>\n");
-      out.write("                                                    <li><a href=\"receipe-post.html\">Drinks</a></li>\n");
-      out.write("                                                    <li><a href=\"contact.html\">Dessert</a></li>\n");
-      out.write("                                                    <li><a href=\"elements.html\">International dishes</a></li>\n");
-      out.write("                                                </ul>\n");
-      out.write("                                            </div>\n");
-      out.write("                                        </li>\n");
       out.write("                                        <li><a href=\"AllRecipeController\">Recipes</a></li>\n");
-      out.write("                                        <li><a href=\"receipe-post.html\">Healthy Food</a></li>\n");
+      out.write("                                        <li><a href=\"searchRecipe.jsp\">Healthy Food</a></li>\n");
       out.write("                                        <li><a href=\"contact.html\">Contact</a></li>\n");
-      out.write("                                        <li><a href=\"login.jsp\">Login</a></li>\n");
+      out.write("                                        <li><a href=\"about.html\">About Us</a></li>\n");
+      out.write("                                            ");
+      if (_jspx_meth_c_if_0(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("                                            ");
+      if (_jspx_meth_c_if_1(_jspx_page_context))
+        return;
+      out.write("                                        \n");
       out.write("                                    </ul>\n");
       out.write("\n");
       out.write("                                    <!-- Newsletter Form -->\n");
@@ -397,6 +391,104 @@ public final class recipePost_jsp extends org.apache.jasper.runtime.HttpJspBase
     } finally {
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
+  }
+
+  private boolean _jspx_meth_c_if_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_0 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_0.setParent(null);
+    _jspx_th_c_if_0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${empty sessionScope.ADMIN and empty sessionScope.USER}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_0 = _jspx_th_c_if_0.doStartTag();
+    if (_jspx_eval_c_if_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\n");
+        out.write("                                            <li><a href=\"login.jsp\">Login</a></li>\n");
+        out.write("                                            ");
+        int evalDoAfterBody = _jspx_th_c_if_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_0);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_1 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_1.setParent(null);
+    _jspx_th_c_if_1.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${not empty sessionScope.ADMIN or not empty sessionScope.USER}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_1 = _jspx_th_c_if_1.doStartTag();
+    if (_jspx_eval_c_if_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("    \n");
+        out.write("\n");
+        out.write("                                            <li><a href=\"#\">User</a>\n");
+        out.write("                                                <div class=\"megamenu\">\n");
+        out.write("                                                    <ul class=\"dropdown\">\n");
+        out.write("                                                        <li><a href=\"profile.jsp\">Profile</a></li>\n");
+        out.write("                                                        <li><a href=\"setting_interface.jsp\">Setting</a></li>\n");
+        out.write("                                                        <li><a href=\"plan.jsp\">Meal Planer</a></li>\n");
+        out.write("                                                            ");
+        if (_jspx_meth_c_if_2((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_if_1, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                                                        <li><a href=\"LogoutController\">Logout</a> </li>\n");
+        out.write("                                                    </ul>\n");
+        out.write("                                                </div>\n");
+        out.write("                                            </li>\n");
+        out.write("                                        ");
+        int evalDoAfterBody = _jspx_th_c_if_1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_1);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_2(javax.servlet.jsp.tagext.JspTag _jspx_th_c_if_1, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_2 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_2.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_if_1);
+    _jspx_th_c_if_2.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${not empty sessionScope.ADMIN}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_2 = _jspx_th_c_if_2.doStartTag();
+    if (_jspx_eval_c_if_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\n");
+        out.write("                                                            <li><a href=\"managerAccount.jsp\">Management Account</a></li>\n");
+        out.write("                                                            ");
+        int evalDoAfterBody = _jspx_th_c_if_2.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_2);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_2);
+    return false;
   }
 
   private boolean _jspx_meth_c_forEach_0(PageContext _jspx_page_context)

@@ -8,6 +8,7 @@
 <%@page import="java.util.List"%>
 <%@page import="team3.recipe.RecipeOrganizeDTO"%>
 <%@page import="team3.recipe.RecipeOrganizeDAO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,14 +26,10 @@
 
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="style.css">
-        <style>
-            body{
-                margin-top:20px;
-                background:#f8f8f8
-            }
-        </style> 
+
     </head>
     <body>
+        
         <!-- Preloader -->
         <div id="preloader">
             <i class="circle-preloader"></i>
@@ -123,32 +120,29 @@
                                 <div class="classynav">
                                     <ul>
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
-                                        <li><a href="#">Pages</a>
-                                            <ul class="dropdown">
-                                                <li><a href="homePage.jsp">Home</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="blog-post.html">Blog Post</a></li>
-                                                <li><a href="receipe-post.html">Recipe Post</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Menu</a>
-                                            <div class="megamenu">
-                                                <ul class="dropdown">
-                                                    <li><a href="homePage.jsp">Rice</a></li>
-                                                    <li><a href="about.html">Noodles</a></li>
-                                                    <li><a href="blog-post.html">Cake</a></li>
-                                                    <li><a href="receipe-post.html">Drinks</a></li>
-                                                    <li><a href="contact.html">Dessert</a></li>
-                                                    <li><a href="elements.html">International dishes</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li><a href="receipe-post.html">Recipes</a></li>
-                                        <li><a href="receipe-post.html">Healthy Food</a></li>
+                                        <li><a href="AllRecipeController">Recipes</a></li>
+                                        <li><a href="searchRecipe.jsp">Healthy Food</a></li>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="LogoutController">Logout</a></li>
+                                        <li><a href="about.html">About Us</a></li>
+                                            <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
+                                            <li><a href="login.jsp">Login</a></li>
+                                            </c:if>
+                                            <c:if test="${not empty sessionScope.ADMIN or not empty sessionScope.USER}">    
+
+                                            <li><a href="#">User</a>
+                                                <div class="megamenu">
+                                                    <ul class="dropdown">
+                                                        <li><a href="profile.jsp">Profile</a></li>
+                                                        <li><a href="setting_interface.jsp">Setting</a></li>
+                                                        <li><a href="plan.jsp">Meal Planer</a></li>
+                                                            <c:if test="${not empty sessionScope.ADMIN}">
+                                                            <li><a href="managerAccount.jsp">Management Account</a></li>
+                                                            </c:if>
+                                                        <li><a href="LogoutController">Logout</a> </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </c:if>                                        
                                     </ul>
 
                                     <!-- Newsletter Form -->
@@ -181,7 +175,7 @@
                 RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
                 RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
                 if (user != null || admin != null) {
-                    if (user != null) {
+                    if (user != null && admin == null) {
 
             %>
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -193,25 +187,29 @@
                             <div class="col mb-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="e-profile">
-
-                                            <form action="ProfileController" method = "post"> 
+                                        <div class="e-profile">                                            
+                                            <form action="ChangePhotoProfileController" method = "post"> 
                                                 <div class="row">
                                                     <div class="col-12 col-sm-auto mb-3">
                                                         <div class="mx-auto" style="width: 140px;">
                                                             <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                                                                <c:if test="${sessionScope.USER.image_path == null}">
+                                                                    <img src="img/recipe/default-user.jpg" alt="hình ảnh" width="140" height="140"/>
+                                                                </c:if>
+                                                                <c:if test="${sessionScope.USER.image_path != null}">
+                                                                    <img src="${sessionScope.USER.image_path}" alt="picture" width="140" height="140" />
+                                                                </c:if>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= user.getFullName()%></h4>
-                                                            <p class="mb-0">Username: <%= user.getUserName()%></p>
+                                                            <p class="mb-0">Fullname: <%= user.getFullName()%></p>
                                                             <p class="mb-0">Phone: <%= user.getPhone()%></p>
                                                             <p class="mb-0">Email: <%= user.getEmail()%></p>
                                                             <div class="mt-2">
-                                                                <button class="btn btn-primary" type="button">
+                                                                <button class="btn btn-primary" type="file" accept=".jpg,.png">
                                                                     <i class="fa fa-fw fa-camera"></i>
                                                                     <span>Change Photo</span>
                                                                 </button>
@@ -220,8 +218,16 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <%
-                                                } else { 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%
+                                            } else {
                                             %>
                                             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
                                             <div class="container">
@@ -234,23 +240,28 @@
                                                                     <div class="card-body">
                                                                         <div class="e-profile">
 
-                                                                            <form action="ProfileController" method = "post"> 
+                                                                            <form action="ChangePhotoProfileController" method = "post"> 
                                                                                 <div class="row">
                                                                                     <div class="col-12 col-sm-auto mb-3">
                                                                                         <div class="mx-auto" style="width: 140px;">
                                                                                             <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                                                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                                                                                                <c:if test="${sessionScope.ADMIN.image_path == null}">
+                                                                                                    <img src="img/recipe/default-user.jpg" alt="hình ảnh" width="140" height="140"/>
+                                                                                                </c:if>
+                                                                                                <c:if test="${sessionScope.ADMIN.image_path != null}">
+                                                                                                    <img src="${sessionScope.ADMIN.image_path}" alt="picture" width="140" height="140" />
+                                                                                                </c:if>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= admin.getFullName()%></h4>
-                                                                                            <p class="mb-0">Username: <%= admin.getUserName()%></p>
+                                                                                            <p class="mb-0">Fullname: <%= admin.getFullName()%></p>
                                                                                             <p class="mb-0">Phone: <%= admin.getPhone()%></p>
                                                                                             <p class="mb-0">Email: <%= admin.getEmail()%></p>
                                                                                             <div class="mt-2">
-                                                                                                <button class="btn btn-primary" type="button">
+                                                                                                <button class="btn btn-primary" type="file" accept=".jpg,.png">
                                                                                                     <i class="fa fa-fw fa-camera"></i>
                                                                                                     <span>Change Photo</span>
                                                                                                 </button>
@@ -259,11 +270,32 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </form>
+                                                                                            
                                                                             <% } %>
-                                                                            <% String message = (String) request.getAttribute("message"); %>
-                                                                            <% if (message != null) {%>
-                                                                            <p><%= message%></p>
-                                                                            <% }%>                                            
+                                                                            <% String message1 = (String) request.getAttribute("message1"); %>
+                                                                            <% if (message1 != null) {%>
+                                                                            <p style="color: red;"><%= message1%></p>
+                                                                            <% }%>  
+                                                                            <% String message2 = (String) request.getAttribute("message2"); %>
+                                                                            <% if (message2 != null) {%>
+                                                                            <p style="color: red;"><%= message2%></p>
+                                                                            <% }%>
+                                                                            <% String message3 = (String) request.getAttribute("message3"); %>
+                                                                            <% if (message3 != null) {%>
+                                                                            <p style="color: red;"><%= message3%></p>
+                                                                            <% }%>
+                                                                            <% String message4 = (String) request.getAttribute("message4"); %>
+                                                                            <% if (message4 != null) {%>
+                                                                            <p style="color: red;"><%= message4%></p>
+                                                                            <% }%>
+                                                                            <% String message5 = (String) request.getAttribute("message5"); %>
+                                                                            <% if (message5 != null) {%>
+                                                                            <p style="color: green;"><%= message5%></p>
+                                                                            <% }%>
+                                                                            <% String message6 = (String) request.getAttribute("message6"); %>
+                                                                            <% if (message6 != null) {%>
+                                                                            <p style="color: green;"><%= message6%></p>
+                                                                            <% }%>
                                                                             <ul class="nav nav-tabs">
                                                                                 <li class="nav-item"><a href="" class="active nav-link">Update Profile</a></li>
                                                                             </ul>
@@ -276,13 +308,13 @@
                                                                                                     <div class="col">
                                                                                                         <div class="form-group">
                                                                                                             <label>Full Name</label>
-                                                                                                            <input class="form-control" type="text" name="txtFullname" placeholder="Sign in here">
+                                                                                                            <input class="form-control" type="text" name="txtFullname" value="${param.txtFullname}" placeholder="1 - 50 characters">
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="col">
                                                                                                         <div class="form-group">
                                                                                                             <label>Phone</label>
-                                                                                                            <input class="form-control" type="text" name="txtPhone" placeholder="Sign in here"">
+                                                                                                            <input class="form-control" type="text" name="txtPhone" value="${param.txtPhone}">
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -290,12 +322,9 @@
                                                                                                     <div class="col">
                                                                                                         <div class="form-group">
                                                                                                             <label>Email</label>
-                                                                                                            <input class="form-control" type="text" name="txtEmail" placeholder="user@example.com">
+                                                                                                            <input class="form-control" type="text" name="txtEmail" value="${param.txtEmail}" placeholder="your email">
                                                                                                         </div>
-                                                                                                        <div class="form-group">
-                                                                                                            <label>Username</label>
-                                                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username">
-                                                                                                        </div>
+
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div>
@@ -318,7 +347,7 @@
                                                                                                     <div class="col">
                                                                                                         <div class="form-group">
                                                                                                             <label>Username</label>
-                                                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username">
+                                                                                                            <input class="form-control" type="text" name="txtUsername" placeholder="Enter a username" value="${param.txtUsername}">
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -327,6 +356,11 @@
                                                                                                         <div class="form-group">
                                                                                                             <label>Current Password</label>
                                                                                                             <input class="form-control" type="password" name="txtCurrentPassword" placeholder="Enter a current password">
+                                                                                                            <font color="red">
+                                                                                                            <c:if test="${not empty message8}">
+                                                                                                                ${message8} <br/>
+                                                                                                            </c:if>
+                                                                                                            </font>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -335,6 +369,11 @@
                                                                                                         <div class="form-group">
                                                                                                             <label>New Password</label>
                                                                                                             <input class="form-control" type="password" name="txtNewPassword" placeholder="Enter a new password">
+                                                                                                            <font color="red">                                                                                     
+                                                                                                            <c:if test="${not empty message7}">
+                                                                                                                ${message7} <br/>
+                                                                                                            </c:if>
+                                                                                                            </font>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -343,6 +382,7 @@
                                                                                         <div class="row">
                                                                                             <div class="col d-flex justify-content-end">
                                                                                                 <input type="submit" value ="Save" name="btAction" class="btn btn-primary">
+
                                                                                             </div>
                                                                                         </div>
                                                                                     </form>
@@ -377,7 +417,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -466,6 +505,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                                                              
                                             <!-- ##### Follow Us Instagram Area End ##### -->
 
                                             <!-- ##### Footer Area Start ##### -->

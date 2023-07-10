@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import team3.DTO.RecipeDTO;
+import team3.DTO.StepsDTO;
 import team3.recipe.RecipeOrganizeDAO;
 import team3.recipe.RecipeOrganizeDTO;
 
@@ -42,8 +43,6 @@ public class DetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         String recipeID = request.getParameter("recipeID");
         String comment = request.getParameter("comment");
         if (comment != null && !comment.isEmpty()) {
@@ -83,13 +82,23 @@ public class DetailController extends HttpServlet {
 
         try {
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            List<RecipeOrganizeDTO> detailProduct = dao.searchRecipeID(recipeID);
+            List<RecipeDTO> detailProduct = dao.searchRecipeID(recipeID);
+            List<StepsDTO> detailSteps = dao.stepByRecipeID(recipeID);
+            // Show inde
             String show = "";
-            for (RecipeOrganizeDTO s : detailProduct) {
+            for(RecipeDTO s: detailProduct){
                 show = s.getIngredient_table();
             }
             String[] ingde = new String[50];
             ingde = show.split("\\|");
+            //show steps
+            String showSteps = "";
+            for(StepsDTO s: detailSteps){
+                show = s.getDescriptionName();
+            }
+            String[] steps = new String[50];
+            steps = show.split("\\|");
+            request.setAttribute("steps", steps);
             request.setAttribute("ingde", ingde);
             request.setAttribute("detailP", detailProduct);
             request.getRequestDispatcher("detail.jsp").forward(request, response);

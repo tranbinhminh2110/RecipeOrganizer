@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import team3.DTO.RecipeDTO;
 import team3.recipe.RecipeOrganizeDAO;
+import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
@@ -37,7 +38,7 @@ public class AllRecipeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try{
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            List<RecipeDTO> list = dao.getAllRecipe();
+            List<RecipeOrganizeDTO> list = dao.getAllRecipe();
             request.setAttribute("listAll", list);
             request.getRequestDispatcher("recipePost.jsp").forward(request, response);
         }catch(Exception e){

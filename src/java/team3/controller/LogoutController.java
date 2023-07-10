@@ -31,12 +31,12 @@ public class LogoutController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        session.invalidate();
+            throws ServletException, IOException { 
+            HttpSession session = request.getSession(false);
+            session.invalidate();
 
-        response.sendRedirect("login.jsp");
-
+            response.sendRedirect("homePage.jsp");
+      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

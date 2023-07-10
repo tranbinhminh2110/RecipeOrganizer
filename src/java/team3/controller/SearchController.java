@@ -40,7 +40,7 @@ public class SearchController extends HttpServlet {
         String searchValue = request.getParameter("txtSearch");
         try {
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            List<RecipeDTO> list = dao.searchRecipe(searchValue);
+            List<RecipeOrganizeDTO> list = dao.searchRecipe(searchValue);
             if (list == null || list.isEmpty()) {
                 request.setAttribute("nof", "No found!!!!");
             } else {

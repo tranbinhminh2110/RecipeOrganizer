@@ -1,7 +1,8 @@
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@page import="team3.recipe.RecipeOrganizeDTO"%>
-<%@page import="team3.recipe.RecipeOrganizeDTO"%>
+<%@page import="team3.recipe.RecipeOrganizeDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,10 +31,10 @@
             <c:set var="reset_password_success" value="${requestScope.RESET_PASSWORD_SUCCESS}" scope="request" />
         </c:if>
         <script>
-                    var result = ${reset_password_success};
-                    if (result) {
-                        alert("Reset your password successfully.");
-                    }
+            var result = ${reset_password_success};
+            if (result) {
+                alert("Reset your password successfully.");
+            }
         </script>
 
         <!-- Preloader -->
@@ -86,16 +87,16 @@
                         </div>
 
                         <!-- Top Social Info -->
-                    <div class="col-12 col-sm-6">
-                        <div class="top-social-info text-right">
-                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        <div class="col-12 col-sm-6">
+                            <div class="top-social-info text-right">
+                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -123,54 +124,34 @@
                                     <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                                 </div>
 
-                                
+
                                 <!-- Nav Start -->
                                 <div class="classynav">
                                     <ul>
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
-                                        <li><a href="#">Pages</a>
-                                            <ul class="dropdown">
-                                                <li><a href="homePage.jsp">Home</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="blog-post.html">Blog Post</a></li>
-                                                <li><a href="recipePost.jsp">Recipe Post</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Menu</a>
-                                            <div class="megamenu">
-                                                <ul class="dropdown">
-                                                    <li><a href="homePage.jsp">Rice</a></li>
-                                                    <li><a href="about.html">Noodles</a></li>
-                                                    <li><a href="blog-post.html">Cake</a></li>
-                                                    <li><a href="receipe-post.html">Drinks</a></li>
-                                                    <li><a href="contact.html">Dessert</a></li>
-                                                    <li><a href="elements.html">International dishes</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="searchRecipe.jsp">Healthy Food</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="contact.jsp">Contact</a></li>
+                                        <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>
                                             </c:if>
-                                        <c:if test="${not empty sessionScope.ADMIN or not empty sessionScope.USER}">    
-                                        
-                                        <li><a href="#">User</a>
-                                            <div class="megamenu">
-                                                <ul class="dropdown">
-                                                    <li><a href="profile.jsp">Profile</a></li>
-                                                    <li><a href="setting_interface.jsp">Setting</a></li>
-                                                    <c:if test="${not empty sessionScope.ADMIN}">
-                                                    <li><a href="account_management.jsp">Management Account</a></li>
-                                                    </c:if>
-                                                    <li><a href="LogoutController">Logout</a> </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                            </c:if>                                        
+                                            <c:if test="${not empty sessionScope.ADMIN or not empty sessionScope.USER}">    
+
+                                            <li><a href="#">User</a>
+                                                <div class="megamenu">
+                                                    <ul class="dropdown">
+                                                        <li><a href="profile.jsp">Profile</a></li>
+                                                        <li><a href="setting_interface.jsp">Setting</a></li>
+                                                        <li><a href="plan.jsp">Meal Planer</a></li>
+                                                            <c:if test="${not empty sessionScope.ADMIN}">
+                                                            <li><a href="managerAccount.jsp">Management Account</a></li>
+                                                            </c:if>
+                                                        <li><a href="LogoutController">Logout</a> </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </c:if>                                        
                                     </ul>
 
                                     <!-- Newsletter Form -->
@@ -193,28 +174,28 @@
             <div class="hero-slides owl-carousel">
 
                 <!-- Single Hero Slide -->
-                <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg1.jpg);">
+                <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg10.jpg);">
                     <div class="container h-100">
                         <div class="row h-100 align-items-center">
                             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                                 <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
                                     <h2 data-animation="fadeInUp" data-delay="300ms">Com tam</h2>
-                                    <p data-animation="fadeInUp" data-delay="700ms">Broken rice is considered a specialty dish of Saigon people. Each plate of hot, fragrant broken rice is always the first choice for quick but nutritious meals.</p>
-                                    <a href="#" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
+                                    <p data-animation="fadeInUp" data-delay="700ms">Com tam is considered a specialty dish of Saigon people. Each plate of hot, fragrant broken rice is always the first choice for quick but nutritious meals.</p>
+                                    <a href="AllRecipeController" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Single Hero Slide -->
-                <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg6.jpg);">
+                <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg11.jpg);">
                     <div class="container h-100">
                         <div class="row h-100 align-items-center">
                             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                                 <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
                                     <h2 data-animation="fadeInUp" data-delay="300ms">Pho bo</h2>
                                     <p data-animation="fadeInUp" data-delay="700ms">Pho is a famous Vietnamese dish loved by many people, it will be even more delicious when cooked at home for the family to enjoy. The taste of beef is sweet and nutritious, the noodles are chewy and chewy, and the broth is rich, mixed with the aroma of herbs. Speaking of which, I'm already hungry, don't wait long, let's go to the kitchen to do it right away.</p>
-                                    <a href="#" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
+                                    <a href="AllRecipeController" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
                                 </div>
                             </div>
                         </div>
@@ -223,14 +204,14 @@
 
 
                 <!-- Single Hero Slide -->
-                <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg7.jpg);">
+                <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg12.jpg);">
                     <div class="container h-100">
                         <div class="row h-100 align-items-center">
                             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                                 <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
-                                    <h2 data-animation="fadeInUp" data-delay="300ms">Milk tea</h2>
-                                    <p data-animation="fadeInUp" data-delay="700ms">Milk tea is the favorite drink of most young people today, not only because of the sweet aroma of tea with milk but also with the diverse combination of unique types of pearls. Today, we will tell you how to make pearl milk tea at home very simple that everyone knows. Go to the kitchen and do it right away!</p>
-                                    <a href="#" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
+                                    <h2 data-animation="fadeInUp" data-delay="300ms">Peach tea</h2>
+                                    <p data-animation="fadeInUp" data-delay="700ms">Peach tea is the favorite drink of most young people today, not only because of the refreshing taste of tea but also because of the diverse combination of flavors from fresh peaches to create a unique drink. Today, we will tell you how to make peach tea at home very easily. Go to the kitchen and do it right away!</p>
+                                    <a href="AllRecipeController" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +233,7 @@
                             <div class="top-cta-content">
                                 <h3>Cake</h3>
                                 <h6>Simple &amp; Delicios</h6>
-                                <a href="receipe-post.html" class="btn delicious-btn">See Full Receipe</a>
+                                <a href="AllRecipeController" class="btn delicious-btn">See Full Receipe</a>
                             </div>
                         </div>
                     </div>
@@ -264,7 +245,7 @@
                             <div class="top-cta-content">
                                 <h3>International dishes</h3>
                                 <h6>Simple &amp; Delicios</h6>
-                                <a href="receipe-post.html" class="btn delicious-btn">See Full Receipe</a>
+                                <a href="AllRecipeController" class="btn delicious-btn">See Full Receipe</a>
                             </div>
                         </div>
                     </div>
@@ -272,59 +253,136 @@
             </div>
         </section>
         <!-- ##### Top Catagory Area End ##### -->
+        <section>
+            <style>
+                .receipe-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-gap: 20px;
+                    margin: -10px;
+                }
 
-        <!-- ##### Best Receipe Area Start ##### -->
-        <section class="best-receipe-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-heading">
-                            <h3>The Best Recipes</h3>
+                .single-best-receipe-area {
+                    text-align: center;
+                    margin: 10px;
+                    padding: 10px;
+                    background-color: #ffffff;
+                    border-radius: 5px;
+                    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+                }
 
-                            <div class="row">
-                                <%
-                                    List<RecipeOrganizeDTO> SEARCHRESULTS = (List<RecipeOrganizeDTO>) request.getAttribute("SEARCHRESULTS");
-                                    if (SEARCHRESULTS != null) {
-                                        for (RecipeOrganizeDTO recipe : SEARCHRESULTS) {
-                                            int rating = recipe.getAvgRating();
-                                            if (rating >= 4) {
-                                %>
-                                <div class="col-12 col-sm-6 col-lg-4">
-                                    <div class="single-best-receipe-area mb-30">
-                                        <img src="<%= recipe.getImgUrl()%>" alt="">
+                .single-best-receipe-area .image-wrapper {
+                    width: 100%;
+                    height: 0;
+                    padding-bottom: 100%;
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 5px;
+                }
+
+                .single-best-receipe-area .image-wrapper img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                .single-best-receipe-area .image-wrapper:hover img {
+                    transform: scale(1.05);
+                }
+
+                .single-best-receipe-area .receipe-content {
+                    padding: 10px;
+                }
+
+                .single-best-receipe-area .receipe-content a {
+                    text-decoration: none;
+                }
+
+                .single-best-receipe-area .receipe-content h5 {
+                    margin-top: 10px;
+                    margin-bottom: 5px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #222222;
+                }
+
+                .single-best-receipe-area .receipe-content .ratings {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .single-best-receipe-area .receipe-content .ratings i {
+                    font-size: 14px;
+                    color: #ee0000;
+                    margin-right: 2px;
+                }
+
+                .single-best-receipe-area .receipe-content .ratings p {
+                    font-size: 14px;
+                    color: #666666;
+                }        
+            </style>
+            <!-- ##### Best Receipe Area Start ##### -->
+            <div class="best-receipe-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-heading">
+                                <h3>The Best Recipes</h3><br>
+                                <div class="receipe-grid">
+                                    <% RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                                        List<RecipeOrganizeDTO> results = dao.getAllRecipe();
+                                        Collections.shuffle(results);
+                                        int count = 0;
+                                        if (results != null) {
+                                            for (RecipeOrganizeDTO recipe : results) {
+                                                int rating = recipe.getAvgRating();
+                                                if (rating >= 4) {
+                                                    if (count >= 9) {
+                                                        break;
+                                                    }
+                                    %>
+                                    <div class="single-best-receipe-area">
+                                        <div class="image-wrapper">
+                                            <img src="<%= recipe.getImgUrl()%>" alt="">
+                                        </div>
                                         <div class="receipe-content">
-                                            <a href="receipe-post.html">
+                                            <a href="AllRecipeController">
                                                 <h5><%= recipe.getRecipeName()%></h5>
                                             </a>
                                             <div class="ratings">
-                                                <%
-                                                    for (int i = 0; i < rating; i++) {
-                                                %>
+                                                <% for (int i = 0; i < rating; i++) { %>
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                                 <% } %>
-                                                <%
-                                                    int remainingStars = 5 - rating;
-                                                    for (int i = 0; i < remainingStars; i++) {
-                                                %>
+                                                <% int remainingStars = 5 - rating;
+                                                    for (int i = 0; i < remainingStars; i++) { %>
                                                 <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <% } %>
+                                                <% }%>
                                             </div>
+                                            <p><%= recipe.getAvgRating()%> comment</p>                                            
                                         </div>
                                     </div>
-                                </div>
-                                <%
+                                    <% count++;
+                                            }
                                         }
-                                    }
-                                } else {
-                                %>
-                                <p>No recipes found.</p>
-                                <% }%>
+                                    } else { %>
+                                    <p>No recipes found.</p>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </section>
+
+
+
         <!-- ##### Best Receipe Area End ##### -->
 
         <!-- ##### CTA Area Start ##### -->
@@ -336,7 +394,7 @@
                         <div class="cta-content text-center">
                             <h2>Healthy Food Recipes</h2>
                             <p>Healthy foods are foods that are healthy, safe and healthy for the user's body. Using organic foods, natural foods, free of harmful impurities, minimal processing to keep the essence of food are the principles of healthy food. As a result, healthy food brings positive values to users' health.</p>
-                            <a href="#" class="btn delicious-btn">Discover all the receipies</a>
+                            <a href="AllRecipeController" class="btn delicious-btn">Discover all the receipies</a>
                         </div>
                     </div>
                 </div>
@@ -349,19 +407,25 @@
             <div class="container">
                 <div class="row">
                     <%
-                        if (SEARCHRESULTS != null) {
-                            for (RecipeOrganizeDTO recipe : SEARCHRESULTS) {
+                        Collections.shuffle(results);
+                        float counti = 0;
+                        if (results != null) {
+                            for (RecipeOrganizeDTO recipe : results) {
                                 int rating = recipe.getAvgRating();
-                                if (rating < 4) {
+                                float ratingcalo = recipe.getCaloRecipe();
+                                if (ratingcalo < 300) {
+                                    if (counti >= 16) {
+                                        break;
+                                    }
                     %>
-                    <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-small-receipe-area d-flex">
                             <div class="receipe-thumb">
                                 <img src="<%= recipe.getImgUrl()%>" alt="">
                             </div>
                             <div class="receipe-content">
-                                <span>January 04, 2018</span>
-                                <a href="receipe-post.html">
+                                <span>April 04, 2023</span>
+                                <a href="AllRecipeController">
                                     <h5><%= recipe.getRecipeName()%></h5>
                                 </a>
                                 <div class="ratings">
@@ -375,13 +439,14 @@
                                         for (int i = 0; i < remainingStars; i++) {
                                     %>
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    <% } %>
+                                    <% }%>
                                 </div>
-                                <p>2 Comments</p>
+                                <p> <%= recipe.getAvgRating()%> comment</p>
                             </div>
                         </div>
                     </div>
                     <%
+                                counti++;
                             }
                         }
                     } else {
@@ -393,281 +458,9 @@
         </section>
         <!-- ##### CTA Area End ##### -->
 
-        <!-- ##### Small Receipe Area Start ##### -->
-        <section class="small-receipe-area section-padding-80-0">
-            <div class="container">
-                <div class="row">
 
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr1.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>May 10, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Vegan Smoothie</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>586 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr2.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>May 29, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Seaweed dried brown rice</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>205 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr3.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>May 15, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Scalops on salt</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>351 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr4.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>April 04, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Fruits on plate</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>256 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr5.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>May 10, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Pan fried chicken breast</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>492 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr6.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>May 01, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Passion fruit juice</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>456 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr7.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>March 29, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Berry Dessert</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>289 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr8.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>March 20, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Zucchini Grilled on peper</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>397 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Small Receipe Area -->
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-small-receipe-area d-flex">
-                            <!-- Receipe Thumb -->
-                            <div class="receipe-thumb">
-                                <img src="img/bg-img/sr9.jpg" alt="">
-                            </div>
-                            <!-- Receipe Content -->
-                            <div class="receipe-content">
-                                <span>March 13, 2023</span>
-                                <a href="receipe-post.html">
-                                    <h5>Chicken Salad</h5>
-                                </a>
-                                <div class="ratings">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <p>687 Comments</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- ##### Small Receipe Area End ##### -->
 
-        <!-- ##### Quote Subscribe Area Start ##### -->
-        <section class="quote-subscribe-adds">
-            <div class="container">
-                <div class="row align-items-end">
-                    <!-- Quote -->
-                    <div class="col-12 col-lg-4">
-                        <div class="quote-area text-center">
-                            <span>"</span>
-                            <h4>Nothing is better than going home to family and eating good food and relaxing</h4>
-                            <p>John Smith</p>
-                            <div class="date-comments d-flex justify-content-between">
-                                <div class="date">March 04, 2023</div>
-                                <div class="comments">1056 Comments</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Newsletter -->
-                    <div class="col-12 col-lg-4">
-                        <div class="newsletter-area">
-                            <h4>Subscribe to our newsletter</h4>
-                            <!-- Form -->
-                            <div class="newsletter-form bg-img bg-overlay" style="background-image: url(img/bg-img/bg1.jpg);">
-                                <form action="#" method="post">
-                                    <input type="email" name="email" placeholder="Subscribe to newsletter">
-                                    <button type="submit" class="btn delicious-btn w-100">Subscribe</button>
-                                </form>
-                                <p>With just 5 minutes of operation, you have access to recipes from all over the world. So what are you waiting for without following our newsletter.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Adds -->
-                    <div class="col-12 col-lg-4">
-                        <div class="delicious-add">
-                            <img src="img/bg-img/add.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- ##### Quote Subscribe Area End ##### -->
 
         <!-- ##### Follow Us Instagram Area Start ##### -->

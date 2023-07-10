@@ -65,9 +65,13 @@ public class LoginController extends HttpServlet {
                     if (result.getStatus() == 1) {
                         if (result.getRole() == true) {
                             session.setAttribute("ADMIN", result);
+                            List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(result.getUserID());
+                            session.setAttribute("MEAL_PLAN", mealplan);
                             url = HOME_PAGE;
                         } else if (result.getRole() == false) {
                             session.setAttribute("USER", result);
+                            List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(result.getUserID());
+                            session.setAttribute("MEAL_PLAN", mealplan);
                             url = HOME_PAGE;
                         }
                     } else {
@@ -86,9 +90,13 @@ public class LoginController extends HttpServlet {
                     if (results.getStatus() == 1) {
                         if (results.getRole() == true) {
                             session.setAttribute("ADMIN", results);
+                            List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(results.getUserID());
+                            session.setAttribute("MEAL_PLAN", mealplan);
                             url = HOME_PAGE;
                         } else if (results.getRole() == false) {
                             session.setAttribute("USER", results);
+                            List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(results.getUserID());
+                            session.setAttribute("MEAL_PLAN", mealplan);
                             url = HOME_PAGE;
                         }
                     } else {

@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import team3.recipe.RecipeOrganizeDAO;
 import team3.recipe.RecipeOrganizeDTO;
 
@@ -23,6 +24,7 @@ import team3.recipe.RecipeOrganizeDTO;
  */
 @WebServlet(name = "ChangePasswordController", urlPatterns = {"/ChangePasswordController"})
 public class ChangePasswordController extends HttpServlet {
+
     private final String LOGIN_PAGE = "login.jsp";
     private final String CHANGE_PASSWORD_PAGE = "changepassword.jsp";
 
@@ -42,16 +44,41 @@ public class ChangePasswordController extends HttpServlet {
         String currentPassword = request.getParameter("txtCurrentPassword");
         String newPassword = request.getParameter("txtNewPassword");
         String url = CHANGE_PASSWORD_PAGE;
+        boolean found_error = false;
         try {
+            if (newPassword.length() < 1) {
+                found_error = true;
+            }
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("USER") != null) {
+                RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                String username = user.getUserName();
+                String userpassword = user.getPassword();
+                if (!userName.trim().equals(username) || !currentPassword.trim().equals(userpassword)) {
+                    found_error = true;
+                    request.setAttribute("message8", "The username, password is wrong!");
+                }
+            } else {
+                RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+                String adminname = admin.getUserName();
+                String adminpassword = admin.getPassword();
+                if (!userName.trim().equals(adminname) || !currentPassword.trim().equals(adminpassword)) {
+                    found_error = true;
+                    request.setAttribute("message8", "The username, password is wrong!");
+                }
+            }
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
             RecipeOrganizeDTO isLogin = dao.checkLogin(userName, currentPassword);
-            if (isLogin != null) {
+            if (isLogin != null && found_error == false) {
                 RecipeOrganizeDAO.changePassword(userName, newPassword);
-                request.setAttribute("message", "Change password successfully!");
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
-            } else {
-                request.setAttribute("message", "The current password is incorrect. Please check again!");
+            } else if (isLogin != null && found_error) {
+                request.setAttribute("message7", "New password is invalid!");
+                RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
+                rd.forward(request, response);
+            } else if (isLogin == null) {
+                request.setAttribute("message8", "The username, password is wrong!");
                 RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
                 rd.forward(request, response);
             }
@@ -59,12 +86,8 @@ public class ChangePasswordController extends HttpServlet {
             ex.printStackTrace();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

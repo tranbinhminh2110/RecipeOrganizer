@@ -26,25 +26,68 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <!-- Search Wrapper -->
-        <div class="search-wrapper">
-            <!-- Close Btn -->
-            <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+            <!-- Preloader -->
+            <div id="preloader">
+                <i class="circle-preloader"></i>
+                <img src="img/recipe/salad.png" alt="">
+            </div>
+            <!-- Search Wrapper -->
+            <div class="search-wrapper">
+                <!-- Close Btn -->
+                <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <form action="SearchController" method="post">
-                            <input type="search" name="txtSearch" placeholder="Type any keywords...">
-                            <button type="submit" name="btAction" value="search"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <form action="#" method="post">
+                                <input type="search" name="search" placeholder="Type any keywords...">
+                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- ##### Header Area Start ##### -->
-        <header class="header-area">
+            <!-- ##### Header Area Start ##### -->
+            <header class="header-area">
+
+                <!-- Top Header Area -->
+                <div class="top-header-area">
+                    <div class="container h-100">
+                        <div class="row h-100 align-items-center justify-content-between">
+                            <!-- Breaking News -->
+                            <div class="col-12 col-sm-6">
+                                <div class="breaking-news">
+                                    <div id="breakingNewsTicker" class="ticker">
+                                        <ul>
+                                            <c:if test="${not empty sessionScope.ADMIN}">
+                                                <c:set var="customer" value="${sessionScope.ADMIN}" scope="request" />
+                                            </c:if>
+                                            <c:if test="${not empty sessionScope.USER}">
+                                                <c:set var="customer" value="${sessionScope.USER}" scope="request" />
+                                            </c:if>
+                                            <li><a href="#">Hello ${customer.fullName}</a></li>
+                                            <li><a href="#">Welcome to Recipe Organize</a></li>
+                                            <li><a href="#">Hi Delicious!</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Top Social Info -->
+                            <div class="col-12 col-sm-6">
+                                <div class="top-social-info text-right">
+                                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             <!-- Navbar Area -->
             <div class="delicious-main-menu">
@@ -73,49 +116,29 @@
                                 <div class="classynav">
                                     <ul>
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
-                                        <li><a href="#">Pages</a>
-                                            <ul class="dropdown">
-                                                <li><a href="homePage.jsp">Home</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="blog-post.html">Blog Post</a></li>
-                                                <li><a href="recipePost.jsp">Recipe Post</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Menu</a>
-                                            <div class="megamenu">
-                                                <ul class="dropdown">
-                                                    <li><a href="homePage.jsp">Rice</a></li>
-                                                    <li><a href="about.html">Noodles</a></li>
-                                                    <li><a href="blog-post.html">Cake</a></li>
-                                                    <li><a href="receipe-post.html">Drinks</a></li>
-                                                    <li><a href="contact.html">Dessert</a></li>
-                                                    <li><a href="elements.html">International dishes</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="searchRecipe.jsp">Healthy Food</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="contact.jsp">Contact</a></li>
+                                        <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>
                                             </c:if>
-                                        <c:if test="${not empty sessionScope.ADMIN or not empty sessionScope.USER}">    
-                                        
-                                        <li><a href="#">User</a>
-                                            <div class="megamenu">
-                                                <ul class="dropdown">
-                                                    <li><a href="profile.jsp">Profile</a></li>
-                                                    <li><a href="setting_interface.jsp">Setting</a></li>
-                                                    <c:if test="${not empty sessionScope.ADMIN}">
-                                                    <li><a href="account_management.jsp">Management Account</a></li>
-                                                    </c:if>
-                                                    <li><a href="LogoutController">Logout</a> </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                            </c:if>                                        
+                                            <c:if test="${not empty sessionScope.ADMIN or not empty sessionScope.USER}">    
+
+                                            <li><a href="#">User</a>
+                                                <div class="megamenu">
+                                                    <ul class="dropdown">
+                                                        <li><a href="profile.jsp">Profile</a></li>
+                                                        <li><a href="setting_interface.jsp">Setting</a></li>
+                                                        <li><a href="plan.jsp">Meal Planer</a></li>
+                                                            <c:if test="${not empty sessionScope.ADMIN}">
+                                                            <li><a href="managerAccount.jsp">Management Account</a></li>
+                                                            </c:if>
+                                                        <li><a href="LogoutController">Logout</a> </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </c:if>                                        
                                     </ul>
 
                                     <!-- Newsletter Form -->

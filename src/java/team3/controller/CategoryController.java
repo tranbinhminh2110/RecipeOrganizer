@@ -24,6 +24,7 @@ import team3.recipe.RecipeOrganizeDAO;
 import team3.DTO.RecipeDTO;
 import team3.DTO.AccountDTO;
 import team3.DTO.CategoryDTO;
+import team3.recipe.RecipeOrganizeDTO;
 
 /**
  *
@@ -47,9 +48,9 @@ public class CategoryController extends HttpServlet {
         try {
             String categoryID = request.getParameter("categoryID");
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-            ArrayList<CategoryDTO> listCategories = dao.getAllCategories();
-            List<RecipeDTO> listRecipe = dao.getAllRecipe();
-            List<RecipeDTO> list = dao.getRecipeByCategory(categoryID);
+            ArrayList<RecipeOrganizeDTO> listCategories = dao.getAllCategories();
+            List<RecipeOrganizeDTO> listRecipe = dao.getAllRecipe();
+            List<RecipeOrganizeDTO> list = dao.getRecipeByCategory(categoryID);
             
             try (PrintWriter out = response.getWriter()){
                 if (categoryID != null && !categoryID.isEmpty()) {

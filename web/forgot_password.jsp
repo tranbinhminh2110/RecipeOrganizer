@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="forgot_password.css">
     </head>
     <body>
+        <div id="colorText">
         <h1>Reset your password</h1>
         <p>Enter your email address and we will send you code to reset your password.</p>
         <form action="DispatchController" method="POST">
@@ -70,6 +71,7 @@
 
             </table>
         </form>
+        </div>
         <c:if test="${requestScope.SEND_SUCCESS}">
             <c:set var="send_success" value="${requestScope.SEND_SUCCESS}" scope="request" />
         </c:if>
@@ -79,7 +81,7 @@
                 alert("Gửi mail thành công.");
             }
         </script>
-
+<script src="js/change_color_text.js"></script>
 
     </body>
 </html>

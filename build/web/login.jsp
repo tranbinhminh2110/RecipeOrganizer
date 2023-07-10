@@ -21,7 +21,7 @@
 
     </head>
     <body>
-
+        <div id="colorText">
         <div class="container">
             <div class="login-box animated fadeInUp" id="login">
                 <div class="box-header">
@@ -33,11 +33,11 @@
                     <table>
                         <tr>
                             <td>Username</td>
-                            <td><input type="text" name ="txtUsername"></td>
+                            <td><input type="text" name ="txtUsername" value="${param.txtUsername}"></td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name ="txtPassword"></td>
+                            <td><input type="password" name ="txtPassword" value="${param.txtPassword}"></td>
                         </tr>
                         <tr>
                         <td colspan="2"><input type="submit" value ="Login" name="btAction"></td>
@@ -62,7 +62,7 @@
                 <script>
                     var result1 = ${ban_acc};
                     if (result1) {
-                        alert("Tài khoản đã bị cấm bởi admin.");
+                        alert("Tài khoản không khả dụng.");
                     }
                 </script>
 
@@ -87,14 +87,16 @@
                 </script>
 
                 <div class="small">
-                    <p>Don’t you have an account? <a href="registration.jsp" style="color: green;">Sign up</a></p>
-                    <p><a href="forgot_password.jsp" style="color: green;">Forgot password?</a></p>
+                    <p>Don’t you have an account? <a href="registration.jsp" style="color: green;">Sign up</a></p><br/>
+                    <p><a href="forgot_password.jsp" style="color: green;">Forgot password?</a></p><br>
                     <button><a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8084/RecipeOrgainze/login-google&response_type=code
                    &client_id=416998610666-lbm6raon0at7tl6ldiiippgtsfbfq10e.apps.googleusercontent.com&approval_prompt=force" class="google-login-button">
                             <i class="fab fa-google"></i> Login with google</a> </button>
                 </div>
                 <br/>
-
+            </div>
+                    </div>
+                    </div>
                 <style>
                     .google-login-button {
                         display: inline-block;
@@ -107,6 +109,6 @@
                     }
                 </style>
 
-                
+                <script src="js/change_color_text.js"></script>
                 </body>
                 </html>

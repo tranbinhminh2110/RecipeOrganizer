@@ -30,7 +30,10 @@ public class DispatchController extends HttpServlet {
     private final String RESET_PASSWORD_CONTROLLER = "ResetPasswordController";
     private final String CHANGE_PASS_CONTROLLER = "ChangePasswordController";
     private final String SEARCH_CONTROLLER = "SearchController";
-    private final String UPDATE_PROFILE_CONTROLLER = "UpdateProfileServlet";
+    private final String UPDATE_PROFILE_CONTROLLER = "UpdateProfileController";
+    private final String PLAN_CONTROLLER = "PlanController";
+    private final String SEARCH_ACCOUNT_CONTROLLER = "searchAccountController";
+    private final String MANAGER_STATUS_ACCOUNT = "updateStatusAccountController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,8 +67,14 @@ public class DispatchController extends HttpServlet {
                 url = SEARCH_CONTROLLER;
             } else if (button.equals("Update")) {
                 url = UPDATE_PROFILE_CONTROLLER;
-            }else if (button.equals("Log out")) {
+            } else if (button.equals("Log out")) {
                 url = LOGOUT_CONTROLLER;
+            } else if (button.equals("Generate")) {
+                url = PLAN_CONTROLLER;
+            } else if (button.equals("Search Account")) {
+                url = SEARCH_ACCOUNT_CONTROLLER;
+            } else if (button.equals("updateStatusAccount")) {
+                url = MANAGER_STATUS_ACCOUNT;
             }
         } catch (NullPointerException ex) {
 
