@@ -925,4 +925,222 @@ public class RecipeOrganizeDAO implements Serializable {
             return kq;
         }
     }
+     public boolean CreateRecipe(String recipeName, String caloRecipe, String description, String imgUrl, String difficulty, String ingredient_table, String categoryID, List<String> steps) throws SQLException, ClassNotFoundException {
+        boolean recipeSuccess = false;
+        boolean stepSuccess = false;
+        Connection con = null;
+        PreparedStatement psRecipe = null;
+        PreparedStatement psStep = null;
+        ResultSet rsRecipe = null;
+
+        try {
+            // Get database connection
+            con = DBUtils.getConnection();
+
+            // Create SQL query for recipe insertion
+            String recipeSql = "INSERT INTO recipe (recipeName, caloRecipe, description, imgUrl, difficulty, ingredient_table, categoryID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            // Create PreparedStatement for recipe insertion
+            psRecipe = con.prepareStatement(recipeSql, Statement.RETURN_GENERATED_KEYS);
+
+            // Set values for recipe parameters
+            psRecipe.setString(1, recipeName);
+            psRecipe.setString(2, caloRecipe);
+            psRecipe.setString(3, description);
+            psRecipe.setString(4, imgUrl);
+            psRecipe.setString(5, difficulty);
+            psRecipe.setString(6, ingredient_table);
+            psRecipe.setString(7, categoryID);
+
+            // Execute recipe insertion query and get the generated keys
+            int recipeResult = psRecipe.executeUpdate();
+            rsRecipe = psRecipe.getGeneratedKeys();
+
+            // Check if recipe insertion was successful
+            if (recipeResult > 0 && rsRecipe.next()) {
+                // Recipe insertion successful
+                recipeSuccess = true;
+            }
+
+            // Check if steps are provided
+            if (!steps.isEmpty()) {
+                // Create SQL query for step insertion
+                String stepSql = "INSERT INTO step (recipeID, descriptionName) VALUES (?, ?)";
+
+                // Create PreparedStatement for step insertion
+                psStep = con.prepareStatement(stepSql);
+
+                // Set recipeID and stepDescription values for each step
+                int recipeID = rsRecipe.getInt(1);
+                for (String step : steps) {
+                    psStep.setInt(1, recipeID);
+                    psStep.setString(2, step);
+                    psStep.addBatch();
+                }
+
+                // Execute step insertion batch
+                int[] stepResults = psStep.executeBatch();
+
+                // Check if all steps were inserted successfully
+                boolean allStepsInserted = true;
+                for (int stepResult : stepResults) {
+                    if (stepResult != PreparedStatement.SUCCESS_NO_INFO) {
+                        allStepsInserted = false;
+                        break;
+                    }
+                }
+
+                // Set step success flag
+                stepSuccess = allStepsInserted;
+            } else {
+                // No steps provided, consider step insertion as successful
+                stepSuccess = true;
+            }
+        } finally {
+            // Close the resources
+            if (rsRecipe != null) {
+                rsRecipe.close();
+            }
+            if (psRecipe != null) {
+                psRecipe.close();
+            }
+            if (psStep != null) {
+                psStep.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return recipeSuccess || stepSuccess;
+    }
+
+   
+
+
+public void updateRecipe(String recipeName, String caloRecipe, String description, String imgUrl, String difficulty, String ingredient_table, String categoryID, String recipeID, List<String> steps) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement psRecipe = null;
+        PreparedStatement psStepDelete = null;
+        PreparedStatement psStepInsert = null;        
+               try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                // Update recipe
+                String recipeSql = "UPDATE recipe\n"
+                        + "SET recipeName = ?, caloRecipe = ?, description = ?, imgUrl = ?, difficulty = ?, ingredient_table = ?, categoryID = ?\n"
+                        + "WHERE recipeID = ?;";
+                psRecipe = con.prepareStatement(recipeSql);
+                psRecipe.setString(1, recipeName);
+                psRecipe.setString(2, caloRecipe);
+                psRecipe.setString(3, description);
+                psRecipe.setString(4, imgUrl);
+                psRecipe.setString(5, difficulty);
+                psRecipe.setString(6, ingredient_table);
+                psRecipe.setString(7, categoryID);
+                psRecipe.setString(8, recipeID);
+                psRecipe.executeUpdate();
+
+                // Delete existing steps
+                String stepDeleteSql = "DELETE FROM step WHERE recipeID = ?;";
+                psStepDelete = con.prepareStatement(stepDeleteSql);
+                psStepDelete.setString(1, recipeID);
+                psStepDelete.executeUpdate();
+
+                // Insert new steps
+                String stepInsertSql = "INSERT INTO step (recipeID, descriptionName) VALUES (?, ?);";
+                psStepInsert = con.prepareStatement(stepInsertSql);
+                for (String step : steps) {
+                    psStepInsert.setString(1, recipeID);
+                    psStepInsert.setString(2, step);
+                    psStepInsert.executeUpdate();
+                }
+            }
+        } finally {
+            if (psRecipe != null) {
+                psRecipe.close();
+            }
+            if (psStepDelete != null) {
+                psStepDelete.close();
+            }
+            if (psStepInsert != null) {
+                psStepInsert.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public List<RecipeOrganizeDTO> deleteRecipe(String recipeID) throws SQLException, ClassNotFoundException {
+        String sqlDeleteFeedback = "DELETE FROM feedback WHERE recipeID = ?";
+        String sqlDeleteFavorite = "DELETE FROM favorite WHERE recipeID = ?";
+        String sqlDeleteStep = "DELETE FROM step WHERE recipeID = ?";
+        String sqlDeleteRecipe = "DELETE FROM recipe WHERE recipeID = ?";
+
+        List<RecipeOrganizeDTO> list = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statementDeleteFeedback = null;
+        PreparedStatement statementDeleteFavorite = null;
+        PreparedStatement statementDeleteStep = null;
+        PreparedStatement statementDeleteRecipe = null;
+
+        try {
+            connection = DBUtils.getConnection();
+
+            // Bắt đầu một transaction
+            connection.setAutoCommit(false);
+
+            // Xóa các bản ghi liên quan trong bảng feedback
+            statementDeleteFeedback = connection.prepareStatement(sqlDeleteFeedback);
+            statementDeleteFeedback.setString(1, recipeID);
+            statementDeleteFeedback.executeUpdate();
+
+            // Xóa các bản ghi liên quan trong bảng favorite
+            statementDeleteFavorite = connection.prepareStatement(sqlDeleteFavorite);
+            statementDeleteFavorite.setString(1, recipeID);
+            statementDeleteFavorite.executeUpdate();
+            // Xóa các bản ghi liên quan trong bảng step
+            statementDeleteStep = connection.prepareStatement(sqlDeleteStep);
+            statementDeleteStep.setString(1, recipeID);
+            statementDeleteStep.executeUpdate();
+
+            // Xóa bản ghi trong bảng recipe
+            statementDeleteRecipe = connection.prepareStatement(sqlDeleteRecipe);
+            statementDeleteRecipe.setString(1, recipeID);
+            statementDeleteRecipe.executeUpdate();
+
+            // Commit transaction
+            connection.commit();
+        } catch (SQLException e) {
+            // Rollback transaction nếu có lỗi xảy ra
+            if (connection != null) {
+                connection.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            // Thiết lập lại chế độ tự động commit
+            if (connection != null) {
+                connection.setAutoCommit(true);
+            }
+
+            // Đóng các PreparedStatement và Connection
+            if (statementDeleteFeedback != null) {
+                statementDeleteFeedback.close();
+            }
+            if (statementDeleteFavorite != null) {
+                statementDeleteFavorite.close();
+            }
+            if (statementDeleteStep != null) {
+                statementDeleteStep.close();
+            }
+            if (statementDeleteRecipe != null) {
+                statementDeleteRecipe.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return list;
+    }
 }

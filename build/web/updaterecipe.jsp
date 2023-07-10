@@ -1,98 +1,28 @@
 <%-- 
-    Document   : profile
-    Created on : Jun 1, 2023, 7:46:14 PM
-    Author     : tranb
+    Document   : updaterecipe
+    Created on : Jul 9, 2023, 11:39:48 PM
+    Author     : dangt
 --%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.io.File"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="team3.recipe.RecipeOrganizeDTO"%>
-<%@page import="team3.recipe.RecipeOrganizeDAO"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <jsp:useBean id="result" class="team3.recipe.RecipeOrganizeDAO" scope="request"/>
         <meta charset="UTF-8">
         <meta name="description" content="">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Update Recipe</title>
 
-        <!-- Title -->
-        <title>Recipe Organize | Manager Account</title>
-
+        <!-- Đường dẫn tới file CSS của trang -->
         <!-- Favicon -->
         <link rel="icon" href="img/recipe/favicon.ico">
-
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="style.css">
-        <style>
-            table {
-                border-collapse: collapse;
-                width: 100%;
-                text-align: center;
-            }
 
-            th, td {
-                padding: 10px;
-                border-bottom: 1px solid #ddd;
-            }
-
-            th {
-                background-color: #4CAF50;
-                color: white;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
-            tr:nth-child(even){
-                background-color: #f2f2f2;
-            }
-
-            tr:hover {
-                background-color: #ddd;
-            }
-
-            .action-link {
-                color: #fff;
-                background-color: #4CAF50;
-                border-radius: 5px;
-                padding: 5px 10px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: all 0.3s ease-in-out;
-            }
-
-            .action-link:hover {
-                background-color: #333;
-            }
-                    form {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Thiết lập CSS cho input */
-        input[type="text"] {
-            padding: 10px;
-            margin-right: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        /* Thiết lập CSS cho button */
-        input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        </style>
     </head>
     <body>
         <!-- Preloader -->
@@ -224,12 +154,14 @@
                 </div>
             </div>
 
+            <!-- ##### Breadcumb Area Start ##### -->
             <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb4.jpg);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
                             <div class="breadcumb-text text-center">
-                                <h2>Manager Account</h2>
+                                <h2>Update Recipe</h2>
+                                <link rel="stylesheet" href="update.css">
                             </div>
                         </div>
                     </div>
@@ -237,109 +169,73 @@
             </div> <br>
         </header>
 
-    <form action="DispatchController" method="post">
-        <input type="text" name="txtSearch" placeholder="Search...">
-        <input type="submit" value="Search Account" name="btAction">
-    </form><br>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>User name</th>
-                <th>Full name</th>
-                <th>Status</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Action</th>
-            </tr>
-            <c:set var="kq" value="${requestScope.usersearch}"/>
-            <c:if test="${kq == null}">
-                <c:set var="list" value="${requestScope.usersearch}"/>
-            </c:if>
-            <c:if test="${kq != null}">
-                <c:set var="list" value="${requestScope.usersearch}"/>
-            </c:if>
-            <c:choose>
-                <c:when test="${empty kq}">
-                    <c:forEach items="${result.getManagerAccount()}" var="manager">
-                        <tr>
-                            <td>${manager.getUserID()}</td>
-                            <td>${manager.getUserName()}</td>
-                            <td>${manager.getFullName()}</td>
-                            <td><c:choose>
-                                    <c:when test="${manager.getStatus() eq 1}">Active</c:when>
-                                    <c:otherwise>Inactive</c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td>${manager.getPhone()}</td>
-                            <td>${manager.getEmail()}</td>
-                            <td>
-                                <c:choose >
-                                    <c:when test="${manager.getRole() eq true}">Admin</c:when>
-                                    <c:otherwise>User</c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td>
-                                <c:if test="${manager.getRole() eq false}">
-                                    <c:url var="mylink" value="DispatchController">
-                                        <c:param name="userName" value="${manager.getUserName()}"></c:param>
-                                        <c:param name="status" value="${manager.getStatus()}"></c:param>
-                                        <c:param name="btAction" value="updateStatusAccount"></c:param>
-                                    </c:url>
-                                    <a class="action-link" href="${mylink}">
-                                        <c:choose>
-                                            <c:when test="${manager.getStatus() eq 1}">Block</c:when>
-                                            <c:otherwise>Unlock</c:otherwise>
-                                        </c:choose>
-                                    </a>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-                    <c:forEach var="manager" items="${list}">
-                        <tr>
-                            <td>${manager.getUserID()}</td>
-                            <td>${manager.getUserName()}</td>
-                            <td>${manager.getFullName()}</td>
-                            <td><c:choose>
-                                    <c:when test="${manager.getStatus() eq 1}">Active</c:when>
-                                    <c:otherwise>Inactive</c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td>${manager.getPhone()}</td>
-                            <td>${manager.getEmail()}</td>
-                            <td>
-                                <c:choose >
-                                    <c:when test="${manager.getRole() eq true}">Admin</c:when>
-                                    <c:otherwise>User</c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td>
-                                <c:if test="${manager.getRole() eq false}">
-                                    <c:url var="mylink" value="DispatchController">
-                                        <c:param name="userName" value="${manager.getUserName()}"></c:param>
-                                        <c:param name="status" value="${manager.getStatus()}"></c:param>
-                                        <c:param name="btAction" value="updateStatusAccount"></c:param>
-                                    </c:url>
-                                    <a class="action-link" href="${mylink}">
-                                        <c:choose>
-                                            <c:when test="${manager.getStatus() eq 1}">Block</c:when>
-                                            <c:otherwise>Unlock</c:otherwise>
-                                        </c:choose>
-                                    </a>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:otherwise>
-            </c:choose>
-
-        </table>
 
 
-
+        <div class="update-form">
+            <form action="UpdateRecipeServlet" method="post">
+                <input type="hidden" name="recipeID" value="${recipeID}">
+                <div class="form-group">
+                    <label for="recipeName">Recipe Name:</label>
+                    <input type="text" id="recipeName" name="recipeName" value="${recipeName}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="caloRecipe">Calories:</label>
+                    <input type="text" id="caloRecipe" name="caloRecipe" value="${caloRecipe}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" class="form-control">${description}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="imgUrl">Image URL:</label>
+                    <select name="imgUrl" id="imgUrl" required class="form-control select-with-scroll">
+                        <option value="" selected disabled>Choose an image</option>
+                        <%-- Add image options from directory --%>
+                        <%
+                            String directoryPath = getServletContext().getRealPath("/img/recipe");
+                            File[] files = new File(directoryPath).listFiles();
+                            for (File file : files) {
+                                if (file.isFile() && (file.getName().endsWith(".jpg") || file.getName().endsWith(".png"))) {
+                                    String fileName = file.getName();
+                        %>
+                        <option value="<%= "img/recipe/" + fileName%>"><%= fileName%></option>
+                        <%
+                                }
+                            }
+                        %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="difficulty">Difficulty:</label>
+                    <select name="difficulty" id="difficulty" required class="form-control">
+                        <option value="" selected disabled>Choose difficulty</option>
+                        <option value="High">High</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ingredient_table">Ingredients:</label>
+                    <textarea id="ingredient_table" name="ingredient_table" class="form-control">${ingredient_table}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="categoryID">Category:</label>
+                    <select name="categoryID" id="categoryID" class="form-control">
+                        <option value="1">Main Dish</option>
+                        <option value="2">Pasta</option>
+                        <option value="3">Salad</option>
+                        <option value="4">Vegetarian</option>
+                        <option value="5">Dessert</option>
+                        <option value="6">Bakery</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="DescriptionName">Step:</label>
+                    <textarea id="steps" name="steps" class="form-control">${DescriptionName}</textarea>
+                </div>
+                <input type="submit" value="Update Recipe" class="btn-submit btn btn-primary">
+            </form>
+        </div>
         <!-- ##### Follow Us Instagram Area Start ##### -->
         <div class="follow-us-instagram">
             <div class="container">

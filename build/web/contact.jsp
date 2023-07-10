@@ -136,6 +136,7 @@
                                                         <li><a href="plan.jsp">Meal Planer</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
+                                                            <li><a href="RecipeManagementController">Management Recipe</a></li>
                                                             </c:if>
                                                         <li><a href="LogoutController">Logout</a> </li>
                                                     </ul>

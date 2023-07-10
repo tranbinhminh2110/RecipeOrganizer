@@ -8,6 +8,22 @@
         <servlet-name>UpdateProfileController</servlet-name>
         <servlet-class>team3.controller.UpdateProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RecipeManagementController</servlet-name>
+        <servlet-class>team3.controller.RecipeManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateRecipeController</servlet-name>
+        <servlet-class>team3.controller.CreateRecipeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRecipeServlet</servlet-name>
+        <servlet-class>team3.controller.UpdateRecipeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRecipeController</servlet-name>
+        <servlet-class>team3.controller.DeleteRecipeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/ProfileController</url-pattern>
@@ -15,6 +31,22 @@
     <servlet-mapping>
         <servlet-name>UpdateProfileController</servlet-name>
         <url-pattern>/UpdateProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecipeManagementController</servlet-name>
+        <url-pattern>/RecipeManagementController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRecipeController</servlet-name>
+        <url-pattern>/CreateRecipeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRecipeServlet</servlet-name>
+        <url-pattern>/UpdateRecipeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRecipeController</servlet-name>
+        <url-pattern>/DeleteRecipeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
