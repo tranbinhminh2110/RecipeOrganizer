@@ -1143,4 +1143,126 @@ public void updateRecipe(String recipeName, String caloRecipe, String descriptio
         }
         return list;
     }
+    
+    public String getCategoryByRecipeID(int recipeID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        String categoryID = null;
+        try {
+            String query = "SELECT categoryID FROM recipe WHERE recipeID = ?";
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(query);
+            stm.setInt(1, recipeID);
+            rs = stm.executeQuery();
+            if (rs.next()) {              
+                categoryID = String.valueOf(rs.getInt("categoryID"));
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return categoryID;
+    }
+    
+    public void addIndividualCalory(int userID, float calory)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            List<RecipeOrganizeDTO> mealplan = getMealPlan(userID);
+            if (mealplan.isEmpty()) {
+                String query = "INSERT into individual_calory(userID, calo)"
+                        + " Values(?, ?)";
+                stm = con.prepareStatement(query);
+                stm.setInt(1, userID);
+                stm.setFloat(2, calory);
+                stm.executeUpdate();
+            } else {
+                if (calory >= 1500 && calory <= 4000) {
+                String query = "UPDATE individual_calory SET calo = ? WHERE userID = ?";
+                stm = con.prepareStatement(query);
+                stm.setFloat(1, calory);
+                stm.setInt(2, userID);
+                stm.executeUpdate();
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public float getIndividualCalory(int userID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        float calo = 0;
+        try {
+            String query = "SELECT * FROM individual_calory WHERE userID = ?";
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(query);
+            stm.setInt(1, userID);
+            rs = stm.executeQuery();
+            if (rs.next()) {              
+                calo = rs.getFloat("calo");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return calo;
+    }
+    
+    public List<RecipeOrganizeDTO> getAllMealPlanToSendEmailAutomatically() throws SQLException, ClassNotFoundException {
+        List<RecipeOrganizeDTO> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT mealPlan.userID, account.email, mealPlan.planDate, recipe.recipeID, recipe.recipeName, recipe.caloRecipe, recipe.imgUrl " +
+                         "FROM mealPlan " +
+                         "JOIN recipe ON mealPlan.recipeID = recipe.recipeID " +
+                         "JOIN account ON mealPlan.userID = account.userID";
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                RecipeOrganizeDTO dto = new RecipeOrganizeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getFloat(6), rs.getString(7));
+                list.add(dto);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+    }
+    
 }

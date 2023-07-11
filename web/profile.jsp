@@ -181,7 +181,6 @@
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
             <div class="container">
                 <div class="row flex-lg-nowrap">
-
                     <div class="col">
                         <div class="row">
                             <div class="col mb-3">
@@ -225,21 +224,20 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
                 <%
                                             } else {
                                             %>
+                                            
                                             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
                                             <div class="container">
                                                 <div class="row flex-lg-nowrap">
-
                                                     <div class="col">
                                                         <div class="row">
                                                             <div class="col mb-3">
                                                                 <div class="card">
                                                                     <div class="card-body">
                                                                         <div class="e-profile">
-
                                                                             <form action="ChangePhotoProfileController" method = "post"> 
                                                                                 <div class="row">
                                                                                     <div class="col-12 col-sm-auto mb-3">
@@ -412,7 +410,7 @@
                                                                     <div class="card-body">
                                                                         <h6 class="card-title font-weight-bold">Support</h6>
                                                                         <p class="card-text">Get fast, free help from our friendly assistants.</p>
-                                                                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                                                                        <a href="contact.jsp" class="btn btn-primary">Contact Us</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -427,8 +425,7 @@
                                             <%
                                                 }
                                             %>
-
-
+                                            
                                             </header>
                                             <!-- ##### Follow Us Instagram Area Start ##### -->
                                             <div class="follow-us-instagram">

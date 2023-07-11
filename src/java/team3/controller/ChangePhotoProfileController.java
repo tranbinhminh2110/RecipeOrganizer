@@ -50,8 +50,8 @@ public class ChangePhotoProfileController extends HttpServlet {
             // Tạo một đối tượng JFileChooser
             JFileChooser fileChooser = new JFileChooser();
             // Thiết lập thư mục mặc định
-//            String defaultDirectory = "D:\\Netbean\\swp391\\RecipeOrganize\\web\\img\\recipe";
-//            fileChooser.setCurrentDirectory(new File(defaultDirectory));
+            String defaultDirectory = "D:\\Netbean\\swp391\\RecipeOrganize\\web\\img\\recipe";
+            fileChooser.setCurrentDirectory(new File(defaultDirectory));
             // Thiết lập bộ lọc tệp tin
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Images(.jpg, .png)", "jpg", "png");
             fileChooser.setFileFilter(filter);

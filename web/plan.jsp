@@ -32,16 +32,6 @@
     </head>
     <body>
 
-        <c:if test="${requestScope.RESET_PASSWORD_SUCCESS}">
-            <c:set var="reset_password_success" value="${requestScope.RESET_PASSWORD_SUCCESS}" scope="request" />
-        </c:if>
-        <script>
-            var result = ${reset_password_success};
-            if (result) {
-                alert("Reset your password successfully.");
-            }
-        </script>
-
         <!-- Preloader -->
         <div id="preloader">
             <i class="circle-preloader"></i>
@@ -432,7 +422,7 @@
                             </button>
                             <form action="DispatchController" method="post">
                                 <span class="subtitle">I want to eat: </span>
-                                <input type="number" min="1000" max="4500" step="any" pattern="[0-9]*" placeholder="####"
+                                <input type="number" min="1500" max="4000" step="any" pattern="[0-9]*" placeholder="####"
                                        name="numcalo" id="bmrInput" value="0" class="input_field">
                                 <span class="subtitle"><b>Calories</b></span>
                                 <button type="submit" value="Generate" name="btAction" class="submit">Generate</button>
@@ -629,7 +619,22 @@
                                     %>
                                 </h2>
                                 <p style="display: inline-block; font-size: 20px; padding-left: 30% ">|</p>
-                                <p style="display: inline-block;text-align: center; color: black; font-family: Times New Roman; font-size: 20px;">Your Calories Estimate: ${param.numcalo}</p>
+                                <p style="display: inline-block;text-align: center; color: black; font-family: Times New Roman; font-size: 20px;">Your Calories Estimate: 
+                                <%
+                    float calo;
+                    if (session.getAttribute("USER") != null) {
+                        RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                        int userID = user.getUserID();
+                        calo = dao.getIndividualCalory(userID);
+                        out.println(calo);
+                    } else {
+                        RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+                        int adminID = admin.getUserID();
+                        calo = dao.getIndividualCalory(adminID);
+                        out.println(calo);
+                    }
+                    %>
+                                </p>
                                 <%
                                     float totalCalories = 0;
                                     if (session.getAttribute("USER") != null) {

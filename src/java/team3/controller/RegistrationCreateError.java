@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package team3.error_package;
+package team3.controller;
 
 import java.io.Serializable;
 

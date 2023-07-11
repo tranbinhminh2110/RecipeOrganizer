@@ -1,4 +1,6 @@
-﻿
+﻿use RecipeOrganize
+go
+create database RecipeOrganize
 CREATE TABLE account (
  
   userID INT IDENTITY(1,1) PRIMARY KEY,
@@ -64,6 +66,12 @@ CREATE TABLE step (
   descriptionName TEXT NULL,
   recipeID INT,
   FOREIGN KEY (recipeID) REFERENCES recipe(recipeID)
+);
+
+CREATE TABLE individual_calory (
+  userID INT,
+  calo FLOAT,
+  FOREIGN KEY (userID) REFERENCES account(userID)
 );
 -- Chèn dữ liệu vào bảng account
 INSERT INTO account (userName, password, fullName, phone, status, role, token, email, image_path)

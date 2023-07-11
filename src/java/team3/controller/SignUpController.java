@@ -19,7 +19,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import team3.error_package.RegistrationCreateError;
 import team3.recipe.RecipeOrganizeDAO;
 
 /**

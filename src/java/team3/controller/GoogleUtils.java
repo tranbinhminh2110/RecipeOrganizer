@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package team3.loginbygmail;
+package team3.controller;
 
 /**
  *
  * @author MSI BH
  */
+import team3.controller.Constants;
+import team3.controller.GooglePojo;
 import java.io.IOException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;

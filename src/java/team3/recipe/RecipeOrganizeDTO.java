@@ -123,7 +123,16 @@ public class RecipeOrganizeDTO implements Serializable {
         this.categoryID = categoryID;
     }
 
-    
+    // hàm khởi tạo cho chức năng gửi email tự động về meal plan cá nhân 
+    public RecipeOrganizeDTO(int userID, String email, String planDate, int recipeID, String recipeName, float caloRecipe, String imgUrl) {
+        this.userID = userID;
+        this.email = email;
+        this.planDate = planDate;
+        this.recipeID = recipeID;
+        this.recipeName = recipeName;
+        this.caloRecipe = caloRecipe;
+        this.imgUrl = imgUrl;
+    }
   
     public RecipeOrganizeDTO(int recipeID, String recipeName, float caloRecipe, String description, String imgUrl, int avgRating, String difficulty) {
         this.recipeID = recipeID;

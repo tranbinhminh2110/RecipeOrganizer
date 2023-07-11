@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package team3.loginbygmail;
+package team3.controller;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -12,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import team3.loginbygmail.GooglePojo;
-import team3.loginbygmail.GoogleUtils;
+import team3.controller.GooglePojo;
+import team3.controller.GoogleUtils;
 
 @WebServlet("/login-google")
 public class LoginGoogleServlet extends HttpServlet {

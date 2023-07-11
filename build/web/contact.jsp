@@ -1,10 +1,4 @@
-<%-- 
-    Document   : contact
-    Created on : Jul 10, 2023, 4:39:40 PM
-    Author     : tranb
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +21,12 @@
 </head>
 
 <body>
+    <script>
+            var result = ${requestScope.SEND_SUCCESS};
+            if (result) {
+                alert("Send email successfully.");
+            }
+        </script>
     <!-- Preloader -->
     <div id="preloader">
         <i class="circle-preloader"></i>
@@ -49,19 +49,18 @@
             </div>
         </div>
     </div>
-
     <!-- ##### Header Area Start ##### -->
-        <header class="header-area">
+    <header class="header-area">
 
-            <!-- Top Header Area -->
-            <div class="top-header-area">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center justify-content-between">
-                        <!-- Breaking News -->
-                        <div class="col-12 col-sm-6">
-                            <div class="breaking-news">
-                                <div id="breakingNewsTicker" class="ticker">
-                                    <ul>
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-between">
+                    <!-- Breaking News -->
+                    <div class="col-12 col-sm-6">
+                        <div class="breaking-news">
+                            <div id="breakingNewsTicker" class="ticker">
+                                <ul>
                                         <c:if test="${not empty sessionScope.ADMIN}">
                                             <c:set var="customer" value="${sessionScope.ADMIN}" scope="request" />
                                         </c:if>
@@ -72,48 +71,47 @@
                                         <li><a href="#">Welcome to Recipe Organize</a></li>
                                         <li><a href="#">Hi Delicious!</a></li>
                                     </ul>
-                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Top Social Info -->
-                        <div class="col-12 col-sm-6">
-                            <div class="top-social-info text-right">
-                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
+                    <!-- Top Social Info -->
+                    <div class="col-12 col-sm-6">
+                        <div class="top-social-info text-right">
+                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Navbar Area -->
-            <div class="delicious-main-menu">
-                <div class="classy-nav-container breakpoint-off">
-                    <div class="container">
+        <!-- Navbar Area -->
+        <div class="delicious-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="deliciousNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
                         <!-- Menu -->
-                        <nav class="classy-navbar justify-content-between" id="deliciousNav">
+                        <div class="classy-menu">
 
-                            <!-- Logo -->
-                            <a class="nav-brand" href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
-
-                            <!-- Navbar Toggler -->
-                            <div class="classy-navbar-toggler">
-                                <span class="navbarToggler"><span></span><span></span><span></span></span>
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                             </div>
-
-                            <!-- Menu -->
-                            <div class="classy-menu">
-
-                                <!-- close btn -->
-                                <div class="classycloseIcon">
-                                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                                </div>
-
 
                                 <!-- Nav Start -->
                                 <div class="classynav">
@@ -133,7 +131,7 @@
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
                                                         <li><a href="setting_interface.jsp">Setting</a></li>
-                                                        <li><a href="plan.jsp">Meal Planer</a></li>
+                                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -145,19 +143,20 @@
                                         </c:if>                                        
                                     </ul>
 
-                                    <!-- Newsletter Form -->
-                                    <div class="search-btn">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </div>
 
+                                <!-- Newsletter Form -->
+                                <div class="search-btn">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
                                 </div>
-                                <!-- Nav End -->
+
                             </div>
-                        </nav>
-                    </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
@@ -208,18 +207,13 @@
                     <!-- Single Contact Information -->
                     <div class="single-contact-information mb-30">
                         <h6>Email:</h6>
-                        <p>team3mail@gmail.com</p>
+                        <p>doanphamdangkhoitd2@gmail.com</p>
                     </div>
                 </div>
 
                 <!-- Newsletter Area -->
                 <div class="col-12 col-lg-4">
-                    <div class="newsletter-form bg-img bg-overlay" style="background-image: url(img/bg-img/bg1.jpg);">
-                        <form action="#" method="post">
-                            <input type="email" name="email" placeholder="Subscribe to newsletter">
-                            <button type="submit" class="btn delicious-btn w-100">Subscribe</button>
-                        </form>
-                        <p>With just 5 minutes of operation, you have access to recipes from all over the world. So what are you waiting for without following our newsletter.</p>
+                    <div class="newsletter-form bg-img bg-overlay" style="background-image: url('img/bg-img/share.jpg'); height: 350px; width: 570px;"></div>
                     </div>
                 </div>
             </div>
@@ -241,19 +235,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="contact-form-area">
-                        <form action="#" method="post">
+                        <form action="SendEmailToContactController" method="post">
                             <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <input type="text" class="form-control" id="name" placeholder="Name">
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <input type="email" class="form-control" id="email" placeholder="E-mail">
+                                <div class="col-12">
+                                    <input type="email" class="form-control" name="email" placeholder="Your Email">
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject">
                                 </div>
                                 <div class="col-12">
-                                    <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                    <textarea name="message" class="form-control" name="message" cols="30" rows="10" placeholder="Message"></textarea>
                                 </div>
                                 <div class="col-12 text-center">
                                     <button class="btn delicious-btn mt-30" type="submit">Send</button>
@@ -344,7 +335,7 @@
         </div>
     </div>
     <!-- ##### Follow Us Instagram Area End ##### -->
-
+   
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
         <div class="container h-100">

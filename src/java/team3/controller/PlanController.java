@@ -67,7 +67,6 @@ public class PlanController extends HttpServlet {
             int randomIndexLunch2;
             randomIndexLunch2 = random.nextInt(list_lunch.size());
             RecipeOrganizeDTO randomLunch2 = null;
-            randomLunch2 = list_lunch.get(randomIndexLunch2);//
             if (randomIndexLunch1 == randomIndexLunch2) {
                 for (int i = 0; i < list_lunch.size(); i++) {
                     randomIndexLunch2 = random.nextInt(list_lunch.size());
@@ -85,12 +84,11 @@ public class PlanController extends HttpServlet {
             int randomIndexDinner1;
             randomIndexDinner1 = random.nextInt(list_dinner.size());
             RecipeOrganizeDTO randomDinner1 = null;
-            randomDinner1 = list_dinner.get(randomIndexDinner1);//
             RecipeOrganizeDTO randomDinner2 = null;
             if (randomIndexLunch1 == randomIndexDinner1 || randomIndexLunch2 == randomIndexDinner1) {
                 for (int i = 0; i < list_dinner.size(); i++) {
                     randomIndexDinner1 = random.nextInt(list_dinner.size());
-                    if (randomIndexDinner1 != randomIndexLunch1 || randomIndexDinner1 != randomIndexLunch2) {
+                    if (randomIndexDinner1 != randomIndexLunch1 && randomIndexDinner1 != randomIndexLunch2) {
                         randomDinner1 = list_dinner.get(randomIndexDinner1);
                         break;
                     }
@@ -99,7 +97,8 @@ public class PlanController extends HttpServlet {
                 randomDinner1 = list_dinner.get(randomIndexDinner1);
             }
             //The 6th recipe dinner
-            float fiveRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+            float fiveRecipe_calories = 0;
+            fiveRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
                     + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + randomDinner1.getCaloRecipe();
             float sixRecipe_calories;
             // if fiveRecipe_calories of 5 first recipes is equal or more than numcalo then The 6th recipe dinner won't be recommended
@@ -107,30 +106,92 @@ public class PlanController extends HttpServlet {
                 if (session.getAttribute("USER") != null) {
                     RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
                     int userID = user.getUserID();
+                    dao.addIndividualCalory(userID, numcalo);
                     List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(userID);
-                    if (mealplan.isEmpty()) {
-                        dao.addMealPlan(planDate, userID, randomBreakfast3.getRecipeID());
-                        dao.addMealPlan(planDate, userID, randomBreakfast5.getRecipeID());
-                        dao.addMealPlan(planDate, userID, randomLunch1.getRecipeID());
-                        dao.addMealPlan(planDate, userID, randomLunch2.getRecipeID());
-                        dao.addMealPlan(planDate, userID, randomDinner1.getRecipeID());
-                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
-                        session.setAttribute("MEAL_PLAN", mealPlan);
+                    Collections.sort(list_dinner, new Comparator<RecipeOrganizeDTO>() {
+                        @Override
+                        public int compare(RecipeOrganizeDTO recipe1, RecipeOrganizeDTO recipe2) {
+                            // So sánh dựa trên thuộc tính caloRecipe
+                            return Float.compare(recipe1.getCaloRecipe(), recipe2.getCaloRecipe());
+                        }
+                    });
+                    if (mealplan.size() == 0) {
+                        for (int i = list_dinner.size() - 1; i >= 0; i--) {
+                            randomDinner1 = list_dinner.get(i);
+                            if (randomDinner1 != randomLunch1 && randomDinner1 != randomLunch2) {
+                                fiveRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                        + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + randomDinner1.getCaloRecipe();
+                                if (fiveRecipe_calories <= numcalo) {
+                                    dao.addMealPlan(planDate, userID, randomBreakfast3.getRecipeID());
+                                    dao.addMealPlan(planDate, userID, randomBreakfast5.getRecipeID());
+                                    dao.addMealPlan(planDate, userID, randomLunch1.getRecipeID());
+                                    dao.addMealPlan(planDate, userID, randomLunch2.getRecipeID());
+                                    dao.addMealPlan(planDate, userID, randomDinner1.getRecipeID());
+                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                    break;
+                                } else {
+                                    RecipeOrganizeDTO minCaloRandomDinner1 = list_dinner.get(0);
+                                    if (randomDinner1 == minCaloRandomDinner1) {
+                                        dao.addMealPlan(planDate, userID, randomBreakfast3.getRecipeID());
+                                        dao.addMealPlan(planDate, userID, randomBreakfast5.getRecipeID());
+                                        dao.addMealPlan(planDate, userID, randomLunch1.getRecipeID());
+                                        dao.addMealPlan(planDate, userID, randomLunch2.getRecipeID());
+                                        dao.addMealPlan(planDate, userID, minCaloRandomDinner1.getRecipeID());
+                                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                        session.setAttribute("MEAL_PLAN", mealPlan);
+                                    }
+                                }
+                            }
+
+                        }
                     }
-                    if (mealplan.size() == 5) {
+                    else if (mealplan.size() == 5) {
                         dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                         dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                         dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
                         dao.updateMealPlan(mealplan.get(3).getPlanID(), planDate, randomLunch2.getRecipeID());
-                        dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, randomDinner1.getRecipeID());
-                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
-                        session.setAttribute("MEAL_PLAN", mealPlan);
+                        for (int i = list_dinner.size() - 1; i >= 0; i--) {
+                            randomDinner1 = list_dinner.get(i);
+                            fiveRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                    + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + list_dinner.get(i).getCaloRecipe();
+                            if (fiveRecipe_calories <= numcalo) {
+                                dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, list_dinner.get(i).getRecipeID());
+                                List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                session.setAttribute("MEAL_PLAN", mealPlan);
+                                break;
+                            } else {
+                                RecipeOrganizeDTO minCaloRandomDinner1 = list_dinner.get(0);
+                                if (randomDinner1 == minCaloRandomDinner1) {
+                                    dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, minCaloRandomDinner1.getRecipeID());
+                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                }
+                            }
+                        }
                     } else {
                         dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                         dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                         dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
                         dao.updateMealPlan(mealplan.get(3).getPlanID(), planDate, randomLunch2.getRecipeID());
-                        dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, randomDinner1.getRecipeID());
+                        for (int i = list_dinner.size() - 1; i >= 0; i--) {
+                            randomDinner1 = list_dinner.get(i);
+                            fiveRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                    + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + list_dinner.get(i).getCaloRecipe();
+                            if (fiveRecipe_calories <= numcalo) {
+                                dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, list_dinner.get(i).getRecipeID());
+                                List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                session.setAttribute("MEAL_PLAN", mealPlan);
+                                break;
+                            } else {
+                                RecipeOrganizeDTO minCaloRandomDinner1 = list_dinner.get(0);
+                                if (randomDinner1 == minCaloRandomDinner1) {
+                                    dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, minCaloRandomDinner1.getRecipeID());
+                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                }
+                            }
+                        }
                         dao.deleteMealPlan(mealplan.get(5).getPlanID());
                         List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
                         session.setAttribute("MEAL_PLAN", mealPlan);
@@ -138,30 +199,91 @@ public class PlanController extends HttpServlet {
                 } else {
                     RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
                     int adminID = admin.getUserID();
+                    dao.addIndividualCalory(adminID, numcalo);
                     List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(adminID);
-                    if (mealplan.isEmpty()) {
-                        dao.addMealPlan(planDate, adminID, randomBreakfast3.getRecipeID());
-                        dao.addMealPlan(planDate, adminID, randomBreakfast5.getRecipeID());
-                        dao.addMealPlan(planDate, adminID, randomLunch1.getRecipeID());
-                        dao.addMealPlan(planDate, adminID, randomLunch2.getRecipeID());
-                        dao.addMealPlan(planDate, adminID, randomDinner1.getRecipeID());
-                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
-                        session.setAttribute("MEAL_PLAN", mealPlan);
+                    Collections.sort(list_dinner, new Comparator<RecipeOrganizeDTO>() {
+                        @Override
+                        public int compare(RecipeOrganizeDTO recipe1, RecipeOrganizeDTO recipe2) {
+                            // So sánh dựa trên thuộc tính caloRecipe
+                            return Float.compare(recipe1.getCaloRecipe(), recipe2.getCaloRecipe());
+                        }
+                    });
+                    if (mealplan.size() == 0) {
+                        for (int i = list_dinner.size() - 1; i >= 0; i--) {
+                            randomDinner1 = list_dinner.get(i);
+                            if (randomDinner1 != randomLunch1 && randomDinner1 != randomLunch2) {
+                                fiveRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                        + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + randomDinner1.getCaloRecipe();
+                                if (fiveRecipe_calories <= numcalo) {
+                                    dao.addMealPlan(planDate, adminID, randomBreakfast3.getRecipeID());
+                                    dao.addMealPlan(planDate, adminID, randomBreakfast5.getRecipeID());
+                                    dao.addMealPlan(planDate, adminID, randomLunch1.getRecipeID());
+                                    dao.addMealPlan(planDate, adminID, randomLunch2.getRecipeID());
+                                    dao.addMealPlan(planDate, adminID, randomDinner1.getRecipeID());
+                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                    break;
+                                } else {
+                                    RecipeOrganizeDTO minCaloRandomDinner1 = list_dinner.get(0);
+                                    if (randomDinner1 == minCaloRandomDinner1) {
+                                        dao.addMealPlan(planDate, adminID, randomBreakfast3.getRecipeID());
+                                        dao.addMealPlan(planDate, adminID, randomBreakfast5.getRecipeID());
+                                        dao.addMealPlan(planDate, adminID, randomLunch1.getRecipeID());
+                                        dao.addMealPlan(planDate, adminID, randomLunch2.getRecipeID());
+                                        dao.addMealPlan(planDate, adminID, minCaloRandomDinner1.getRecipeID());
+                                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                        session.setAttribute("MEAL_PLAN", mealPlan);
+                                    }
+                                }
+                            }
+                        }
                     }
-                    if (mealplan.size() == 5) {
+                    else if (mealplan.size() == 5) {
                         dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                         dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                         dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
                         dao.updateMealPlan(mealplan.get(3).getPlanID(), planDate, randomLunch2.getRecipeID());
-                        dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, randomDinner1.getRecipeID());
-                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
-                        session.setAttribute("MEAL_PLAN", mealPlan);
+                        for (int i = list_dinner.size() - 1; i >= 0; i--) {
+                            randomDinner1 = list_dinner.get(i);
+                            fiveRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                    + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + list_dinner.get(i).getCaloRecipe();
+                            if (fiveRecipe_calories <= numcalo) {
+                                dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, list_dinner.get(i).getRecipeID());
+                                List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                session.setAttribute("MEAL_PLAN", mealPlan);
+                                break;
+                            } else {
+                                RecipeOrganizeDTO minCaloRandomDinner1 = list_dinner.get(0);
+                                if (randomDinner1 == minCaloRandomDinner1) {
+                                    dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, minCaloRandomDinner1.getRecipeID());
+                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                }
+                            }
+                        }
                     } else {
                         dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                         dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                         dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
                         dao.updateMealPlan(mealplan.get(3).getPlanID(), planDate, randomLunch2.getRecipeID());
-                        dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, randomDinner1.getRecipeID());
+                        for (int i = list_dinner.size() - 1; i >= 0; i--) {
+                            randomDinner1 = list_dinner.get(i);
+                            fiveRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                    + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + list_dinner.get(i).getCaloRecipe();
+                            if (fiveRecipe_calories <= numcalo) {
+                                dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, list_dinner.get(i).getRecipeID());
+                                List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                session.setAttribute("MEAL_PLAN", mealPlan);
+                                break;
+                            } else {
+                                RecipeOrganizeDTO minCaloRandomDinner1 = list_dinner.get(0);
+                                if (randomDinner1 == minCaloRandomDinner1) {
+                                    dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, minCaloRandomDinner1.getRecipeID());
+                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                }
+                            }
+                        }
                         dao.deleteMealPlan(mealplan.get(5).getPlanID());
                         List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
                         session.setAttribute("MEAL_PLAN", mealPlan);
@@ -188,8 +310,9 @@ public class PlanController extends HttpServlet {
                             if (session.getAttribute("USER") != null) {
                                 RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
                                 int userID = user.getUserID();
+                                dao.addIndividualCalory(userID, numcalo);
                                 List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(userID);
-                                if (mealplan.isEmpty()) {
+                                if (mealplan.size() == 0) {
                                     dao.addMealPlan(planDate, userID, randomBreakfast3.getRecipeID());
                                     dao.addMealPlan(planDate, userID, randomBreakfast5.getRecipeID());
                                     dao.addMealPlan(planDate, userID, randomLunch1.getRecipeID());
@@ -199,30 +322,55 @@ public class PlanController extends HttpServlet {
                                     List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
                                     session.setAttribute("MEAL_PLAN", mealPlan);
                                 }
-                                if (mealplan.size() == 6) {
+                                else if (mealplan.size() == 6) {
                                     dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(3).getPlanID(), planDate, randomLunch2.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, randomDinner1.getRecipeID());
-                                    dao.updateMealPlan(mealplan.get(5).getPlanID(), planDate, randomDinner2.getRecipeID());
-                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
-                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                    sixRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                            + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + randomDinner1.getCaloRecipe() + list_dinner.get(i).getCaloRecipe();
+                                    if (fiveRecipe_calories <= numcalo) {
+                                        dao.updateMealPlan(mealplan.get(5).getPlanID(), planDate, list_dinner.get(i).getRecipeID());
+                                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                        session.setAttribute("MEAL_PLAN", mealPlan);
+                                        break;
+                                    } else {
+                                        RecipeOrganizeDTO minCaloRandomDinner2 = list_dinner.get(0);
+                                        if (randomDinner2 == minCaloRandomDinner2) {
+                                            dao.updateMealPlan(mealplan.get(5).getPlanID(), planDate, minCaloRandomDinner2.getRecipeID());
+                                            List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                            session.setAttribute("MEAL_PLAN", mealPlan);
+                                        }
+                                    }
                                 } else {
                                     dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(3).getPlanID(), planDate, randomLunch2.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, randomDinner1.getRecipeID());
-                                    dao.addMealPlan(planDate, userID, randomDinner2.getRecipeID());
-                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
-                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                    sixRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                            + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + randomDinner1.getCaloRecipe() + list_dinner.get(i).getCaloRecipe();
+                                    if (fiveRecipe_calories <= numcalo) {
+                                        dao.addMealPlan(planDate, userID, list_dinner.get(i).getRecipeID());
+                                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                        session.setAttribute("MEAL_PLAN", mealPlan);
+                                        break;
+                                    } else {
+                                        RecipeOrganizeDTO minCaloRandomDinner2 = list_dinner.get(0);
+                                        if (randomDinner2 == minCaloRandomDinner2) {
+                                            dao.addMealPlan(planDate, userID, minCaloRandomDinner2.getRecipeID());
+                                            List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
+                                            session.setAttribute("MEAL_PLAN", mealPlan);
+                                        }
+                                    }
                                 }
                             } else {
                                 RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
                                 int adminID = admin.getUserID();
+                                dao.addIndividualCalory(adminID, numcalo);
                                 List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(adminID);
-                                if (mealplan.isEmpty()) {
+                                if (mealplan.size() == 0) {
                                     dao.addMealPlan(planDate, adminID, randomBreakfast3.getRecipeID());
                                     dao.addMealPlan(planDate, adminID, randomBreakfast5.getRecipeID());
                                     dao.addMealPlan(planDate, adminID, randomLunch1.getRecipeID());
@@ -232,24 +380,48 @@ public class PlanController extends HttpServlet {
                                     List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
                                     session.setAttribute("MEAL_PLAN", mealPlan);
                                 }
-                                if (mealplan.size() == 6) {
+                                else if (mealplan.size() == 6) {
                                     dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(3).getPlanID(), planDate, randomLunch2.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, randomDinner1.getRecipeID());
-                                    dao.updateMealPlan(mealplan.get(5).getPlanID(), planDate, randomDinner2.getRecipeID());
-                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
-                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                    sixRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                            + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + randomDinner1.getCaloRecipe() + list_dinner.get(i).getCaloRecipe();
+                                    if (fiveRecipe_calories <= numcalo) {
+                                        dao.updateMealPlan(mealplan.get(5).getPlanID(), planDate, list_dinner.get(i).getRecipeID());
+                                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                        session.setAttribute("MEAL_PLAN", mealPlan);
+                                        break;
+                                    } else {
+                                        RecipeOrganizeDTO minCaloRandomDinner2 = list_dinner.get(0);
+                                        if (randomDinner2 == minCaloRandomDinner2) {
+                                            dao.updateMealPlan(mealplan.get(5).getPlanID(), planDate, minCaloRandomDinner2.getRecipeID());
+                                            List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                            session.setAttribute("MEAL_PLAN", mealPlan);
+                                        }
+                                    }
                                 } else {
                                     dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(3).getPlanID(), planDate, randomLunch2.getRecipeID());
                                     dao.updateMealPlan(mealplan.get(4).getPlanID(), planDate, randomDinner1.getRecipeID());
-                                    dao.addMealPlan(planDate, adminID, randomDinner2.getRecipeID());
-                                    List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
-                                    session.setAttribute("MEAL_PLAN", mealPlan);
+                                    sixRecipe_calories = randomBreakfast3.getCaloRecipe() + randomBreakfast5.getCaloRecipe()
+                                            + randomLunch1.getCaloRecipe() + randomLunch2.getCaloRecipe() + randomDinner1.getCaloRecipe() + list_dinner.get(i).getCaloRecipe();
+                                    if (fiveRecipe_calories <= numcalo) {
+                                        dao.addMealPlan(planDate, adminID, list_dinner.get(i).getRecipeID());
+                                        List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                        session.setAttribute("MEAL_PLAN", mealPlan);
+                                        break;
+                                    } else {
+                                        RecipeOrganizeDTO minCaloRandomDinner2 = list_dinner.get(0);
+                                        if (randomDinner2 == minCaloRandomDinner2) {
+                                            dao.addMealPlan(planDate, adminID, minCaloRandomDinner2.getRecipeID());
+                                            List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
+                                            session.setAttribute("MEAL_PLAN", mealPlan);
+                                        }
+                                    }
                                 }
                             }
                             break;
@@ -259,8 +431,9 @@ public class PlanController extends HttpServlet {
                                 if (session.getAttribute("USER") != null) {
                                     RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
                                     int userID = user.getUserID();
+                                    dao.addIndividualCalory(userID, numcalo);
                                     List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(userID);
-                                    if (mealplan.isEmpty()) {
+                                    if (mealplan.size() == 0) {
                                         dao.addMealPlan(planDate, userID, randomBreakfast3.getRecipeID());
                                         dao.addMealPlan(planDate, userID, randomBreakfast5.getRecipeID());
                                         dao.addMealPlan(planDate, userID, randomLunch1.getRecipeID());
@@ -270,7 +443,7 @@ public class PlanController extends HttpServlet {
                                         List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(userID);
                                         session.setAttribute("MEAL_PLAN", mealPlan);
                                     }
-                                    if (mealplan.size() == 6) {
+                                    else if (mealplan.size() == 6) {
                                         dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                                         dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                                         dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());
@@ -292,8 +465,9 @@ public class PlanController extends HttpServlet {
                                 } else {
                                     RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
                                     int adminID = admin.getUserID();
+                                    dao.addIndividualCalory(adminID, numcalo);
                                     List<RecipeOrganizeDTO> mealplan = dao.getMealPlan(adminID);
-                                    if (mealplan.isEmpty()) {
+                                    if (mealplan.size() == 0) {
                                         dao.addMealPlan(planDate, adminID, randomBreakfast3.getRecipeID());
                                         dao.addMealPlan(planDate, adminID, randomBreakfast5.getRecipeID());
                                         dao.addMealPlan(planDate, adminID, randomLunch1.getRecipeID());
@@ -303,7 +477,7 @@ public class PlanController extends HttpServlet {
                                         List<RecipeOrganizeDTO> mealPlan = dao.getMealPlan(adminID);
                                         session.setAttribute("MEAL_PLAN", mealPlan);
                                     }
-                                    if (mealplan.size() == 6) {
+                                    else if (mealplan.size() == 6) {
                                         dao.updateMealPlan(mealplan.get(0).getPlanID(), planDate, randomBreakfast3.getRecipeID());
                                         dao.updateMealPlan(mealplan.get(1).getPlanID(), planDate, randomBreakfast5.getRecipeID());
                                         dao.updateMealPlan(mealplan.get(2).getPlanID(), planDate, randomLunch1.getRecipeID());

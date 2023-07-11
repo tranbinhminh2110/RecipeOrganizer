@@ -25,7 +25,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import javax.servlet.RequestDispatcher;
-import team3.error_package.RegistrationCreateError;
 import team3.recipe.RecipeOrganizeDAO;
 import team3.recipe.RecipeOrganizeDTO;
 
