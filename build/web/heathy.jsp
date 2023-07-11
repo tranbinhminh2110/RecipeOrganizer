@@ -1,14 +1,9 @@
 <%-- 
-    Document   : recipe-post
-    Created on : Jun 16, 2023, 2:05:13 PM
-    Author     : AS
+    Document   : heathy
+    Created on : Jul 10, 2023, 7:04:48 AM
+    Author     : dangt
 --%>
 
-<%-- 
-    Document   : showrecipe
-    Created on : Jun 3, 2023, 11:42:02 AM
-    Author     : AS
---%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="team3.recipe.RecipeOrganizeDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,68 +27,25 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-            <!-- Preloader -->
-            <div id="preloader">
-                <i class="circle-preloader"></i>
-                <img src="img/recipe/salad.png" alt="">
-            </div>
-            <!-- Search Wrapper -->
-            <div class="search-wrapper">
-                <!-- Close Btn -->
-                <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <!-- Search Wrapper -->
+        <div class="search-wrapper">
+            <!-- Close Btn -->
+            <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <form action="#" method="post">
-                                <input type="search" name="search" placeholder="Type any keywords...">
-                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </form>
-                        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <form action="SearchController" method="post">
+                            <input type="search" name="txtSearch" placeholder="Type any keywords...">
+                            <button type="submit" name="btAction" value="search"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- ##### Header Area Start ##### -->
-            <header class="header-area">
-
-                <!-- Top Header Area -->
-                <div class="top-header-area">
-                    <div class="container h-100">
-                        <div class="row h-100 align-items-center justify-content-between">
-                            <!-- Breaking News -->
-                            <div class="col-12 col-sm-6">
-                                <div class="breaking-news">
-                                    <div id="breakingNewsTicker" class="ticker">
-                                        <ul>
-                                            <c:if test="${not empty sessionScope.ADMIN}">
-                                                <c:set var="customer" value="${sessionScope.ADMIN}" scope="request" />
-                                            </c:if>
-                                            <c:if test="${not empty sessionScope.USER}">
-                                                <c:set var="customer" value="${sessionScope.USER}" scope="request" />
-                                            </c:if>
-                                            <li><a href="#">Hello ${customer.fullName}</a></li>
-                                            <li><a href="#">Welcome to Recipe Organize</a></li>
-                                            <li><a href="#">Hi Delicious!</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Top Social Info -->
-                            <div class="col-12 col-sm-6">
-                                <div class="top-social-info text-right">
-                                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- ##### Header Area Start ##### -->
+        <header class="header-area">
 
             <!-- Navbar Area -->
             <div class="delicious-main-menu">
@@ -122,30 +74,32 @@
                                 <div class="classynav">
                                     <ul>
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
+                                        <li><a href="#">Pages</a>
+                                            <ul class="dropdown">
+                                                <li><a href="homePage.jsp">Home</a></li>
+                                                <li><a href="about.html">About Us</a></li>
+                                                <li><a href="blog-post.html">Blog Post</a></li>
+                                                <li><a href="receipe-post.html">Recipe Post</a></li>
+                                                <li><a href="contact.html">Contact</a></li>
+                                                <li><a href="elements.html">Elements</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Menu</a>
+                                            <div class="megamenu">
+                                                <ul class="dropdown">
+                                                    <li><a href="homePage.jsp">Rice</a></li>
+                                                    <li><a href="about.html">Noodles</a></li>
+                                                    <li><a href="blog-post.html">Cake</a></li>
+                                                    <li><a href="receipe-post.html">Drinks</a></li>
+                                                    <li><a href="contact.html">Dessert</a></li>
+                                                    <li><a href="elements.html">International dishes</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="HeathyRecipeController">Healthy Food</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
-                                        <li><a href="about.jsp">About Us</a></li>
-                                            <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
-                                            <li><a href="login.jsp">Login</a></li>
-                                            </c:if>
-                                            <c:if test="${not empty sessionScope.ADMIN or not empty sessionScope.USER}">    
-
-                                            <li><a href="#">User</a>
-                                                <div class="megamenu">
-                                                    <ul class="dropdown">
-                                                        <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
-                                                        <li><a href="plan.jsp">Meal Planer</a></li>
-                                                            <c:if test="${not empty sessionScope.ADMIN}">
-                                                            <li><a href="managerAccount.jsp">Management Account</a></li>
-                                                            <li><a href="RecipeManagementController">Management Recipe</a></li>
-                                                            </c:if>
-                                                        <li><a href="LogoutController">Logout</a> </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                        </c:if>                                        
+                                        <li><a href="login.jsp">Login</a></li>
                                     </ul>
 
                                     <!-- Newsletter Form -->
@@ -215,21 +169,31 @@
             <div class="">
                 <div class="result">
                     <div class="section-heading text-left">
-                        <h3>Result</h3>
+                        <h3>Result j</h3>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <c:forEach items="${listAll}" var="o">
+                <c:forEach items="${recipes}" var="recipe">
                     <div class="col-12 col-md-3">
                         <div class="card product-container">
-                            <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
+                            <img class="card-img-top" src="${recipe.imgUrl}" alt="Card image cap">
                             <div class="card-body">
                                 <div>
-                                    <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
+                                    <h3 class="card-title view-title">
+                                        <b>
+                                            <a href="DetailController?recipeID=${recipe.recipeID}" title="View Product">${recipe.recipeName}</a>
+                                        </b>
+                                    </h3>
                                 </div>
-                                <div><p class="card-text calo"><b>${o.caloRecipe}</b></p></div>
-                                <div><p class="card-text show_txt" id="description">${o.description}</p></div>
+                                <div>
+                                    <p class="card-text calo">
+                                        <b>${recipe.caloRecipe}</b>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="card-text show_txt" id="description">${recipe.description}</p>
+                                </div>
                                 <div class="rating">
                                     <span class="star"><i class="fa fa-star"></i></span>
                                     <span class="star"><i class="fa fa-star"></i></span>
@@ -240,48 +204,11 @@
                                 <button class="add-to-cart-btn">Favorite</button>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </c:forEach>
-            </div
-        </div>
-
-        <!-- Comment and Review-->
-        <div class="row">
-            <div class="col-12">
-                <div class="section-heading text-left">
-                    <h3>Leave a comment</h3>
-                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="contact-form-area">
-                    <form action="#" method="post">
-                        <div class="row">
-                            <div class="col-12 col-lg-6">
-                                <input type="text" class="form-control" id="name" placeholder="Name">
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <input type="email" class="form-control" id="email" placeholder="E-mail">
-                            </div>
-                            <div class="col-12">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject">
-                            </div>
-                            <div class="col-12">
-                                <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn delicious-btn mt-30" type="submit">Post Comments</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+            
 
 <!-- ##### Follow Us Instagram Area Start ##### -->
 <div class="follow-us-instagram">

@@ -24,6 +24,10 @@
         <servlet-name>DeleteRecipeController</servlet-name>
         <servlet-class>team3.controller.DeleteRecipeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HeathyRecipeController</servlet-name>
+        <servlet-class>team3.controller.HeathyRecipeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/ProfileController</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>DeleteRecipeController</servlet-name>
         <url-pattern>/DeleteRecipeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HeathyRecipeController</servlet-name>
+        <url-pattern>/HeathyRecipeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

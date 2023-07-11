@@ -121,8 +121,8 @@
                                     <ul>
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
-                                        <li><a href="searchRecipe.jsp">Healthy Food</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="HeathyRecipeController">Healthy Food</a></li>
+                                        <li><a href="contact.jsp">Contact</a></li>
                                         <li><a href="about.html">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>

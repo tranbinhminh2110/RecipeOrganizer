@@ -1264,5 +1264,36 @@ public void updateRecipe(String recipeName, String caloRecipe, String descriptio
         }
         return list;
     }
-    
+     public List<RecipeOrganizeDTO> getRecipesCalories( int minCalories, int maxCalories) throws ClassNotFoundException {
+    List<RecipeOrganizeDTO> recipes = new ArrayList<>();
+
+    // Assuming you have access to a recipe data source (e.g., database)
+    // Perform the necessary query to retrieve recipes based on category and calorie range
+    // Replace the following code with your actual data retrieval logic
+
+    // Example using a database query
+    String query = "SELECT * FROM recipe WHERE caloRecipe >= ? AND caloRecipe <= ?";
+    try (Connection connection = DBUtils.getConnection();
+         PreparedStatement statement = connection.prepareStatement(query)) {
+        
+        statement.setInt(1, minCalories);
+        statement.setInt(2, maxCalories);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            RecipeOrganizeDTO recipe = new RecipeOrganizeDTO();
+            // Map the retrieved data to the Recipe object
+            recipe.setRecipeID(resultSet.getInt("recipeID"));
+            recipe.setRecipeName(resultSet.getString("recipeName"));
+            recipe.setCaloRecipe(resultSet.getInt("caloRecipe"));
+            recipe.setDescription(resultSet.getString("description"));
+            // Set other properties as needed
+            recipes.add(recipe);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Handle any exceptions that occur during data retrieval
+    }
+
+    return recipes;
+}
 }
