@@ -659,7 +659,7 @@
                                 <p style="display: inline-block; color: black; font-family: Times New Roman; font-size: 20px">Total Food's Calories: ${requestScope.TotalCalories}</p>
                             </div>
                         </div>
-
+                            <form action="RefreshRecipeController" method="POST">
                         <div class="meal-frame">
                             <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Breakfast</h2></div>
                             <div style="background-color: grey; height: 3px"></div>
@@ -678,6 +678,9 @@
                                                     </a>
                                                     <p><b>${meal_plan.caloRecipe} calories </b></p>
                                                 </div>
+                                                <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}">
+                                <img src="img/recipe/refresh.png" alt="Refresh" width="32" height="32">
+                            </button>
                                             </div>
                                         </c:if>
                                     </div>
@@ -705,6 +708,9 @@
                                                                 </a>
                                                                 <p><b>${meal_plan.caloRecipe} calories </b></p>
                                                             </div>
+                                                            <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}">
+                                <img src="img/recipe/refresh.png" alt="Refresh" width="32" height="32">
+                            </button>
                                                         </div>
                                                     </c:if>
                                                 </div>
@@ -732,6 +738,9 @@
                                                     </a>
                                                     <p><b>${meal_plan.caloRecipe} calories </b></p>
                                                 </div>
+                                                <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}">
+                                <img src="img/recipe/refresh.png" alt="Refresh" width="32" height="32">
+                            </button>
                                             </div>
                                         </c:if>
                                     </div>
@@ -746,6 +755,7 @@
                         </c:if>
                     </c:if>
                 </div>
+                                </form>
             </section>
             <!-- End Today's -->
             <!-- ##### Follow Us Instagram Area Start ##### -->

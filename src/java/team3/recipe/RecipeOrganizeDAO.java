@@ -1241,9 +1241,10 @@ public void updateRecipe(String recipeName, String caloRecipe, String descriptio
         ResultSet rs = null;
         try {
             String sql = "SELECT mealPlan.userID, account.email, mealPlan.planDate, recipe.recipeID, recipe.recipeName, recipe.caloRecipe, recipe.imgUrl " +
-                         "FROM mealPlan " +
-                         "JOIN recipe ON mealPlan.recipeID = recipe.recipeID " +
-                         "JOIN account ON mealPlan.userID = account.userID";
+                     "FROM mealPlan " +
+                     "JOIN recipe ON mealPlan.recipeID = recipe.recipeID " +
+                     "JOIN account ON mealPlan.userID = account.userID " +
+                     "ORDER BY mealPlan.userID";
             con = DBUtils.getConnection();
             stm = con.prepareStatement(sql);
             rs = stm.executeQuery();

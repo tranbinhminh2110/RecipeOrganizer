@@ -38,7 +38,9 @@ import javax.mail.internet.*;
  */
 @WebServlet(name = "SendEmailWithMealPlan", urlPatterns = {"/SendEmailWithMealPlan"})
 public class SendEmailWithMealPlan extends HttpServlet {
-
+            List<RecipeOrganizeDTO> individual_list;
+            LocalDate currentDate = LocalDate.now();
+            String planDate = currentDate.toString();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -51,12 +53,10 @@ public class SendEmailWithMealPlan extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            LocalDate currentDate = LocalDate.now();
-            String planDate = currentDate.toString();
+        try {           
             SendEmailWithMealPlan sendemailwithmealplan = new SendEmailWithMealPlan();
             List list = sendemailwithmealplan.getAllMealPlan();
-            List<RecipeOrganizeDTO> individual_list = new ArrayList<>();
+            individual_list = new ArrayList<>();
             for (Object mealplan : list) {
                 if (!mealplan.equals("#")) {
                     individual_list.add((RecipeOrganizeDTO) mealplan);
@@ -64,128 +64,22 @@ public class SendEmailWithMealPlan extends HttpServlet {
                     Timer timer = new Timer();
                     // Định thời gian gửi email (ví dụ: 13h45 giờ)
                     Calendar scheduledTime = Calendar.getInstance();
-                    scheduledTime.set(Calendar.HOUR_OF_DAY, 7);
-                    scheduledTime.set(Calendar.MINUTE, 40);
+                    scheduledTime.set(Calendar.HOUR_OF_DAY, 13);
+                    scheduledTime.set(Calendar.MINUTE, 02);
                     scheduledTime.set(Calendar.SECOND, 0);
 
                     // Lên lịch gửi email
                     timer.schedule(new TimerTask() {
                         @Override
-                        public void run() {
-
-                            final String team3_email = "doanphamdangkhoitd2@gmail.com";
-                            // Mật khẩu <ứng dụng> của email phải xác thực 2 yếu tố cho email đó
-                            final String password_team3_email = "zdeljopzejidaenn";
-                            // dia chi email nguoi nhan
-                            String toEmail = individual_list.get(0).getEmail();
-
-                            Properties props = new Properties();
-                            props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-                            props.put("mail.smtp.port", "587"); //TLS Port
-                            props.put("mail.smtp.auth", "true"); //enable authentication
-                            props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
-
-                            Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                                    return new javax.mail.PasswordAuthentication(team3_email, password_team3_email);
-                                }
-                            });
-                            MimeMessage message = new MimeMessage(session);
-                            try {
-                                message.setFrom(new InternetAddress(team3_email));
-                            } catch (AddressException ex) {
-                                Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (MessagingException ex) {
-                                Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            try {
-                                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-                            } catch (AddressException ex) {
-                                Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (MessagingException ex) {
-                                Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            try {
-                                message.setSubject("Recipe Organize");
-                            } catch (MessagingException ex) {
-                                Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            int count = 0;
-                            for (RecipeOrganizeDTO plandate : individual_list) {
-                                if (plandate.getPlanDate().equals(planDate)) {
-                                    String htmlContent = "<h2>Today's Meal Plan</h2><br>";
-                                    for (int i = 0; i < 2; i++) {
-                                        htmlContent += "<img src=\"" + individual_list.get(i).getImgUrl() + "\" alt=\"kk\" width=\"60\" height=\"60\">";
-                                        htmlContent += individual_list.get(i).getRecipeName() + "<br>";
-                                    }
-                                    for (int i = 2; i < 4; i++) {
-                                        htmlContent += "<img src=\"" + individual_list.get(i).getImgUrl() + "\" alt=\"kk\" width=\"60\" height=\"60\">";
-                                        htmlContent += individual_list.get(i).getRecipeName() + "<br>";
-                                    }
-                                    if (individual_list.size() == 5) {
-                                        htmlContent += "<img src=\"" + individual_list.get(4).getImgUrl() + "\" alt=\"kk\" width=\"60\" height=\"60\">";
-                                        htmlContent += individual_list.get(4).getRecipeName() + "<br>";
-                                    } else {
-                                        for (int i = 4; i < 6; i++) {
-                                            htmlContent += "<img src=\"" + individual_list.get(i).getImgUrl() + "\" alt=\"kk\" width=\"60\" height=\"60\">";
-                                            htmlContent += individual_list.get(i).getRecipeName() + "<br>";
-                                        }
-                                    }
-                                    try {
-                                        message.setContent(htmlContent, "text/html");
-                                    } catch (MessagingException ex) {
-                                        Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                    try {
-                                        Transport.send(message);
-                                    } catch (MessagingException ex) {
-                                        Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                    break;
-                                } else {
-                                    count += 1;
-                                    if (individual_list.size() == 5 && count == 5) {
-                                        String link = "http://localhost:8084/RecipeOrgainze/"; 
-                                        String text = "Click here"; 
-                                        String htmlContent = "<h2>Today, you haven't set a meal plan yet!</h2><br>"
-                                                + "Create your own?" + "<a href=\"" + link + "\">" + text + "</a>";
-                                        try {
-                                            message.setContent(htmlContent, "text/html");
-                                        } catch (MessagingException ex) {
-                                            Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
-                                        try {
-                                            Transport.send(message);
-                                        } catch (MessagingException ex) {
-                                            Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
-                                    } else if (individual_list.size() == 6 && count == 6) {
-                                        String link = "http://localhost:8084/RecipeOrgainze/"; 
-                                        String text = "Click here"; 
-                                        String htmlContent = "<h2>Today, you haven't set a meal plan yet!</h2><br>"
-                                                + "Create your own?" + "<a href=\"" + link + "\">" + text + "</a>";
-                                        try {
-                                            message.setContent(htmlContent, "text/html");
-                                        } catch (MessagingException ex) {
-                                            Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
-                                        try {
-                                            Transport.send(message);
-                                        } catch (MessagingException ex) {
-                                            Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
-                                    }
-                                }
-                            }
-                            individual_list.clear();
+                        public void run() {  
+                            
                         }
                     }, scheduledTime.getTime());
+                    SendMail();
+                    individual_list.clear();
                 }
             }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        } // Xử lý ngoại lệ MessagingException
-        finally {
+        } finally {
             response.sendRedirect("homePage.jsp");
         }
     }
@@ -258,4 +152,92 @@ public class SendEmailWithMealPlan extends HttpServlet {
         }
         return new_mealplan_list;
     }
+    
+    private void SendMail() {
+        final String team3_email = "doanphamdangkhoitd2@gmail.com";
+        // Mật khẩu <ứng dụng> của email phải xác thực 2 yếu tố cho email đó
+        final String password_team3_email = "zdeljopzejidaenn";
+        // dia chi email nguoi nhan
+        String toEmail = individual_list.get(0).getEmail();
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+        props.put("mail.smtp.port", "587"); //TLS Port
+        props.put("mail.smtp.auth", "true"); //enable authentication
+        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new javax.mail.PasswordAuthentication(team3_email, password_team3_email);
+            }
+        });
+        MimeMessage message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress(team3_email));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+            message.setSubject("Recipe Organize");
+        } catch (AddressException ex) {
+            Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int count = 0;
+        for (RecipeOrganizeDTO plandate : individual_list) {
+            if (plandate.getPlanDate().equals(planDate)) {
+                String htmlContent = "<h2>Today's Meal Plan</h2><br>";
+                for (int i = 0; i < 2; i++) {
+                    htmlContent += "<img src=\"" + individual_list.get(i).getImgUrl() + "\" alt=\"\" width=\"60\" height=\"60\">";
+                    htmlContent += individual_list.get(i).getRecipeName() + "<br>";
+                }
+                for (int i = 2; i < 4; i++) {
+                    htmlContent += "<img src=\"" + individual_list.get(i).getImgUrl() + "\" alt=\"\" width=\"60\" height=\"60\">";
+                    htmlContent += individual_list.get(i).getRecipeName() + "<br>";
+                }
+                if (individual_list.size() == 5) {
+                    htmlContent += "<img src=\"" + individual_list.get(4).getImgUrl() + "\" alt=\"\" width=\"60\" height=\"60\">";
+                    htmlContent += individual_list.get(4).getRecipeName() + "<br>";
+                } else {
+                    for (int i = 4; i < 6; i++) {
+                        htmlContent += "<img src=\"" + individual_list.get(i).getImgUrl() + "\" alt=\"\" width=\"60\" height=\"60\">";
+                        htmlContent += individual_list.get(i).getRecipeName() + "<br>";
+                    }
+                }
+                try {
+                    message.setContent(htmlContent, "text/html");
+                    Transport.send(message);
+                } catch (MessagingException ex) {
+                    Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            } else {
+                count += 1;
+                if (individual_list.size() == 5 && count == 5) {
+                    count = 0;
+                    String link = "http://localhost:8084/RecipeOrgainze/";
+                    String text = "Click here";
+                    String htmlContent = "<h2>Today, you haven't set a meal plan yet!</h2><br>"
+                            + "Create your own?" + "<a href=\"" + link + "\">" + text + "</a>";
+                    try {
+                        message.setContent(htmlContent, "text/html");
+                        Transport.send(message);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else if (individual_list.size() == 6 && count == 6) {
+                    count = 0;
+                    String link = "http://localhost:8084/RecipeOrgainze/";
+                    String text = "Click here";
+                    String htmlContent = "<h2>Today, you haven't set a meal plan yet!</h2><br>"
+                            + "Create your own?" + "<a href=\"" + link + "\">" + text + "</a>";
+                    try {
+                        message.setContent(htmlContent, "text/html");
+                        Transport.send(message);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(SendEmailWithMealPlan.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+        
+    }   
 }

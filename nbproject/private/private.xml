@@ -3,23 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/contact.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/recipePost.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/profile.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/homePage.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/src/java/team3/controller/HeathyRecipeController.java</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/create.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/updaterecipe.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/recipe.css</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/detail.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/recipe-management.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/about.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/searchRecipe.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/src/java/team3/recipe/RecipeOrganizeDAO.java</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/heathy.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/managerAccount.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/plan.jsp</file>
-            <file>file:/D:/Project%20SWP/New%20folder/RecipeOrganize/web/registration.jsp</file>
+            <file>file:/D:/Git/RecipeOrganize/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>
