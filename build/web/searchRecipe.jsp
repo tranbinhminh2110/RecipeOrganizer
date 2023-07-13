@@ -234,7 +234,7 @@
                                     <span class="star"><i class="fa fa-star"></i></span>
                                     <span class="star"><i class="fa fa-star"></i></span>
                                 </div>
-                                <button class="add-to-cart-btn">Favorite</button>
+                                <p><button>Add Favorite</button></p>
                             </div>
                         </div>
                     </div> 
@@ -242,7 +242,7 @@
             </div
         </div>
         <!-- Recipe by search -->
-        <div class="row">
+        <div class="row listCard">
             <c:forEach items="${listP}" var="o">
                 <div class="col-12 col-md-3">
                     <div class="card product-container">
@@ -251,7 +251,7 @@
                             <div>
                                 <h3 class="card-title view-title" style="line-height: 1.5rem;"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
                             </div>
-                            <div><p class="card-text calo"><b>${o.caloRecipe}</b></p></div>
+                            <div><p class="card-text calo">${o.caloRecipe}</p></div>
                             <div><p class="card-text show_txt" id="description">${o.description}</p></div>
                             <div class="rating">
                                 <span class="star"><i class="fa fa-star"></i></span>
@@ -260,7 +260,7 @@
                                 <span class="star"><i class="fa fa-star"></i></span>
                                 <span class="star"><i class="fa fa-star"></i></span>
                             </div>
-                            <button class="add-to-cart-btn">Favorite</button>
+                            <p><button>Add Favorite</button></p>
                         </div>
                     </div>
                 </div> 
