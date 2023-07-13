@@ -169,7 +169,19 @@
             </div> <br>
         </header>
 
-
+        <!-- Display the search form -->
+        <div class="search-form">
+            <form action="RecipeManagementController" method="GET">
+                <input type="text" name="txtSearch" placeholder="Search recipes...">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <%-- Button "Create New Recipe" --%>
+        <div class="create-button">
+            <form action="create.jsp" method="get">
+                <input type="submit" value="Create New Recipe" class="btn-create">
+            </form>
+        </div>
         <%-- Hiển thị thông báo lỗi nếu có --%>
         <c:if test="${not empty errorMessage}">
             <div class="error">${errorMessage}</div>
@@ -202,10 +214,7 @@
             </table>
         </c:if>
 
-        <%-- Button "Create New Recipe" --%>
-        <form action="create.jsp" method="get">
-            <input type="submit" value="Create New Recipe" class="btn-create">
-        </form>
+
         <!-- ##### Follow Us Instagram Area Start ##### -->
         <div class="follow-us-instagram">
             <div class="container">
