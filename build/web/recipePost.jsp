@@ -126,7 +126,6 @@
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
-                                        <li><a href="HeathyRecipeController">Healthy Food</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
                                         <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
@@ -242,17 +241,18 @@
                                 </div>
                             </div>
                             <%
-                                RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
-                                if (user != null) {
-                            %>
-                            <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
-                            <%
-                            } else {
-                            %>
-                            <button class="add-to-cart-btn">Add Favorite</button>
-                            <%
-                                }
-                            %>
+                                    RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                                    RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+                                    if (user != null || admin != null) {
+                                %>
+                                <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
+                                <%
+                                } else {
+                                %>
+                                <button class="add-to-cart-btn">Add Favorite</button>
+                                <%
+                                    }
+                                %>
                         </div>
                     </div> 
                 </c:forEach>

@@ -117,7 +117,6 @@
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
-                                        <li><a href="HeathyRecipeController">Healthy Food</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
                                         <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">

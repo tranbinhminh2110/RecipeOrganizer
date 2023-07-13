@@ -64,7 +64,7 @@ CREATE TABLE feedback (
   feedbackID INT IDENTITY(1,1) PRIMARY KEY,
   rating INT NULL,
   comment TEXT NULL,
-  feedbackDate DATE NULL,
+  feedbackDate DATETIME NULL,
   userName VARCHAR(30)NOT NULL,
   recipeID INT,
   FOREIGN KEY (userName) REFERENCES account(userName),

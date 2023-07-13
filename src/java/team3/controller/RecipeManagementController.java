@@ -31,25 +31,36 @@ public class RecipeManagementController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+    response.setContentType("text/html;charset=UTF-8");
 
-        try {
-            // Gọi phương thức trong DAO để lấy danh sách công thức
-            RecipeOrganizeDAO recipeDAO = new RecipeOrganizeDAO();
-            List<RecipeOrganizeDTO> recipes = recipeDAO.getAllRecipe();
+    String searchValue = request.getParameter("txtSearch");
 
-            // Đặt danh sách công thức vào thuộc tính request
-            request.setAttribute("recipes", recipes);
+try {
+    // Create an instance of RecipeOrganizeDAO
+    RecipeOrganizeDAO recipeDAO = new RecipeOrganizeDAO();
+    List<RecipeOrganizeDTO> recipes;
 
-            // Forward đến trang quản lý công thức
-            request.getRequestDispatcher("recipe-management.jsp").forward(request, response);
-        } catch (Exception ex) {
-            // Xử lý thông báo lỗi nếu có
-            String errorMessage = "Đã xảy ra lỗi khi tải danh sách công thức: " + ex.getMessage();
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("recipe-management.jsp").forward(request, response);
-        }
+    if (searchValue != null && !searchValue.isEmpty()) {
+        // If a search value is provided, perform a search using the DAO
+        recipes = recipeDAO.searchRecipe(searchValue);
+    } else {
+        // If no search value is provided, get all recipes using the DAO
+        recipes = recipeDAO.getAllRecipe();
     }
+
+    // Set the recipes and search value as request attributes
+    request.setAttribute("recipes", recipes);
+    request.setAttribute("txtSearch", searchValue);
+
+    // Forward the request to the recipe-management.jsp
+    request.getRequestDispatcher("recipe-management.jsp").forward(request, response);
+} catch (Exception ex) {
+    // Handle error message if an exception occurs
+    String errorMessage = "An error occurred while loading the recipe list: " + ex.getMessage();
+    request.setAttribute("errorMessage", errorMessage);
+    request.getRequestDispatcher("recipe-management.jsp").forward(request, response);
+}
+  }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
