@@ -20,7 +20,7 @@
         <link rel="icon" href="img/recipe/favicon.ico">
 
         <!-- Core Stylesheet -->
-        <link rel="stylesheet" href="recipe.css">
+        <link rel="stylesheet" href="css/recipe.css">
         <link rel="stylesheet" href="favorite.css">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -179,7 +179,7 @@
                     RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
                     if (user != null) {
                         %>
-                        <h4> Your favorite recipe </h4>
+                        <h4 style="font-family: sans-serif; margin-bottom: 5px;">Your Favorite Recipe</h4>
                 <%
                         RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
                         dao.AllFavorite(user.getUserID());
@@ -200,7 +200,7 @@
                             for (FavoriteDTO dto : result) {
                         %>
                         <tr>
-                            <td>
+                            <td style="width: 15px">
                                 <%= dto.getRecipeID()%>
                             </td>
 
@@ -209,7 +209,7 @@
                             </td>
 
                             <td>
-                                <a href="DetailController?recipeID=<%= dto.getRecipeID()%>" ><img src="<%=dto.getImgUrl()%>" alt="" /></a>
+                                <a href="DetailController?recipeID=<%= dto.getRecipeID()%>" ><img style="width: 300px; height: 300px;" src="<%=dto.getImgUrl()%>" alt="" /></a>
                             </td>
 
                             <td> 
@@ -241,41 +241,6 @@
                         }
                     %>
 
-                <!-- Comment and Review-->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-heading text-left">
-                            <h3>Leave a comment</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="contact-form-area">
-                            <form action="#" method="post">
-                                <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <input type="text" class="form-control" id="name" placeholder="Name">
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <input type="email" class="form-control" id="email" placeholder="E-mail">
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn delicious-btn mt-30" type="submit">Post Comments</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- ##### Follow Us Instagram Area Start ##### -->
             <div class="follow-us-instagram">
                 <div class="container">

@@ -28,7 +28,7 @@
 
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="style_plan.css">
+        <link rel="stylesheet" href="css/style_plan.css">
     </head>
     <body>
 
@@ -177,34 +177,6 @@
             </section>
 
             <section>
-                <style>
-                    .popup {
-                        display: none;
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background-color: rgba(0, 0, 0, 0.5); /* Màu nền của overlay */
-                        z-index: 9999; /* Đảm bảo hiển thị trên các phần tử khác */
-                    }
-
-                    .popup-content {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        background-color: #fff;
-                        padding: 20px;
-                        min-width: 300px; /* Chiều rộng tối thiểu */
-                        max-width: 800px; /* Chiều rộng tối đa */
-                        min-height: 200px; /* Chiều cao tối thiểu */
-                        max-height: 500px; /* Chiều cao tối đa */
-                        overflow: auto; /* Hiển thị thanh cuộn khi nội dung vượt quá kích thước */
-                        border-radius: 5px; /* Bo góc của popup */
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Đổ bóng cho popup */
-                    }
-                </style>
 
                 <script>
                     function openPopup() {
@@ -245,154 +217,6 @@
                         document.getElementById("popup").style.display = "none";
                     }
                 </script>
-                <style>
-                    .popup-card {
-                        position: relative;
-                        width: 320px;
-                        height: fit-content;
-                        background: #FFFFFF;
-                        box-shadow: 0px 150px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
-                        border-radius: 13px;
-                    }
-
-                    .form {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: flex-start;
-                        padding: 20px;
-                        gap: 20px;
-                    }
-
-                    .icon {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 60px;
-                        height: 60px;
-                        background: #ECF1FD;
-                        box-shadow: 0px 0.5px 0.5px #EFEFEF, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
-                        border-radius: 5px;
-                    }
-
-                    .note {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 8px;
-                        width: 100%;
-                    }
-
-                    .title {
-                        font-style: normal;
-                        font-weight: 700;
-                        font-size: 17px;
-                        line-height: 24px;
-                        color: #2B2B2F;
-                    }
-
-                    .subtitle {
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 13px;
-                        line-height: 18px;
-                        color: #5F5D6B;
-                    }
-
-                    .input_field {
-                        width: 100%;
-                        height: 42px;
-                        padding: 0 0 0 12px;
-                        border-radius: 5px;
-                        outline: none;
-                        border: 1px solid #e5e5e5;
-                        filter: drop-shadow(0px 1px 0px #efefef)
-                            drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
-                        transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
-                    }
-
-                    .input_field:focus {
-                        border: 1px solid transparent;
-                        box-shadow: 0px 0px 0px 1px #2B2B2F;
-                        background-color: transparent;
-                    }
-
-                    .form button.submit {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: center;
-                        align-items: center;
-                        padding: 10px 18px;
-                        gap: 10px;
-                        width: 100%;
-                        height: 42px;
-                        background: linear-gradient(180deg, #40ba37 0%, #8bc34a 50%, #2e7d32 100%);
-                        box-shadow: 0px 0.5px 0.5px #EFEFEF, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
-                        border-radius: 5px;
-                        border: 0;
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 12px;
-                        line-height: 15px;
-                        color: #ffffff;
-                    }
-                    .button {
-                        position: relative;
-                        width: 150px;
-                        height: 40px;
-                        cursor: pointer;
-                        display: flex;
-                        align-items: center;
-                        border: 1px solid #40ba37;
-                        background-color: #40ba37;
-                    }
-
-                    .button, .button__icon, .button__text {
-                        transition: all 0.3s;
-                    }
-
-                    .button .button__text {
-                        transform: translateX(30px);
-                        color: #fff;
-                        font-weight: 600;
-                    }
-
-                    .button .button__icon {
-                        position: absolute;
-                        transform: translateX(109px);
-                        height: 100%;
-                        width: 39px;
-                        background-color: #40ba37;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-
-                    .button .svg {
-                        width: 30px;
-                        stroke: #fff;
-                    }
-
-                    .button:hover {
-                        background: #40ba37;
-                    }
-
-                    .button:hover .button__text {
-                        color: transparent;
-                    }
-
-                    .button:hover .button__icon {
-                        width: 148px;
-                        transform: translateX(0);
-                    }
-
-                    .button:active .button__icon {
-                        background-color: #40ba37;
-                    }
-
-                    .button:active {
-                        border: 1px solid #4480FF;
-                    }
-
-                </style>
                 <div class="popup-card">
                     <div class="form">
                         <div class="icon">
@@ -433,160 +257,99 @@
                 </div>
 
 
-                <div id="popup" class="popup">
-                    <div class="popup-content">
-                        <!-- Nội dung của cửa sổ popup -->
-                        <h3>Nutrition calculator</h3>
-                        <p>
-                            This calculator uses a standard BMR equation (the Mifflin-St Jeor formula) to estimate your Calorie needs.
-                            We also make some rough macronutrient suggestions, but you're free to completely customize these values
-                            when you create a free account.
-                        </p>
-                        <p>
-                            <strong>Keep in mind that this is a general estimate.</strong> For best results, consult your healthcare provider.
-                        </p>
+                <div id="popup" class="modal">
+                    <div class="  modal-dialog ">
+                        <div class =" modal-content overflow-y-auto ">
+
+                            <!-- Nội dung của cửa sổ popup -->
+                            <div class="modal-header">   
+                                <h3 class="modal-title">Nutrition calculator</h3>
+                            </div>
+                            <div class="modal-body  flex-column ">
+                                <!--                                <p>
+                                                                    This calculator uses a standard BMR equation (the Mifflin-St Jeor formula) to estimate your Calorie needs.
+                                                                    We also make some rough macronutrient suggestions, but you're free to completely customize these values
+                                                                    when you create a free account.
+                                                                </p>
+                                                                <p>
+                                                                    <strong>Keep in mind that this is a general estimate.</strong> For best results, consult your healthcare provider.
+                                                                </p>-->
+                                <div class="px-6 w-100 ">
+                                    <div class=" w-100 ">
+                                        <div id="" class="btn-group btn-group-toggle d-flex flex-row w-100 align-items-center " name="goal" data-toggle="buttons">
+                                            <div class="w-25">I want to: </div>
+                                            <div class="w-100 d-flex justify-content-between align-items-center ">
+                                                <input type="radio" name="goal" value="L" id="c59_goal-0">Lose weight
+                                                <input type="radio" name="goal" value="M" id="c59_goal-1" checked="">Maintain
+                                                <input type="radio" name="goal" value="B" id="c59_goal-2">Build muscle
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="w-100 mt-2">
+                                    <div id="c59_goal" class="btn-group btn-group-toggle w-100 d-flex align-items-center " name="gender" data-toggle="buttons">
+                                        <div class="w-25">I am: </div>
+                                        <div class="w-100 d-flex">
+                                            <div>
+                                                <input type="radio" name="gender" value="M" id="c59_gender-0" value="Male"/>
+                                                <label for="Male">Male</label>
+                                            </div>
+                                            <div class="ml-4" >
+                                                <input type="radio" name="gender" value="F" id="c59_gender-1" checked="" value="Female"/>
+                                                <label for="Female">Female</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="w-100 d-flex  ">
+                                    <div class=" d-flex align-items-center">
+                                        <label>Height:</label>
+                                        <input id="height" name="height" value="" class="form-control  inline_block ml-15" type="number">
+                                        <label for="height-secondary" class="metric_inputs signup_input_label ml-15">cms</label>
+                                    </div>
+                                </div>
 
 
-                        <div class="col-12 col-sm-8">
-                            <div class="row">
-                                <div id="c59_goal" class="btn-group btn-group-toggle" name="goal" data-toggle="buttons">
-                                    <p>I want to: </p>
-                                    <p></p>
-                                    <label>
-                                        <input type="radio" name="goal" value="L" id="c59_goal-0">Lose weight
-                                    </label> 
-                                    <label>
-                                        <input type="radio" name="goal" value="M" id="c59_goal-1" checked="">Maintain
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="goal" value="B" id="c59_goal-2">Build muscle
-                                    </label>
+                                <div class="w-100 d-flex mt-2 ">
+                                    <div class="d-flex align-items-center">
+                                        <label>Weight:</label>
+                                        <input id="weight" name="weight" value="" class="form-control inline_block ml-15" type="number">
+                                        <label for="weight" class="signup_input_label metric_inputs ml-15">kgs</label>
+                                    </div>
+                                </div>
+
+                                <div class="w-100 d-flex mt-2">
+                                    <div class="d-flex align-items-center">
+                                        <label>Age:</label>
+                                        <input name="age" id="age" value="" class="form-control inline_block ml-15 " type="number">
+                                        <label for="age" class="signup_input_label ml-15">years</label>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="w-100 d-flex mt-2">
+                                    <label>Activity level:</label>
+                                    <select id="activity_level" class="form-control" name="activity_level">
+                                        <option value="1.375">Lightly Active</option>
+                                        <option value="1.55" selected>Moderately Active</option>
+                                        <option value="1.725">Very Active</option>
+                                    </select>
                                 </div>
                             </div>
-                        </div>
+                            <div class="modal-footer">
 
-                        <div class="col-12 col-sm-8">
-                            <div class="row">
-                                <div id="c59_goal" class="btn-group btn-group-toggle" name="gender" data-toggle="buttons">
-                                    <label>I am: </label> <label>
-                                        <input type="radio" name="gender" value="M" id="c59_gender-0">Male
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="gender" value="F" id="c59_gender-1" checked="">Female
-                                    </label>
-
-                                </div>
+                                <button class="py-2 px-4 rounded bg-success text-center text-white " onclick="calculate()">Calculate</button>
+                                <button class="py-2 px-4 rounded  text-center  " onclick="closePopup()">Close</button>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label>Height:</label>
-                                <input id="height" name="height" value="" class="form-control inline_block" type="number">
-                                <label for="height-secondary" class="metric_inputs signup_input_label">cms</label>
-                            </div>
-                        </div>
 
-                        <br>
-
-                        <div class="row">
-                            <div class="col-12 col-sm-4">
-                                <label>Weight:</label>
-                                <input id="weight" name="weight" value="" class="form-control inline_block" type="number">
-                                <label for="weight" class="signup_input_label metric_inputs">kgs</label>
-                            </div>
-                        </div>
-
-                        <br>
-
-                        <div class="row">
-                            <div class="col-12 col-sm-4">
-                                <label>Age:</label>
-                                <input name="age" id="age" value="" class="form-control inline_block" type="number">
-                                <label for="age" class="signup_input_label">years</label>
-                            </div>
-                        </div>
-
-                        <br>
-
-                        <div class="col-12 col-sm-6"style="margin-: 10px">
-                            <label>Activity level:</label>
-                            <select id="activity_level" class="form-control" name="activity_level">
-                                <option value="1.375">Lightly Active</option>
-                                <option value="1.55" selected>Moderately Active</option>
-                                <option value="1.725">Very Active</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-8">
-                            <button class="close-button" onclick="calculate()">Calculate</button>
-                        </div>
-                        <p></p>
-                        <p></p>
-                        <div class="col-12 col-sm-8">
-                            <button class="close-button" onclick="closePopup()">Close</button>
                         </div>
                     </div>
                 </div>
-                <style>
-                    .popup {
-                        display: none;
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background-color: rgba(0, 0, 0, 0.5);
-                    }
-
-                    .popup-content {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        background-color: #fff;
-                        padding: 20px;
-                        min-width: 300px;
-                        max-width: 800px;
-                        min-height: 200px;
-                        max-height: 500px;
-                        overflow: auto;
-                    }
-
-                    .close-button {
-                        width: 62px;
-                        cursor: pointer;
-                    }
-                </style>
             </section>
             <section>
-                <style>
-                    body {
-                        background-color: #fff; /* chọn màu trắng */
-                    }
-
-                    section {
-                        padding: 20px;
-                        background-color: #f2f2f2;
-                        border-radius: 5px;
-                    }
-
-                    h2, h3 {
-                        color: black; /* chọn màu xanh lá cây */
-                    }
-
-                    img {
-                        margin-right: 10px;
-                        margin-bottom: 5px;
-                        border-radius: 5px;
-                    }
-
-                    .meal-category {
-                        margin-top: 20px;
-                    }
-
-                    .meal-category h3 {
-                        margin-bottom: 10px;
-                    }
-                </style>
 
                 <!-- Start Today's -->
                 <c:if test="${not empty sessionScope.USER || not empty sessionScope.ADMIN}">
@@ -621,20 +384,20 @@
                                 </h2>
                                 <p style="display: inline-block; font-size: 20px; padding-left: 30% ">|</p>
                                 <p style="display: inline-block;text-align: center; color: black; font-family: Times New Roman; font-size: 20px;">Your Calories Estimate: 
-                                <%
-                    float calo;
-                    if (session.getAttribute("USER") != null) {
-                        RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
-                        int userID = user.getUserID();
-                        calo = dao.getIndividualCalory(userID);
-                        out.println(calo);
-                    } else {
-                        RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
-                        int adminID = admin.getUserID();
-                        calo = dao.getIndividualCalory(adminID);
-                        out.println(calo);
-                    }
-                    %>
+                                    <%
+                                        float calo;
+                                        if (session.getAttribute("USER") != null) {
+                                            RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                                            int userID = user.getUserID();
+                                            calo = dao.getIndividualCalory(userID);
+                                            out.println(calo);
+                                        } else {
+                                            RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+                                            int adminID = admin.getUserID();
+                                            calo = dao.getIndividualCalory(adminID);
+                                            out.println(calo);
+                                        }
+                                    %>
                                 </p>
                                 <%
                                     float totalCalories = 0;
@@ -660,103 +423,105 @@
                                 <p style="display: inline-block; color: black; font-family: Times New Roman; font-size: 20px">Total Food's Calories: ${requestScope.TotalCalories}</p>
                             </div>
                         </div>
-                            <form action="RefreshRecipeController" method="POST">
-                        <div class="meal-frame">
-                            <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Breakfast</h2></div>
-                            <div style="background-color: grey; height: 3px"></div>
-                            <div style="padding-bottom: 15px; padding-top: -5px"></div>
-                            <div class="row meal-items">
-                                <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
-                                    <div class="col-12 col-sm-6">
-                                        <c:if test="${loop.index < 2}">
-                                            <div class="row meal-item">
-                                                <div class="col-12 col-sm-6">
-                                                    <img src=${meal_plan.imgUrl}>
+                        <form action="RefreshRecipeController" method="POST">
+                            <div class="meal-frame">
+                                <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Breakfast</h2></div>
+                                <div style="background-color: grey; height: 3px"></div>
+                                <div style="padding-bottom: 15px; padding-top: -5px"></div>
+                                <div class="row meal-items">
+                                    <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
+                                        <div class="col-12 col-sm-6">
+                                            <c:if test="${loop.index < 2}">
+                                                <div class="row meal-item">
+                                                    <div class="col-12 col-sm-6">
+                                                        <img src=${meal_plan.imgUrl}>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
+                                                            <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
+                                                        </a>
+                                                        <p><b>${meal_plan.caloRecipe} calories </b></p>
+                                                        
+                                                        <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}" class="refresh-button">
+                                                            <img src="img/recipe/refresh.png" alt="Refresh">
+                                                        </button>
+                                                    </div>
+
                                                 </div>
-                                                <div class="col-12 col-sm-6">
-                                                    <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
-                                                        <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
-                                                    </a>
-                                                    <p><b>${meal_plan.caloRecipe} calories </b></p>
-                                                </div>
-                                                <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}">
-                                <img src="img/recipe/refresh.png" alt="Refresh" width="32" height="32">
-                            </button>
-                                            </div>
-                                        </c:if>
-                                    </div>
-                                </c:forEach>
+                                            </c:if>
+                                        </div>
+                                    </c:forEach>
+                                </div>
                             </div>
-                        </div>
-                        <div class="meal-frame">
-                            <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Lunch</h2></div>
-                            <div style="background-color: grey; height: 3px"></div>
-                            <div style="padding-bottom: 15px; padding-top: -5px"></div>
-                            <div style="display: flex; justify-content: center;">
-                                <div class="container">
-                                    <div class="inline-block-center">
-                                        <div class="row meal-items">
-                                            <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
-                                                <div class="col-12 col-md-6">
-                                                    <c:if test="${loop.index > 1 && loop.index < 4}">
-                                                        <div class="row meal-item">
-                                                            <div class="col-12 col-md-6">
-                                                                <img src=${meal_plan.imgUrl}>
+                            <div class="meal-frame">
+                                <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Lunch</h2></div>
+                                <div style="background-color: grey; height: 3px"></div>
+                                <div style="padding-bottom: 15px; padding-top: -5px"></div>
+                                <div style="display: flex; justify-content: center;">
+                                    <div class="container">
+                                        <div class="inline-block-center">
+                                            <div class="row meal-items">
+                                                <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
+                                                    <div class="col-12 col-md-6">
+                                                        <c:if test="${loop.index > 1 && loop.index < 4}">
+                                                            <div class="row meal-item">
+                                                                <div class="col-12 col-md-6">
+                                                                    <img src=${meal_plan.imgUrl}>
+                                                                </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
+                                                                        <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
+                                                                    </a>
+                                                                    <p><b>${meal_plan.caloRecipe} calories </b></p>
+                                                                    <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}" class="refresh-button">
+                                                                    <img src="img/recipe/refresh.png" alt="Refresh">
+                                                                </button>
+                                                                </div>    
                                                             </div>
-                                                            <div class="col-12 col-md-6">
-                                                                <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
-                                                                    <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
-                                                                </a>
-                                                                <p><b>${meal_plan.caloRecipe} calories </b></p>
-                                                            </div>
-                                                            <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}">
-                                <img src="img/recipe/refresh.png" alt="Refresh" width="32" height="32">
-                            </button>
-                                                        </div>
-                                                    </c:if>
-                                                </div>
-                                            </c:forEach>
+                                                        </c:if>
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="meal-frame">
-                            <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Dinner</h2></div>
-                            <div style="background-color: grey; height: 3px"></div>
-                            <div style="padding-bottom: 15px; padding-top: -5px"></div>
-                            <div class="row meal-items">
-                                <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
-                                    <div class="col-12 col-sm-6">
-                                        <c:if test="${loop.index > 3}">
-                                            <div class="row meal-item">
-                                                <div class="col-12 col-sm-6">
-                                                    <img src=${meal_plan.imgUrl}>
+                            <div class="meal-frame">
+                                <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Dinner</h2></div>
+                                <div style="background-color: grey; height: 3px"></div>
+                                <div style="padding-bottom: 15px; padding-top: -5px"></div>
+                                <div class="row meal-items">
+                                    <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
+                                        <div class="col-12 col-sm-6">
+                                            <c:if test="${loop.index > 3}">
+                                                <div class="row meal-item">
+                                                    <div class="col-12 col-sm-6">
+                                                        <img src=${meal_plan.imgUrl}>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
+                                                            <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
+                                                        </a>
+                                                        <p><b>${meal_plan.caloRecipe} calories </b></p>
+                                                        <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}" class="refresh-button">
+                                                        <img src="img/recipe/refresh.png" alt="Refresh">
+                                                    </button>
+                                                    </div>                                               
                                                 </div>
-                                                <div class="col-12 col-sm-6">
-                                                    <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
-                                                        <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
-                                                    </a>
-                                                    <p><b>${meal_plan.caloRecipe} calories </b></p>
-                                                </div>
-                                                <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}">
-                                <img src="img/recipe/refresh.png" alt="Refresh" width="32" height="32">
-                            </button>
-                                            </div>
-                                        </c:if>
-                                    </div>
-                                </c:forEach>
-                            </div> 
-                        </c:if>
+                                            </c:if>
+                                        </div>
+                                    </c:forEach>
+                                </div> 
+                            </c:if>
 
-                    </c:if>
-                    <c:if test="${not empty sessionScope.USER || not empty sessionScope.ADMIN || (empty sessionScope.USER and empty sessionScope.ADMIN)}">
-                        <c:if test="${empty sessionScope.MEAL_PLAN}">
-                            <h2>You haven't set a meal plan yet!</h2>
                         </c:if>
-                    </c:if>
-                </div>
-                                </form>
+                        <c:if test="${not empty sessionScope.USER || not empty sessionScope.ADMIN || (empty sessionScope.USER and empty sessionScope.ADMIN)}">
+                            <c:if test="${empty sessionScope.MEAL_PLAN}">
+                                <h2>You haven't set a meal plan yet!</h2>
+                            </c:if>
+                        </c:if>
+                    </div>
+                </form>
             </section>
             <!-- End Today's -->
             <!-- ##### Follow Us Instagram Area Start ##### -->

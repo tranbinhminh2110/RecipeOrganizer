@@ -22,8 +22,9 @@
         <link rel="icon" href="img/recipe/favicon.ico">
 
         <!-- Core Stylesheet -->
-        <link rel="stylesheet" href="recipe.css">
+        <link rel="stylesheet" href="css/recipe.css">
         <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.tailwindcss.com"></script>     
     </head>
     <body>
         <!-- Preloader -->
@@ -200,34 +201,33 @@
                                 <input type="search" name="txtSearch" placeholder="Search Receipies" >
                             </div>
                             <div class="col-12 col-lg-4 text-right">
-                                <button type="submit" class="btn delicious-btn" name="btAction" value="search">Search</button>
+                                <button type="submit" class="py-4 px-10 text-white bg-success" name="btAction" value="search">Search</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
             <!-- Result -->
-            <div class="">
-                <div class="result">
-                    <div class="section-heading text-left">
-                        <h3>Result</h3>
-                        <p class="noFound">${nof}</p>
-                    </div>
-                </div>
+            <div class="result pl-6">
+                <h3 class="text-3xl">Result</h3>
             </div>
 
             <!-- Recipe by Category -->
             <div class="row">
                 <c:forEach items="${list}" var="o">
-                    <div class="col-12 col-md-3">
-                        <div class="card product-container">
+                    <div class="col-12 col-md-3 mt-30">
+                        <div class="card product-container rounded">
                             <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
                             <div class="card-body">
                                 <div>
-                                    <h3 class="card-title view-title"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
+                                    <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
                                 </div>
-                                <div><p class="card-text calo"><b>${o.caloRecipe} calos</b></p></div>
-                                <div><p class="card-text show_txt" id="description">${o.description}</p></div>
+                                <div  class="card-text calo ">
+                                    <p><b>${o.caloRecipe}</b></p>
+                                </div>
+                                <div class="card-text show_txt" id="description">
+                                    <p>${o.description}</p>
+                                </div>
                                 <div class="rating">
                                     <span class="star"><i class="fa fa-star"></i></span>
                                     <span class="star"><i class="fa fa-star"></i></span>
@@ -240,20 +240,23 @@
                         </div>
                     </div> 
                 </c:forEach>
-            </div
         </div>
         <!-- Recipe by search -->
         <div class="row listCard">
             <c:forEach items="${listP}" var="o">
-                <div class="col-12 col-md-3">
-                    <div class="card product-container">
-                        <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap"/>
+                <div class="col-12 col-md-3 mt-30">
+                    <div class="card product-container rounded">
+                        <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
                         <div class="card-body">
                             <div>
-                                <h3 class="card-title view-title" style="line-height: 1.5rem;"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
+                                <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
                             </div>
-                            <div><p class="card-text calo">${o.caloRecipe}</p></div>
-                            <div><p class="card-text show_txt" id="description">${o.description}</p></div>
+                            <div  class="card-text calo ">
+                                <p><b>${o.caloRecipe}</b></p>
+                            </div>
+                            <div class="card-text show_txt" id="description">
+                                <p>${o.description}</p>
+                            </div>
                             <div class="rating">
                                 <span class="star"><i class="fa fa-star"></i></span>
                                 <span class="star"><i class="fa fa-star"></i></span>
@@ -267,44 +270,44 @@
                 </div> 
             </c:forEach>
         </div>
-      
-<!-- ##### Follow Us Instagram Area End ##### -->
 
-<!-- ##### Footer Area Start ##### -->
-<footer class="footer-area">
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
-                <!-- Footer Social Info -->
-                <div class="footer-social-info text-right">
-                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                </div>
-                <!-- Footer Logo -->
-                <div class="footer-logo">
-                    <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
+        <!-- ##### Follow Us Instagram Area End ##### -->
+
+        <!-- ##### Footer Area Start ##### -->
+        <footer class="footer-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
+                        <!-- Footer Social Info -->
+                        <div class="footer-social-info text-right">
+                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                        <!-- Footer Logo -->
+                        <div class="footer-logo">
+                            <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</footer>
-<!-- ##### Footer Area Start ##### -->
+        </footer>
+        <!-- ##### Footer Area Start ##### -->
 
-<!-- ##### All Javascript Files ##### -->
-<!-- jQuery-2.2.4 js -->
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
-<!-- Popper js -->
-<script src="js/bootstrap/popper.min.js"></script>
-<!-- Bootstrap js -->
-<script src="js/bootstrap/bootstrap.min.js"></script>
-<!-- All Plugins js -->
-<script src="js/plugins/plugins.js"></script>
-<!-- Active js -->
-<script src="js/active.js"></script>
+        <!-- ##### All Javascript Files ##### -->
+        <!-- jQuery-2.2.4 js -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <!-- Popper js -->
+        <script src="js/bootstrap/popper.min.js"></script>
+        <!-- Bootstrap js -->
+        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <!-- All Plugins js -->
+        <script src="js/plugins/plugins.js"></script>
+        <!-- Active js -->
+        <script src="js/active.js"></script>
 
-</body>
+    </body>
 </html>

@@ -28,9 +28,9 @@
         <link rel="icon" href="img/recipe/favicon.ico">
 
         <!-- Core Stylesheet -->
-        <link rel="stylesheet" href="recipe.css">
+        <link rel="stylesheet" href="css/recipe.css">
         <link rel="stylesheet" href="style.css">
-         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
         <!-- Preloader -->
@@ -207,15 +207,15 @@
                                 <input type="search" name="txtSearch" placeholder="Search Receipies" >
                             </div>
                             <div class="col-12 col-lg-4 text-right">
-                                <button type="submit" class="btn delicious-btn" name="btAction" value="search">Search</button>
+                                <button type="submit" class="py-4 px-10 text-white bg-success" name="btAction" value="search">Search</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
             <!-- Result -->
-                <div class="result pl-6">
-                    <h3 class="text-3xl">Result</h3>
+            <div class="result pl-6">
+                <h3 class="text-3xl">Result</h3>
             </div>
             <div class="row p-6 pt-0">
                 <c:forEach items="${listAll}" var="o">
@@ -241,21 +241,21 @@
                                 </div>
                             </div>
                             <%
-                                    RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
-                                    if (user != null) {
-                                %>
-                                <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
-                                <%
-                                } else {
-                                %>
-                                <button class="add-to-cart-btn">Add Favorite</button>
-                                <%
-                                    }
-                                %>
+                                RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                                if (user != null) {
+                            %>
+                            <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
+                            <%
+                            } else {
+                            %>
+                            <button class="add-to-cart-btn">Add Favorite</button>
+                            <%
+                                }
+                            %>
                         </div>
                     </div> 
                 </c:forEach>
-            </div
+            </div>
         </div>
 
         <!-- Comment and Review-->

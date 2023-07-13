@@ -23,7 +23,7 @@
         <link rel="icon" href="img/recipe/favicon.ico">
 
         <!-- Core Stylesheet -->
-        <link rel="stylesheet" href="recipe.css">
+        <link rel="stylesheet" href="css/recipe.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -167,174 +167,167 @@
                 </div>
             </div>
             <!-- Result -->
-            <div class="">
-                <div class="result">
-                    <div class="section-heading text-left">
-                        <h3>Result</h3>
-                    </div>
-                </div>
+            <div class="result pl-6">
+                <h3 class="text-3xl">Result</h3>
             </div>
-            <div class="row">
-                <c:forEach items="${recipes}" var="recipe">
-                    <div class="col-12 col-md-3">
-                        <div class="card product-container">
-                            <img class="card-img-top" src="${recipe.imgUrl}" alt="Card image cap">
+            <div class="row p-6 pt-0">
+                <c:forEach items="${recipes}" var="o">
+                    <div class="col-12 col-md-3 mt-30">
+                        <div class="card product-container rounded">
+                            <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
                             <div class="card-body">
                                 <div>
-                                    <h3 class="card-title view-title">
-                                        <b>
-                                            <a href="DetailController?recipeID=${recipe.recipeID}" title="View Product">${recipe.recipeName}</a>
-                                        </b>
-                                    </h3>
+                                    <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
                                 </div>
-                                <div>
-                                    <p class="card-text calo">
-                                        <b>${recipe.caloRecipe}</b>
-                                    </p>
+                                <div  class="card-text calo ">
+                                    <p><b>${o.caloRecipe}</b></p>
                                 </div>
-                                <div>
-                                    <p class="card-text show_txt" id="description">${recipe.description}</p>
+                                <div class="card-text show_txt" id="description">
+                                    <p>${o.description}</p>
                                 </div>
-                                <div class="rating">
+                                <div class="rating ">
                                     <span class="star"><i class="fa fa-star"></i></span>
                                     <span class="star"><i class="fa fa-star"></i></span>
                                     <span class="star"><i class="fa fa-star"></i></span>
                                     <span class="star"><i class="fa fa-star"></i></span>
                                     <span class="star"><i class="fa fa-star"></i></span>
                                 </div>
-                                <%
-                                    RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
-                                    if (user != null) {
-                                %>
-                                <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${recipe.recipeID}"> Add Favorite</a></button>
-                                <%
-                                } else {
-                                %>
-                                <button class="add-to-cart-btn">Add Favorite</button>
-                                <%
-                                    }
-                                %>
                             </div>
+                            <%
+                                RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                                if (user != null) {
+                            %>
+                            <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
+                            <%
+                            } else {
+                            %>
+                            <button class="add-to-cart-btn">Add Favorite</button>
+                            <%
+                                }
+                            %>
                         </div>
-                    </div>
-                </c:forEach>
-            </div>
-
-
-
-            <!-- ##### Follow Us Instagram Area Start ##### -->
-            <div class="follow-us-instagram">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h5>Follow Us Instragram</h5>
-                        </div>
-                    </div>
-                </div>
-                <!-- Instagram Feeds -->
-                <div class="insta-feeds d-flex flex-wrap">
-                    <!-- Single Insta Feeds -->
-                    <div class="single-insta-feeds">
-                        <img src="img/bg-img/insta1.jpg" alt="">
-                        <!-- Icon -->
-                        <div class="insta-icon">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Single Insta Feeds -->
-                    <div class="single-insta-feeds">
-                        <img src="img/bg-img/insta2.jpg" alt="">
-                        <!-- Icon -->
-                        <div class="insta-icon">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Single Insta Feeds -->
-                    <div class="single-insta-feeds">
-                        <img src="img/bg-img/insta3.jpg" alt="">
-                        <!-- Icon -->
-                        <div class="insta-icon">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Single Insta Feeds -->
-                    <div class="single-insta-feeds">
-                        <img src="img/bg-img/insta4.jpg" alt="">
-                        <!-- Icon -->
-                        <div class="insta-icon">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Single Insta Feeds -->
-                    <div class="single-insta-feeds">
-                        <img src="img/bg-img/insta5.jpg" alt="">
-                        <!-- Icon -->
-                        <div class="insta-icon">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Single Insta Feeds -->
-                    <div class="single-insta-feeds">
-                        <img src="img/bg-img/insta6.jpg" alt="">
-                        <!-- Icon -->
-                        <div class="insta-icon">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Single Insta Feeds -->
-                    <div class="single-insta-feeds">
-                        <img src="img/bg-img/insta7.jpg" alt="">
-                        <!-- Icon -->
-                        <div class="insta-icon">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
-            <!-- ##### Follow Us Instagram Area End ##### -->
+        </div>
+    </c:forEach>
+</div>
 
-            <!-- ##### Footer Area Start ##### -->
-            <footer class="footer-area">
-                <div class="container h-100">
-                    <div class="row h-100">
-                        <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
-                            <!-- Footer Social Info -->
-                            <div class="footer-social-info text-right">
-                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
-                            <!-- Footer Logo -->
-                            <div class="footer-logo">
-                                <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
+
+
+<!-- ##### Follow Us Instagram Area Start ##### -->
+<div class="follow-us-instagram">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h5>Follow Us Instragram</h5>
+            </div>
+        </div>
+    </div>
+    <!-- Instagram Feeds -->
+    <div class="insta-feeds d-flex flex-wrap">
+        <!-- Single Insta Feeds -->
+        <div class="single-insta-feeds">
+            <img src="img/bg-img/insta1.jpg" alt="">
+            <!-- Icon -->
+            <div class="insta-icon">
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <!-- Single Insta Feeds -->
+        <div class="single-insta-feeds">
+            <img src="img/bg-img/insta2.jpg" alt="">
+            <!-- Icon -->
+            <div class="insta-icon">
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <!-- Single Insta Feeds -->
+        <div class="single-insta-feeds">
+            <img src="img/bg-img/insta3.jpg" alt="">
+            <!-- Icon -->
+            <div class="insta-icon">
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <!-- Single Insta Feeds -->
+        <div class="single-insta-feeds">
+            <img src="img/bg-img/insta4.jpg" alt="">
+            <!-- Icon -->
+            <div class="insta-icon">
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <!-- Single Insta Feeds -->
+        <div class="single-insta-feeds">
+            <img src="img/bg-img/insta5.jpg" alt="">
+            <!-- Icon -->
+            <div class="insta-icon">
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <!-- Single Insta Feeds -->
+        <div class="single-insta-feeds">
+            <img src="img/bg-img/insta6.jpg" alt="">
+            <!-- Icon -->
+            <div class="insta-icon">
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <!-- Single Insta Feeds -->
+        <div class="single-insta-feeds">
+            <img src="img/bg-img/insta7.jpg" alt="">
+            <!-- Icon -->
+            <div class="insta-icon">
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Follow Us Instagram Area End ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
+                <!-- Footer Social Info -->
+                <div class="footer-social-info text-right">
+                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                 </div>
-            </footer>
-            <!-- ##### Footer Area Start ##### -->
+                <!-- Footer Logo -->
+                <div class="footer-logo">
+                    <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- ##### Footer Area Start ##### -->
 
-            <!-- ##### All Javascript Files ##### -->
-            <!-- jQuery-2.2.4 js -->
-            <script src="js/jquery/jquery-2.2.4.min.js"></script>
-            <!-- Popper js -->
-            <script src="js/bootstrap/popper.min.js"></script>
-            <!-- Bootstrap js -->
-            <script src="js/bootstrap/bootstrap.min.js"></script>
-            <!-- All Plugins js -->
-            <script src="js/plugins/plugins.js"></script>
-            <!-- Active js -->
-            <script src="js/active.js"></script>
+<!-- ##### All Javascript Files ##### -->
+<!-- jQuery-2.2.4 js -->
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="js/bootstrap/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<!-- All Plugins js -->
+<script src="js/plugins/plugins.js"></script>
+<!-- Active js -->
+<script src="js/active.js"></script>
 
-    </body>
+</body>
 </html>
 
