@@ -70,37 +70,36 @@
                                     <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                                 </div>
 
+
                                 <!-- Nav Start -->
                                 <div class="classynav">
                                     <ul>
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
-                                        <li><a href="#">Pages</a>
-                                            <ul class="dropdown">
-                                                <li><a href="homePage.jsp">Home</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="blog-post.html">Blog Post</a></li>
-                                                <li><a href="receipe-post.html">Recipe Post</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Menu</a>
-                                            <div class="megamenu">
-                                                <ul class="dropdown">
-                                                    <li><a href="homePage.jsp">Rice</a></li>
-                                                    <li><a href="about.html">Noodles</a></li>
-                                                    <li><a href="blog-post.html">Cake</a></li>
-                                                    <li><a href="receipe-post.html">Drinks</a></li>
-                                                    <li><a href="contact.html">Dessert</a></li>
-                                                    <li><a href="elements.html">International dishes</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
                                         <li><a href="HeathyRecipeController">Healthy Food</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
-                                        <li><a href="login.jsp">Login</a></li>
+                                        <li><a href="about.jsp">About Us</a></li>
+                                            <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
+                                            <li><a href="login.jsp">Login</a></li>
+                                            </c:if>
+                                            <c:if test="${not empty sessionScope.ADMIN or not empty sessionScope.USER}">    
+
+                                            <li><a href="#">User</a>
+                                                <div class="megamenu">
+                                                    <ul class="dropdown">
+                                                        <li><a href="profile.jsp">Profile</a></li>
+                                                        <li><a href="setting_interface.jsp">Setting</a></li>
+                                                        <li><a href="plan.jsp">Meal Plan</a></li>
+                                                            <c:if test="${not empty sessionScope.ADMIN}">
+                                                            <li><a href="managerAccount.jsp">Management Account</a></li>
+                                                            <li><a href="RecipeManagementController">Management Recipe</a></li>
+                                                            </c:if>
+                                                        <li><a href="LogoutController">Logout</a> </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </c:if>                                        
                                     </ul>
 
                                     <!-- Newsletter Form -->

@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/web/searchRecipe.jsp</file>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/web/css/style_plan.css</file>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/web/favorite.jsp</file>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/web/mrecipe.css</file>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/web/favorite.css</file>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/src/java/team3/util/DBUtils.java</file>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/web/recipePost.jsp</file>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/web/heathy.jsp</file>
-            <file>file:/D:/Download%20Github/RO/RecipeOrganize/web/plan.jsp</file>
+            <file>file:/D:/RecipeOrganize/web/homePage.jsp</file>
+            <file>file:/D:/RecipeOrganize/src/java/team3/controller/AllRecipeController.java</file>
+            <file>file:/D:/RecipeOrganize/web/favorite.jsp</file>
+            <file>file:/D:/RecipeOrganize/web/heathy.jsp</file>
+            <file>file:/D:/RecipeOrganize/src/java/team3/util/DBUtils.java</file>
+            <file>file:/D:/RecipeOrganize/web/recipePost.jsp</file>
         </group>
     </open-files>
 </project-private>

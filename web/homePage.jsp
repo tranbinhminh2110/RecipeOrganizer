@@ -233,7 +233,7 @@
                             <img src="img/bg-img/bg2.jpg" alt="">
                             <!-- Content -->
                             <div class="top-cta-content">
-                                <h3>Cake</h3>
+                                <h3>Dessert</h3>
                                 <h6>Simple &amp; Delicios</h6>
                                 <a href="AllRecipeController" class="btn delicious-btn">See Full Receipe</a>
                             </div>
@@ -245,7 +245,7 @@
                             <img src="img/bg-img/bg3.jpg" alt="">
                             <!-- Content -->
                             <div class="top-cta-content">
-                                <h3>International dishes</h3>
+                                <h3>Main dish</h3>
                                 <h6>Simple &amp; Delicios</h6>
                                 <a href="AllRecipeController" class="btn delicious-btn">See Full Receipe</a>
                             </div>
@@ -354,19 +354,18 @@
                                             <img src="<%= recipe.getImgUrl()%>" alt="">
                                         </div>
                                         <div class="receipe-content">
-                                            <a href="AllRecipeController">
-                                                <h5><%= recipe.getRecipeName()%></h5>
-                                            </a>
-                                            <div class="ratings">
-                                                <% for (int i = 0; i < rating; i++) { %>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <% } %>
-                                                <% int remainingStars = 5 - rating;
+                                            <a href="DetailController?recipeID=<%= recipe.getRecipeID()%>" title="View Product" ><%= recipe.getRecipeName()%><a>
+                                                </a>
+                                                <div class="ratings">
+                                                    <% for (int i = 0; i < rating; i++) { %>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <% } %>
+                                                    <% int remainingStars = 5 - rating;
                                                     for (int i = 0; i < remainingStars; i++) { %>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <% }%>
-                                            </div>
-                                            <p><%= recipe.getAvgRating()%> comment</p>                                            
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                    <% }%>
+                                                </div>
+                                                <p><%= recipe.getAvgRating()%> comment</p>                                            
                                         </div>
                                     </div>
                                     <% count++;
@@ -427,23 +426,22 @@
                             </div>
                             <div class="receipe-content">
                                 <span>April 04, 2023</span>
-                                <a href="AllRecipeController">
-                                    <h5><%= recipe.getRecipeName()%></h5>
-                                </a>
-                                <div class="ratings">
-                                    <%
-                                        for (int i = 0; i < rating; i++) {
-                                    %>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <% } %>
-                                    <%
-                                        int remainingStars = 5 - rating;
-                                        for (int i = 0; i < remainingStars; i++) {
-                                    %>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    <% }%>
-                                </div>
-                                <p> <%= recipe.getAvgRating()%> comment</p>
+                                <a href="DetailController?recipeID=<%= recipe.getRecipeID()%>" title="View Product" ><%= recipe.getRecipeName()%><a>
+                                    </a>
+                                    <div class="ratings">
+                                        <%
+                                            for (int i = 0; i < rating; i++) {
+                                        %>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <% } %>
+                                        <%
+                                            int remainingStars = 5 - rating;
+                                            for (int i = 0; i < remainingStars; i++) {
+                                        %>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <% }%>
+                                    </div>
+                                    <p> <%= recipe.getAvgRating()%> comment</p>
                             </div>
                         </div>
                     </div>
