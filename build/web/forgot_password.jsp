@@ -11,7 +11,7 @@
         <link rel="icon" href="img/recipe/favicon.ico">       
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reset Password</title>
-        <link rel="stylesheet" type="text/css" href="forgot_password.css">
+        <link rel="stylesheet" type="text/css" href="css/forgot_password.css">
     </head>
     <body>
         <div id="colorText">

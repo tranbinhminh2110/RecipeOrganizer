@@ -241,17 +241,18 @@
                                 </div>
                             </div>
                             <%
-                                RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
-                                if (user != null) {
-                            %>
-                            <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
-                            <%
-                            } else {
-                            %>
-                            <button class="add-to-cart-btn">Add Favorite</button>
-                            <%
-                                }
-                            %>
+                                    RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                                    RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+                                    if (user != null || admin != null) {
+                                %>
+                                <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
+                                <%
+                                } else {
+                                %>
+                                <button class="add-to-cart-btn">Add Favorite</button>
+                                <%
+                                    }
+                                %>
                         </div>
                     </div> 
                 </c:forEach>

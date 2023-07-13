@@ -42,17 +42,34 @@ public class AddFavorite extends HttpServlet {
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             HttpSession session = request.getSession(false);
             RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
-            RecipeOrganizeDAO daos = new RecipeOrganizeDAO();
-            boolean result = daos.checkFavorite(recipeID, user.getUserID());
-            if (result) {
-                url = RECIPE_PAGE;
-            } else {
-                Random rng = new Random();
-                int favoriteID = rng.nextInt(900000) + 100000;
-                RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
-                boolean Results = dao.AddFavorite(favoriteID, user.getUserID(), recipeID);
-                if (Results) {
+            RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+            if (user != null) {
+                RecipeOrganizeDAO daos = new RecipeOrganizeDAO();
+                boolean result = daos.checkFavorite(recipeID, user.getUserID());
+                if (result) {
                     url = RECIPE_PAGE;
+                } else {
+                    Random rng = new Random();
+                    int favoriteID = rng.nextInt(900000) + 100000;
+                    RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                    boolean Results = dao.AddFavorite(favoriteID, user.getUserID(), recipeID);
+                    if (Results) {
+                        url = RECIPE_PAGE;
+                    }
+                }
+            } else if (admin != null) {
+                RecipeOrganizeDAO daos = new RecipeOrganizeDAO();
+                boolean result = daos.checkFavorite(recipeID, admin.getUserID());
+                if (result) {
+                    url = RECIPE_PAGE;
+                } else {
+                    Random rng = new Random();
+                    int favoriteID = rng.nextInt(900000) + 100000;
+                    RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                    boolean Results = dao.AddFavorite(favoriteID, admin.getUserID(), recipeID);
+                    if (Results) {
+                        url = RECIPE_PAGE;
+                    }
                 }
             }
 

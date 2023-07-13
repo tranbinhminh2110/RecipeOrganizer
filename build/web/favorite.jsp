@@ -21,7 +21,7 @@
 
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="css/recipe.css">
-        <link rel="stylesheet" href="favorite.css">
+        <link rel="stylesheet" href="css/favorite.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -175,15 +175,22 @@
             <!-- Receipe Post Search -->
             <div class="receipe-post-search mb-80">
                 <%
+                     RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
                     RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
-                    if (user != null) {
+
+                    if (user != null || admin != null) {
                         %>
                         <h4 style="font-family: sans-serif; margin-bottom: 5px;">Your Favorite Recipe</h4>
                 <%
                         RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
+                    if (user != null ) {
                         dao.AllFavorite(user.getUserID());
-                        List<FavoriteDTO> result = dao.getListFavorite();
-                        if (result != null) {
+                    } else if (admin != null) {
+                        dao.AllFavorite(admin.getUserID());
+                    }
+
+                    List<FavoriteDTO> result = dao.getListFavorite();
+                    if (result != null) {
                 %>
                 <table border="1">
                     <thead>
@@ -213,7 +220,17 @@
 
                             <td> 
                                 <form action="DispatchController" method="POST">
+                                    <%
+                                        if (user != null) {
+                                    %>
                                     <input type="hidden" name="txtUserID" value="<%= user.getUserID()%>" />
+                                    <%
+                                    } else if (admin != null) {
+                                    %>
+                                    <input type="hidden" name="txtUserID" value="<%= admin.getUserID()%>" />
+                                    <%
+                                        }
+                                    %>
                                     <input type="hidden" name="txtRecipeID" value="<%= dto.getRecipeID()%>" />
                                     <input type="submit" value="Remove" name="btAction" />
                                 </form>

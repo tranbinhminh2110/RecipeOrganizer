@@ -24,7 +24,7 @@
 
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="recipe.css">
-        <link rel="stylesheet" href="rating.css">
+        <link rel="stylesheet" href="css/rating.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
