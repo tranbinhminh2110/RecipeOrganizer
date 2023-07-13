@@ -97,6 +97,7 @@
                                             </div>
                                         </li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
+                                        <li><a href="favorite.jsp">Favorite</a></li>
                                         <li><a href="HeathyRecipeController">Healthy Food</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
                                         <li><a href="login.jsp">Login</a></li>
@@ -169,7 +170,7 @@
             <div class="">
                 <div class="result">
                     <div class="section-heading text-left">
-                        <h3>Result j</h3>
+                        <h3>Result</h3>
                     </div>
                 </div>
             </div>
@@ -201,128 +202,139 @@
                                     <span class="star"><i class="fa fa-star"></i></span>
                                     <span class="star"><i class="fa fa-star"></i></span>
                                 </div>
-                                <button class="add-to-cart-btn">Favorite</button>
+                                <%
+                                    RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                                    if (user != null) {
+                                %>
+                                <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${recipe.recipeID}"> Add Favorite</a></button>
+                                <%
+                                } else {
+                                %>
+                                <button class="add-to-cart-btn">Add Favorite</button>
+                                <%
+                                    }
+                                %>
                             </div>
                         </div>
                     </div>
                 </c:forEach>
             </div>
 
-            
 
-<!-- ##### Follow Us Instagram Area Start ##### -->
-<div class="follow-us-instagram">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h5>Follow Us Instragram</h5>
-            </div>
-        </div>
-    </div>
-    <!-- Instagram Feeds -->
-    <div class="insta-feeds d-flex flex-wrap">
-        <!-- Single Insta Feeds -->
-        <div class="single-insta-feeds">
-            <img src="img/bg-img/insta1.jpg" alt="">
-            <!-- Icon -->
-            <div class="insta-icon">
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            </div>
-        </div>
 
-        <!-- Single Insta Feeds -->
-        <div class="single-insta-feeds">
-            <img src="img/bg-img/insta2.jpg" alt="">
-            <!-- Icon -->
-            <div class="insta-icon">
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            </div>
-        </div>
-
-        <!-- Single Insta Feeds -->
-        <div class="single-insta-feeds">
-            <img src="img/bg-img/insta3.jpg" alt="">
-            <!-- Icon -->
-            <div class="insta-icon">
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            </div>
-        </div>
-
-        <!-- Single Insta Feeds -->
-        <div class="single-insta-feeds">
-            <img src="img/bg-img/insta4.jpg" alt="">
-            <!-- Icon -->
-            <div class="insta-icon">
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            </div>
-        </div>
-
-        <!-- Single Insta Feeds -->
-        <div class="single-insta-feeds">
-            <img src="img/bg-img/insta5.jpg" alt="">
-            <!-- Icon -->
-            <div class="insta-icon">
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            </div>
-        </div>
-
-        <!-- Single Insta Feeds -->
-        <div class="single-insta-feeds">
-            <img src="img/bg-img/insta6.jpg" alt="">
-            <!-- Icon -->
-            <div class="insta-icon">
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            </div>
-        </div>
-
-        <!-- Single Insta Feeds -->
-        <div class="single-insta-feeds">
-            <img src="img/bg-img/insta7.jpg" alt="">
-            <!-- Icon -->
-            <div class="insta-icon">
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ##### Follow Us Instagram Area End ##### -->
-
-<!-- ##### Footer Area Start ##### -->
-<footer class="footer-area">
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
-                <!-- Footer Social Info -->
-                <div class="footer-social-info text-right">
-                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <!-- ##### Follow Us Instagram Area Start ##### -->
+            <div class="follow-us-instagram">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>Follow Us Instragram</h5>
+                        </div>
+                    </div>
                 </div>
-                <!-- Footer Logo -->
-                <div class="footer-logo">
-                    <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
+                <!-- Instagram Feeds -->
+                <div class="insta-feeds d-flex flex-wrap">
+                    <!-- Single Insta Feeds -->
+                    <div class="single-insta-feeds">
+                        <img src="img/bg-img/insta1.jpg" alt="">
+                        <!-- Icon -->
+                        <div class="insta-icon">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Single Insta Feeds -->
+                    <div class="single-insta-feeds">
+                        <img src="img/bg-img/insta2.jpg" alt="">
+                        <!-- Icon -->
+                        <div class="insta-icon">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Single Insta Feeds -->
+                    <div class="single-insta-feeds">
+                        <img src="img/bg-img/insta3.jpg" alt="">
+                        <!-- Icon -->
+                        <div class="insta-icon">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Single Insta Feeds -->
+                    <div class="single-insta-feeds">
+                        <img src="img/bg-img/insta4.jpg" alt="">
+                        <!-- Icon -->
+                        <div class="insta-icon">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Single Insta Feeds -->
+                    <div class="single-insta-feeds">
+                        <img src="img/bg-img/insta5.jpg" alt="">
+                        <!-- Icon -->
+                        <div class="insta-icon">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Single Insta Feeds -->
+                    <div class="single-insta-feeds">
+                        <img src="img/bg-img/insta6.jpg" alt="">
+                        <!-- Icon -->
+                        <div class="insta-icon">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Single Insta Feeds -->
+                    <div class="single-insta-feeds">
+                        <img src="img/bg-img/insta7.jpg" alt="">
+                        <!-- Icon -->
+                        <div class="insta-icon">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</footer>
-<!-- ##### Footer Area Start ##### -->
+            <!-- ##### Follow Us Instagram Area End ##### -->
 
-<!-- ##### All Javascript Files ##### -->
-<!-- jQuery-2.2.4 js -->
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
-<!-- Popper js -->
-<script src="js/bootstrap/popper.min.js"></script>
-<!-- Bootstrap js -->
-<script src="js/bootstrap/bootstrap.min.js"></script>
-<!-- All Plugins js -->
-<script src="js/plugins/plugins.js"></script>
-<!-- Active js -->
-<script src="js/active.js"></script>
+            <!-- ##### Footer Area Start ##### -->
+            <footer class="footer-area">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
+                            <!-- Footer Social Info -->
+                            <div class="footer-social-info text-right">
+                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                            <!-- Footer Logo -->
+                            <div class="footer-logo">
+                                <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- ##### Footer Area Start ##### -->
 
-</body>
+            <!-- ##### All Javascript Files ##### -->
+            <!-- jQuery-2.2.4 js -->
+            <script src="js/jquery/jquery-2.2.4.min.js"></script>
+            <!-- Popper js -->
+            <script src="js/bootstrap/popper.min.js"></script>
+            <!-- Bootstrap js -->
+            <script src="js/bootstrap/bootstrap.min.js"></script>
+            <!-- All Plugins js -->
+            <script src="js/plugins/plugins.js"></script>
+            <!-- Active js -->
+            <script src="js/active.js"></script>
+
+    </body>
 </html>
 

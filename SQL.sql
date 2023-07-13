@@ -1,6 +1,7 @@
 ﻿use RecipeOrganize
 go
 create database RecipeOrganize
+drop database RecipeOrganize
 CREATE TABLE account (
  
   userID INT IDENTITY(1,1) PRIMARY KEY,
@@ -31,6 +32,15 @@ CREATE TABLE recipe (
   ingredient_table TEXT NULL,
   categoryID INT,
   FOREIGN KEY (categoryID) REFERENCES category(categoryID)
+);
+
+CREATE TABLE rating (
+    ratingID INT PRIMARY KEY NOT NULL,
+    userName VARCHAR(30)NOT NULL,
+	recipeID INT,
+    ratingValue decimal,
+	FOREIGN KEY (userName) REFERENCES account(userName),
+    FOREIGN KEY (recipeID) REFERENCES recipe(recipeID)
 );
 
 CREATE TABLE favorite (

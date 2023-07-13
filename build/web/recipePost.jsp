@@ -124,6 +124,7 @@
                                     <ul>
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
+                                        <li><a href="favorite.jsp">Favorite</a></li>
                                         <li><a href="HeathyRecipeController">Healthy Food</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
                                         <li><a href="about.jsp">About Us</a></li>
@@ -239,7 +240,18 @@
                                     <span class="star"><i class="fa fa-star"></i></span>
                                 </div>
                             </div>
-                            <button>Add Favorite</button>
+                            <%
+                                    RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                                    if (user != null) {
+                                %>
+                                <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
+                                <%
+                                } else {
+                                %>
+                                <button class="add-to-cart-btn">Add Favorite</button>
+                                <%
+                                    }
+                                %>
                         </div>
                     </div> 
                 </c:forEach>

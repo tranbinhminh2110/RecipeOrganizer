@@ -34,6 +34,7 @@ public class DispatchController extends HttpServlet {
     private final String PLAN_CONTROLLER = "PlanController";
     private final String SEARCH_ACCOUNT_CONTROLLER = "searchAccountController";
     private final String MANAGER_STATUS_ACCOUNT = "updateStatusAccountController";
+    private final String REMOVE_FAVORITE_CONTROLLER = "RemoveFavoriteController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -75,6 +76,8 @@ public class DispatchController extends HttpServlet {
                 url = SEARCH_ACCOUNT_CONTROLLER;
             } else if (button.equals("updateStatusAccount")) {
                 url = MANAGER_STATUS_ACCOUNT;
+            } else if (button.equals("Remove")) {
+                url = REMOVE_FAVORITE_CONTROLLER;
             }
         } catch (NullPointerException ex) {
 
