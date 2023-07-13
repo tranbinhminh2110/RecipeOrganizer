@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/RecipeOrganize/web/managerAccount.jsp</file>
             <file>file:/D:/RecipeOrganize/web/homePage.jsp</file>
-            <file>file:/D:/RecipeOrganize/src/java/team3/controller/AllRecipeController.java</file>
-            <file>file:/D:/RecipeOrganize/web/favorite.jsp</file>
-            <file>file:/D:/RecipeOrganize/web/heathy.jsp</file>
-            <file>file:/D:/RecipeOrganize/src/java/team3/util/DBUtils.java</file>
-            <file>file:/D:/RecipeOrganize/web/recipePost.jsp</file>
+            <file>file:/D:/RecipeOrganize/web/css/managerAccount.css</file>
+            <file>file:/D:/RecipeOrganize/web/profile.jsp</file>
         </group>
     </open-files>
 </project-private>
