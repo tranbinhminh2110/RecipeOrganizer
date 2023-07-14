@@ -22,7 +22,7 @@
         <link rel="icon" href="img/recipe/favicon.ico">
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="style.css">
-
+        <link rel="stylesheet" href="css/update.css">
     </head>
     <body>
         <!-- Preloader -->
@@ -161,7 +161,7 @@
                         <div class="col-12">
                             <div class="breadcumb-text text-center">
                                 <h2>Update Recipe</h2>
-                                <link rel="stylesheet" href="update.css">
+                               
                             </div>
                         </div>
                     </div>

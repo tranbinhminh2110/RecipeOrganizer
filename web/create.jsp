@@ -21,7 +21,7 @@
         <link rel="icon" href="img/recipe/favicon.ico">
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="cssupdate.css">
+        <link rel="stylesheet" href="css/update.css">
     </head>
     <body>
         <!-- Preloader -->
