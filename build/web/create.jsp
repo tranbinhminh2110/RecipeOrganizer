@@ -21,7 +21,7 @@
         <link rel="icon" href="img/recipe/favicon.ico">
         <!-- Core Stylesheet -->
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="update.css">
+        <link rel="stylesheet" href="cssupdate.css">
     </head>
     <body>
         <!-- Preloader -->
@@ -129,7 +129,7 @@
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
                                                         <li><a href="setting_interface.jsp">Setting</a></li>
-                                                        <li><a href="plan.jsp">Meal Planer</a></li>
+                                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -245,7 +245,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h5>Follow Us Instragram</h5>
+                        <h5>Enjoy Your Passion</h5>
                     </div>
                 </div>
             </div>

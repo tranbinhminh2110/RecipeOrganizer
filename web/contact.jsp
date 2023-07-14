@@ -227,7 +227,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading">
-                        <h3>Get In Touch</h3>
+                        <h3>Contact Us</h3>
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h5>Follow Us Instragram</h5>
+                    <h5>Enjoy Your Passion</h5>
                 </div>
             </div>
         </div>
