@@ -46,7 +46,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form action="#" method="post">
+                        <form action="SearchController" method="post">
                             <input type="search" name="search" placeholder="Type any keywords...">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
@@ -137,7 +137,6 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
                                                         <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
@@ -241,25 +240,29 @@
                                 </div>
                             </div>
                             <%
-                                    RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
-                                    RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
-                                    if (user != null || admin != null) {
-                                %>
-                                <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
-                                <%
-                                } else {
-                                %>
-                                <button class="add-to-cart-btn">Add Favorite</button>
-                                <%
-                                    }
-                                %>
+                                RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+                                RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+                                if (user != null || admin != null) {
+                            %>
+                            <button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button>
+                            <%
+                            } else {
+                            %>
+                            <button class="add-to-cart-btn">Add Favorite</button>
+                            <%
+                                }
+                            %>
                         </div>
                     </div> 
                 </c:forEach>
             </div>
         </div>
 
-        
+
+    </div>
+</div>
+</div>
+
 <!-- ##### Follow Us Instagram Area Start ##### -->
 <div class="follow-us-instagram">
     <div class="container">

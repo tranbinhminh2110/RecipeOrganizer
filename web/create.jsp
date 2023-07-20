@@ -37,7 +37,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form action="#" method="post">
+                        <form action="SearchController" method="post">
                             <input type="search" name="search" placeholder="Type any keywords...">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
@@ -116,7 +116,6 @@
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
-                                        <li><a href="searchRecipe.jsp">Healthy Food</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
                                         <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
@@ -128,8 +127,7 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
-                                                        <li><a href="plan.jsp">Meal Plan</a></li>
+                                                        <li><a href="plan.jsp">Meal Planer</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -170,7 +168,7 @@
             </div> <br>
         </header>
         <div class="update-form">
-            <form action="CreateRecipeServlet" method="POST" class="form">
+            <form action="CreateRecipeController" method="POST" class="form">
                 <div class="form-group">
                     <label for="categoryID">Category:</label>
                     <select name="categoryID" id="categoryID" required>

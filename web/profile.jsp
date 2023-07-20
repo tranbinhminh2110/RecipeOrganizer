@@ -43,7 +43,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form action="#" method="post">
+                        <form action="SearchController" method="post">
                             <input type="search" name="search" placeholder="Type any keywords...">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
@@ -133,8 +133,7 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
-                                                        <li><a href="plan.jsp">Meal Plan</a></li>
+                                                        <li><a href="plan.jsp">Meal Planer</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             </c:if>
@@ -224,7 +223,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+ 
                 <%
                                             } else {
                                             %>
@@ -392,28 +391,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-12 col-md-3 mb-3">
-                                                                <form action="DispatchController" method ="post">
-                                                                    <div class="card mb-3">
-                                                                        <div class="card-body">
-                                                                            <div class="px-xl-3">
-                                                                                <button class="btn btn-block btn-secondary">
-                                                                                    <i class="fa fa-sign-out"></i>
-                                                                                    <span>Back</span>
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
 
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h6 class="card-title font-weight-bold">Support</h6>
-                                                                        <p class="card-text">Get fast, free help from our friendly assistants.</p>
-                                                                        <a href="contact.jsp" class="btn btn-primary">Contact Us</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

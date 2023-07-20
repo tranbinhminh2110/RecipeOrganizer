@@ -3,15 +3,16 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import java.io.File;
+import team3.recipe.RecipeOrganizeDTO;
 
-public final class updaterecipe_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class searchRecipe_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_set_var_value_scope_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_if_test;
 
@@ -22,11 +23,13 @@ public final class updaterecipe_jsp extends org.apache.jasper.runtime.HttpJspBas
   }
 
   public void _jspInit() {
+    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_c_set_var_value_scope_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_c_if_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
+    _jspx_tagPool_c_forEach_var_items.release();
     _jspx_tagPool_c_set_var_value_scope_nobody.release();
     _jspx_tagPool_c_if_test.release();
   }
@@ -59,32 +62,25 @@ public final class updaterecipe_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
-      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
-      out.write("        ");
-      team3.recipe.RecipeOrganizeDAO result = null;
-      synchronized (request) {
-        result = (team3.recipe.RecipeOrganizeDAO) _jspx_page_context.getAttribute("result", PageContext.REQUEST_SCOPE);
-        if (result == null){
-          result = new team3.recipe.RecipeOrganizeDAO();
-          _jspx_page_context.setAttribute("result", result, PageContext.REQUEST_SCOPE);
-        }
-      }
-      out.write("\r\n");
       out.write("        <meta charset=\"UTF-8\">\r\n");
       out.write("        <meta name=\"description\" content=\"\">\r\n");
       out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\r\n");
-      out.write("        <title>Update Recipe</title>\r\n");
+      out.write("        <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->\r\n");
       out.write("\r\n");
-      out.write("        <!-- Đường dẫn tới file CSS của trang -->\r\n");
+      out.write("        <!-- Title -->\r\n");
+      out.write("        <title>Recipe Organize | Recipe Post</title>\r\n");
+      out.write("\r\n");
       out.write("        <!-- Favicon -->\r\n");
       out.write("        <link rel=\"icon\" href=\"img/recipe/favicon.ico\">\r\n");
-      out.write("        <!-- Core Stylesheet -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"style.css\">\r\n");
       out.write("\r\n");
+      out.write("        <!-- Core Stylesheet -->\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"css/recipe.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"style.css\">\r\n");
+      out.write("        <script src=\"https://cdn.tailwindcss.com\"></script>     \r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
       out.write("        <!-- Preloader -->\r\n");
@@ -207,186 +203,79 @@ public final class updaterecipe_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
+      out.write("        </header>\r\n");
+      out.write("        <!-- ##### Header Area End ##### -->\r\n");
       out.write("\r\n");
-      out.write("            <!-- ##### Breadcumb Area Start ##### -->\r\n");
-      out.write("            <div class=\"breadcumb-area bg-img bg-overlay\" style=\"background-image: url(img/bg-img/breadcumb4.jpg);\">\r\n");
-      out.write("                <div class=\"container h-100\">\r\n");
-      out.write("                    <div class=\"row h-100 align-items-center\">\r\n");
-      out.write("                        <div class=\"col-12\">\r\n");
-      out.write("                            <div class=\"breadcumb-text text-center\">\r\n");
-      out.write("                                <h2>Update Recipe</h2>\r\n");
-      out.write("                                <link rel=\"stylesheet\" href=\"update.css\">\r\n");
-      out.write("                            </div>\r\n");
+      out.write("        <!-- ##### Breadcumb Area Start ##### -->\r\n");
+      out.write("        <div class=\"breadcumb-area bg-img bg-overlay\" style=\"background-image: url(img/bg-img/breadcumb3.jpg);\">\r\n");
+      out.write("            <div class=\"container h-100\">\r\n");
+      out.write("                <div class=\"row h-100 align-items-center\">\r\n");
+      out.write("                    <div class=\"col-12\">\r\n");
+      out.write("                        <div class=\"breadcumb-text text-center\">\r\n");
+      out.write("                            <h2>Recipe</h2>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
-      out.write("            </div> <br>\r\n");
-      out.write("        </header>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("        <div class=\"update-form\">\r\n");
-      out.write("            <form action=\"UpdateRecipeServlet\" method=\"post\">\r\n");
-      out.write("                <input type=\"hidden\" name=\"recipeID\" value=\"");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${recipeID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\">\r\n");
-      out.write("                <div class=\"form-group\">\r\n");
-      out.write("                    <label for=\"recipeName\">Recipe Name:</label>\r\n");
-      out.write("                    <input type=\"text\" id=\"recipeName\" name=\"recipeName\" value=\"");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${recipeName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\" class=\"form-control\">\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"form-group\">\r\n");
-      out.write("                    <label for=\"caloRecipe\">Calories:</label>\r\n");
-      out.write("                    <input type=\"text\" id=\"caloRecipe\" name=\"caloRecipe\" value=\"");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${caloRecipe}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\" class=\"form-control\">\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"form-group\">\r\n");
-      out.write("                    <label for=\"description\">Description:</label>\r\n");
-      out.write("                    <textarea id=\"description\" name=\"description\" class=\"form-control\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${description}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("</textarea>\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"form-group\">\r\n");
-      out.write("                    <label for=\"imgUrl\">Image URL:</label>\r\n");
-      out.write("                    <select name=\"imgUrl\" id=\"imgUrl\" required class=\"form-control select-with-scroll\">\r\n");
-      out.write("                        <option value=\"\" selected disabled>Choose an image</option>\r\n");
-      out.write("                        ");
-      out.write("\r\n");
-      out.write("                        ");
-
-                            String directoryPath = getServletContext().getRealPath("/img/recipe");
-                            File[] files = new File(directoryPath).listFiles();
-                            for (File file : files) {
-                                if (file.isFile() && (file.getName().endsWith(".jpg") || file.getName().endsWith(".png"))) {
-                                    String fileName = file.getName();
-                        
-      out.write("\r\n");
-      out.write("                        <option value=\"");
-      out.print( "img/recipe/" + fileName);
-      out.write('"');
-      out.write('>');
-      out.print( fileName);
-      out.write("</option>\r\n");
-      out.write("                        ");
-
-                                }
-                            }
-                        
-      out.write("\r\n");
-      out.write("                    </select>\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"form-group\">\r\n");
-      out.write("                    <label for=\"difficulty\">Difficulty:</label>\r\n");
-      out.write("                    <select name=\"difficulty\" id=\"difficulty\" required class=\"form-control\">\r\n");
-      out.write("                        <option value=\"\" selected disabled>Choose difficulty</option>\r\n");
-      out.write("                        <option value=\"High\">High</option>\r\n");
-      out.write("                        <option value=\"Easy\">Easy</option>\r\n");
-      out.write("                        <option value=\"Medium\">Medium</option>\r\n");
-      out.write("                    </select>\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"form-group\">\r\n");
-      out.write("                    <label for=\"ingredient_table\">Ingredients:</label>\r\n");
-      out.write("                    <textarea id=\"ingredient_table\" name=\"ingredient_table\" class=\"form-control\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ingredient_table}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("</textarea>\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"form-group\">\r\n");
-      out.write("                    <label for=\"categoryID\">Category:</label>\r\n");
-      out.write("                    <select name=\"categoryID\" id=\"categoryID\" class=\"form-control\">\r\n");
-      out.write("                        <option value=\"1\">Main Dish</option>\r\n");
-      out.write("                        <option value=\"2\">Pasta</option>\r\n");
-      out.write("                        <option value=\"3\">Salad</option>\r\n");
-      out.write("                        <option value=\"4\">Vegetarian</option>\r\n");
-      out.write("                        <option value=\"5\">Dessert</option>\r\n");
-      out.write("                        <option value=\"6\">Bakery</option>\r\n");
-      out.write("                    </select>\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"form-group\">\r\n");
-      out.write("                    <label for=\"DescriptionName\">Step:</label>\r\n");
-      out.write("                    <textarea id=\"steps\" name=\"steps\" class=\"form-control\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${DescriptionName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("</textarea>\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <input type=\"submit\" value=\"Update Recipe\" class=\"btn-submit btn btn-primary\">\r\n");
-      out.write("            </form>\r\n");
-      out.write("        </div>\r\n");
-      out.write("        <!-- ##### Follow Us Instagram Area Start ##### -->\r\n");
-      out.write("        <div class=\"follow-us-instagram\">\r\n");
-      out.write("            <div class=\"container\">\r\n");
-      out.write("                <div class=\"row\">\r\n");
-      out.write("                    <div class=\"col-12\">\r\n");
-      out.write("                        <h5>Enjoy Your Passion</h5>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                </div>\r\n");
-      out.write("            </div>\r\n");
-      out.write("            <!-- Instagram Feeds -->\r\n");
-      out.write("            <div class=\"insta-feeds d-flex flex-wrap\">\r\n");
-      out.write("                <!-- Single Insta Feeds -->\r\n");
-      out.write("                <div class=\"single-insta-feeds\">\r\n");
-      out.write("                    <img src=\"img/bg-img/insta1.jpg\" alt=\"\">\r\n");
-      out.write("                    <!-- Icon -->\r\n");
-      out.write("                    <div class=\"insta-icon\">\r\n");
-      out.write("                        <a href=\"#\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                </div>\r\n");
-      out.write("\r\n");
-      out.write("                <!-- Single Insta Feeds -->\r\n");
-      out.write("                <div class=\"single-insta-feeds\">\r\n");
-      out.write("                    <img src=\"img/bg-img/insta2.jpg\" alt=\"\">\r\n");
-      out.write("                    <!-- Icon -->\r\n");
-      out.write("                    <div class=\"insta-icon\">\r\n");
-      out.write("                        <a href=\"#\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                </div>\r\n");
-      out.write("\r\n");
-      out.write("                <!-- Single Insta Feeds -->\r\n");
-      out.write("                <div class=\"single-insta-feeds\">\r\n");
-      out.write("                    <img src=\"img/bg-img/insta3.jpg\" alt=\"\">\r\n");
-      out.write("                    <!-- Icon -->\r\n");
-      out.write("                    <div class=\"insta-icon\">\r\n");
-      out.write("                        <a href=\"#\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                </div>\r\n");
-      out.write("\r\n");
-      out.write("                <!-- Single Insta Feeds -->\r\n");
-      out.write("                <div class=\"single-insta-feeds\">\r\n");
-      out.write("                    <img src=\"img/bg-img/insta4.jpg\" alt=\"\">\r\n");
-      out.write("                    <!-- Icon -->\r\n");
-      out.write("                    <div class=\"insta-icon\">\r\n");
-      out.write("                        <a href=\"#\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                </div>\r\n");
-      out.write("\r\n");
-      out.write("                <!-- Single Insta Feeds -->\r\n");
-      out.write("                <div class=\"single-insta-feeds\">\r\n");
-      out.write("                    <img src=\"img/bg-img/insta5.jpg\" alt=\"\">\r\n");
-      out.write("                    <!-- Icon -->\r\n");
-      out.write("                    <div class=\"insta-icon\">\r\n");
-      out.write("                        <a href=\"#\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                </div>\r\n");
-      out.write("\r\n");
-      out.write("                <!-- Single Insta Feeds -->\r\n");
-      out.write("                <div class=\"single-insta-feeds\">\r\n");
-      out.write("                    <img src=\"img/bg-img/insta6.jpg\" alt=\"\">\r\n");
-      out.write("                    <!-- Icon -->\r\n");
-      out.write("                    <div class=\"insta-icon\">\r\n");
-      out.write("                        <a href=\"#\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                </div>\r\n");
-      out.write("\r\n");
-      out.write("                <!-- Single Insta Feeds -->\r\n");
-      out.write("                <div class=\"single-insta-feeds\">\r\n");
-      out.write("                    <img src=\"img/bg-img/insta7.jpg\" alt=\"\">\r\n");
-      out.write("                    <!-- Icon -->\r\n");
-      out.write("                    <div class=\"insta-icon\">\r\n");
-      out.write("                        <a href=\"#\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </div>\r\n");
+      out.write("        <!-- ##### Breadcumb Area End ##### -->\r\n");
+      out.write("\r\n");
+      out.write("        <div class=\"receipe-post-area section-padding-80\">\r\n");
+      out.write("\r\n");
+      out.write("            <!-- Receipe Post Search -->\r\n");
+      out.write("            <div class=\"receipe-post-search mb-80\">\r\n");
+      out.write("                <div class=\"container\">\r\n");
+      out.write("\r\n");
+      out.write("                    <form value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${txtS}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\" action=\"SearchController\" method=\"post\">\r\n");
+      out.write("                        <div class=\"row\">\r\n");
+      out.write("                            <!-- Recipe Category-->\r\n");
+      out.write("                            <div class=\"col-12 col-lg-4\">\r\n");
+      out.write("                                <ul class=\"category-list\">\r\n");
+      out.write("                                    <select onchange=\"location = this.value;\">\r\n");
+      out.write("                                        <option value=\"CategoryController?categoryID=0\">All Recipe Categories</option>\r\n");
+      out.write("                                        <option value=\"CategoryController?categoryID=1\">Main Dish</option>\r\n");
+      out.write("                                        <option value=\"CategoryController?categoryID=2\">Pasta</option>\r\n");
+      out.write("                                        <option value=\"CategoryController?categoryID=3\">Salad</option>\r\n");
+      out.write("                                        <option value=\"CategoryController?categoryID=4\">Vegetarian</option>\r\n");
+      out.write("                                        <option value=\"CategoryController?categoryID=5\">Dessert</option>\r\n");
+      out.write("                                        <option value=\"CategoryController?categoryID=6\">Bakery</option>\r\n");
+      out.write("                                    </select>\r\n");
+      out.write("\r\n");
+      out.write("                                </ul>\r\n");
+      out.write("                            </div>\r\n");
+      out.write("                            <!-- Recipe Search-->\r\n");
+      out.write("                            <div class=\"col-12 col-lg-4\">\r\n");
+      out.write("                                <input type=\"search\" name=\"txtSearch\" placeholder=\"Search Receipies\" >\r\n");
+      out.write("                            </div>\r\n");
+      out.write("                            <div class=\"col-12 col-lg-4 text-right\">\r\n");
+      out.write("                                <button type=\"submit\" class=\"py-4 px-10 text-white bg-success\" name=\"btAction\" value=\"search\">Search</button>\r\n");
+      out.write("                            </div>\r\n");
+      out.write("                        </div>\r\n");
+      out.write("                    </form>\r\n");
+      out.write("                </div>\r\n");
+      out.write("            </div>\r\n");
+      out.write("            <!-- Result -->\r\n");
+      out.write("            <div class=\"result pl-6\">\r\n");
+      out.write("                <h3 class=\"text-3xl\">Result</h3>\r\n");
+      out.write("            </div>\r\n");
+      out.write("\r\n");
+      out.write("            <!-- Recipe by Category -->\r\n");
+      out.write("            <div class=\"row\">\r\n");
+      out.write("                ");
+      if (_jspx_meth_c_forEach_0(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("        </div>\r\n");
+      out.write("        <!-- Recipe by search -->\r\n");
+      out.write("        <div class=\"row listCard\">\r\n");
+      out.write("            ");
+      if (_jspx_meth_c_forEach_1(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("        </div>\r\n");
+      out.write("\r\n");
       out.write("        <!-- ##### Follow Us Instagram Area End ##### -->\r\n");
       out.write("\r\n");
       out.write("        <!-- ##### Footer Area Start ##### -->\r\n");
@@ -407,11 +296,12 @@ public final class updaterecipe_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("                        <div class=\"footer-logo\">\r\n");
       out.write("                            <a href=\"homePage.jsp\"><img src=\"img/recipe/logo.png\" alt=\"\"></a>\r\n");
       out.write("                        </div>\r\n");
-      out.write("\r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </footer>\r\n");
+      out.write("        <!-- ##### Footer Area Start ##### -->\r\n");
+      out.write("\r\n");
       out.write("        <!-- ##### All Javascript Files ##### -->\r\n");
       out.write("        <!-- jQuery-2.2.4 js -->\r\n");
       out.write("        <script src=\"js/jquery/jquery-2.2.4.min.js\"></script>\r\n");
@@ -423,6 +313,7 @@ public final class updaterecipe_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("        <script src=\"js/plugins/plugins.js\"></script>\r\n");
       out.write("        <!-- Active js -->\r\n");
       out.write("        <script src=\"js/active.js\"></script>\r\n");
+      out.write("\r\n");
       out.write("    </body>\r\n");
       out.write("</html>\r\n");
     } catch (Throwable t) {
@@ -586,8 +477,7 @@ public final class updaterecipe_jsp extends org.apache.jasper.runtime.HttpJspBas
         out.write("                                                <div class=\"megamenu\">\r\n");
         out.write("                                                    <ul class=\"dropdown\">\r\n");
         out.write("                                                        <li><a href=\"profile.jsp\">Profile</a></li>\r\n");
-        out.write("                                                        <li><a href=\"setting_interface.jsp\">Setting</a></li>\r\n");
-        out.write("                                                        <li><a href=\"plan.jsp\">Meal Plan</a></li>\r\n");
+        out.write("                                                        <li><a href=\"plan.jsp\">Meal Planer</a></li>\r\n");
         out.write("                                                            ");
         if (_jspx_meth_c_if_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_if_3, _jspx_page_context))
           return true;
@@ -636,6 +526,150 @@ public final class updaterecipe_jsp extends org.apache.jasper.runtime.HttpJspBas
       return true;
     }
     _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_4);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_0.setParent(null);
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${list}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setVar("o");
+    int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
+      if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\r\n");
+          out.write("                    <div class=\"col-12 col-md-3 mt-30\">\r\n");
+          out.write("                        <div class=\"card product-container rounded\">\r\n");
+          out.write("                            <img class=\"card-img-top\" src=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.imgUrl}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\" alt=\"Card image cap\">\r\n");
+          out.write("                            <div class=\"card-body\">\r\n");
+          out.write("                                <div>\r\n");
+          out.write("                                    <h3 class=\"card-title view-title\" style=\"line-height: 15px\"><b><a href=\"DetailController?recipeID=");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.recipeID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\" title=\"View Product\" >");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.recipeName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</a></b></h3>\r\n");
+          out.write("                                </div>\r\n");
+          out.write("                                <div  class=\"card-text calo \">\r\n");
+          out.write("                                    <p><b>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.caloRecipe}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</b></p>\r\n");
+          out.write("                                </div>\r\n");
+          out.write("                                <div class=\"card-text show_txt\" id=\"description\">\r\n");
+          out.write("                                    <p>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.description}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</p>\r\n");
+          out.write("                                </div>\r\n");
+          out.write("                                <div class=\"rating\">\r\n");
+          out.write("                                    <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                    <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                    <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                    <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                    <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                </div>\r\n");
+          out.write("                                <p><button class=\"add-to-cart-btn\"><a href=\"AddFavorite?recipeID=");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.recipeID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\"> Add Favorite</a></button></p>\r\n");
+          out.write("                            </div>\r\n");
+          out.write("                        </div>\r\n");
+          out.write("                    </div> \r\n");
+          out.write("                ");
+          int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_0.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_0.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_1 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_1.setParent(null);
+    _jspx_th_c_forEach_1.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${listP}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_1.setVar("o");
+    int[] _jspx_push_body_count_c_forEach_1 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_1 = _jspx_th_c_forEach_1.doStartTag();
+      if (_jspx_eval_c_forEach_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\r\n");
+          out.write("                <div class=\"col-12 col-md-3 mt-30\">\r\n");
+          out.write("                    <div class=\"card product-container rounded\">\r\n");
+          out.write("                        <img class=\"card-img-top\" src=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.imgUrl}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\" alt=\"Card image cap\">\r\n");
+          out.write("                        <div class=\"card-body\">\r\n");
+          out.write("                            <div>\r\n");
+          out.write("                                <h3 class=\"card-title view-title\" style=\"line-height: 15px\"><b><a href=\"DetailController?recipeID=");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.recipeID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\" title=\"View Product\" >");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.recipeName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</a></b></h3>\r\n");
+          out.write("                            </div>\r\n");
+          out.write("                            <div  class=\"card-text calo \">\r\n");
+          out.write("                                <p><b>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.caloRecipe}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</b></p>\r\n");
+          out.write("                            </div>\r\n");
+          out.write("                            <div class=\"card-text show_txt\" id=\"description\">\r\n");
+          out.write("                                <p>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.description}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</p>\r\n");
+          out.write("                            </div>\r\n");
+          out.write("                            <div class=\"rating\">\r\n");
+          out.write("                                <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                                <span class=\"star\"><i class=\"fa fa-star\"></i></span>\r\n");
+          out.write("                            </div>\r\n");
+          out.write("                            <p><button class=\"add-to-cart-btn\"><a href=\"AddFavorite?recipeID=");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${o.recipeID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\"> Add Favorite</a></button></p>\r\n");
+          out.write("                        </div>\r\n");
+          out.write("                    </div>\r\n");
+          out.write("                </div> \r\n");
+          out.write("            ");
+          int evalDoAfterBody = _jspx_th_c_forEach_1.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_1[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_1.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_1.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_1);
+    }
     return false;
   }
 }

@@ -142,7 +142,6 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
                                                         <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
@@ -182,7 +181,7 @@
                                 <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
                                     <h2 data-animation="fadeInUp" data-delay="300ms">Com tam</h2>
                                     <p data-animation="fadeInUp" data-delay="700ms">Com tam is considered a specialty dish of Saigon people. Each plate of hot, fragrant broken rice is always the first choice for quick but nutritious meals.</p>
-                                    <a href="AllRecipeController" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
+                                    <a href="DetailController?recipeID=91" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +195,7 @@
                                 <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
                                     <h2 data-animation="fadeInUp" data-delay="300ms">Pho bo</h2>
                                     <p data-animation="fadeInUp" data-delay="700ms">Pho is a famous Vietnamese dish loved by many people, it will be even more delicious when cooked at home for the family to enjoy. The taste of beef is sweet and nutritious, the noodles are chewy and chewy, and the broth is rich, mixed with the aroma of herbs. Speaking of which, I'm already hungry, don't wait long, let's go to the kitchen to do it right away.</p>
-                                    <a href="AllRecipeController" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
+                                    <a href="DetailController?recipeID=92" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +211,7 @@
                                 <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
                                     <h2 data-animation="fadeInUp" data-delay="300ms">Peach tea</h2>
                                     <p data-animation="fadeInUp" data-delay="700ms">Peach tea is the favorite drink of most young people today, not only because of the refreshing taste of tea but also because of the diverse combination of flavors from fresh peaches to create a unique drink. Today, we will tell you how to make peach tea at home very easily. Go to the kitchen and do it right away!</p>
-                                    <a href="AllRecipeController" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
+                                    <a href="DetailController?recipeID=93" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Receipe</a>
                                 </div>
                             </div>
                         </div>

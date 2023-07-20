@@ -25,11 +25,12 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <!-- Preloader -->
+       <!-- Preloader -->
         <div id="preloader">
             <i class="circle-preloader"></i>
             <img src="img/recipe/salad.png" alt="">
         </div>
+
         <!-- Search Wrapper -->
         <div class="search-wrapper">
             <!-- Close Btn -->
@@ -129,7 +130,6 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
                                                         <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>

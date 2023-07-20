@@ -43,7 +43,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <form action="#" method="post">
+                            <form action="SearchController" method="post">
                                 <input type="search" name="search" placeholder="Type any keywords...">
                                 <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </form>
@@ -134,8 +134,7 @@
                                                     <div class="megamenu">
                                                         <ul class="dropdown">
                                                             <li><a href="profile.jsp">Profile</a></li>
-                                                            <li><a href="setting_interface.jsp">Setting</a></li>
-                                                            <li><a href="plan.jsp">Meal Plan</a></li>
+                                                            <li><a href="plan.jsp">Meal Planer</a></li>
                                                                 <c:if test="${not empty sessionScope.ADMIN}">
                                                                 <li><a href="managerAccount.jsp">Management Account</a></li>
                                                                 <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -236,7 +235,7 @@
                                             <div class="col-12 col-md-8">   
                                                 <div class="method-card">
                                                     <div >
-                                                        <h4>Method of execution</h4>
+                                                        <h4>How To Cook</h4>
                                                     </div>
                                                     <div class="show-steps">
                                                         <% String[] steps_recipe = (String[]) request.getAttribute("steps");

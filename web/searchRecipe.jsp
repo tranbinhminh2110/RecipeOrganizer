@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form action="#" method="post">
+                        <form action="SearchController" method="post">
                             <input type="search" name="search" placeholder="Type any keywords...">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
@@ -130,8 +130,7 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
-                                                        <li><a href="plan.jsp">Meal Plan</a></li>
+                                                        <li><a href="plan.jsp">Meal Planer</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -219,7 +218,7 @@
                             <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
                             <div class="card-body">
                                 <div>
-                                    <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
+                                    <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product">${o.recipeName}</a></b></h3>
                                 </div>
                                 <div  class="card-text calo ">
                                     <p><b>${o.caloRecipe}</b></p>
@@ -241,14 +240,14 @@
                 </c:forEach>
         </div>
         <!-- Recipe by search -->
-        <div class="row listCard">
+        <div class="row">
             <c:forEach items="${listP}" var="o">
                 <div class="col-12 col-md-3 mt-30">
                     <div class="card product-container rounded">
                         <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
                         <div class="card-body">
                             <div>
-                                <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h3>
+                                <h1 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product" >${o.recipeName}</a></b></h1>
                             </div>
                             <div  class="card-text calo ">
                                 <p><b>${o.caloRecipe}</b></p>
@@ -270,6 +269,81 @@
             </c:forEach>
         </div>
 
+        <!-- ##### Follow Us Instagram Area Start ##### -->
+        <div class="follow-us-instagram">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h5>Enjoy Your Passion</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- Instagram Feeds -->
+            <div class="insta-feeds d-flex flex-wrap">
+                <!-- Single Insta Feeds -->
+                <div class="single-insta-feeds">
+                    <img src="img/bg-img/insta1.jpg" alt="">
+                    <!-- Icon -->
+                    <div class="insta-icon">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <!-- Single Insta Feeds -->
+                <div class="single-insta-feeds">
+                    <img src="img/bg-img/insta2.jpg" alt="">
+                    <!-- Icon -->
+                    <div class="insta-icon">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <!-- Single Insta Feeds -->
+                <div class="single-insta-feeds">
+                    <img src="img/bg-img/insta3.jpg" alt="">
+                    <!-- Icon -->
+                    <div class="insta-icon">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <!-- Single Insta Feeds -->
+                <div class="single-insta-feeds">
+                    <img src="img/bg-img/insta4.jpg" alt="">
+                    <!-- Icon -->
+                    <div class="insta-icon">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <!-- Single Insta Feeds -->
+                <div class="single-insta-feeds">
+                    <img src="img/bg-img/insta5.jpg" alt="">
+                    <!-- Icon -->
+                    <div class="insta-icon">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <!-- Single Insta Feeds -->
+                <div class="single-insta-feeds">
+                    <img src="img/bg-img/insta6.jpg" alt="">
+                    <!-- Icon -->
+                    <div class="insta-icon">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <!-- Single Insta Feeds -->
+                <div class="single-insta-feeds">
+                    <img src="img/bg-img/insta7.jpg" alt="">
+                    <!-- Icon -->
+                    <div class="insta-icon">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- ##### Follow Us Instagram Area End ##### -->
 
         <!-- ##### Footer Area Start ##### -->

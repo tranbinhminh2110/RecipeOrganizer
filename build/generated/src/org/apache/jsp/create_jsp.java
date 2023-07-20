@@ -99,7 +99,7 @@ public final class create_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"container\">\r\n");
       out.write("                <div class=\"row\">\r\n");
       out.write("                    <div class=\"col-12\">\r\n");
-      out.write("                        <form action=\"#\" method=\"post\">\r\n");
+      out.write("                        <form action=\"SearchController\" method=\"post\">\r\n");
       out.write("                            <input type=\"search\" name=\"search\" placeholder=\"Type any keywords...\">\r\n");
       out.write("                            <button type=\"submit\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i></button>\r\n");
       out.write("                        </form>\r\n");
@@ -182,7 +182,6 @@ public final class create_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                        <li class=\"active\"><a href=\"homePage.jsp\">Home</a></li>\r\n");
       out.write("                                        <li><a href=\"AllRecipeController\">Recipes</a></li>\r\n");
       out.write("                                        <li><a href=\"favorite.jsp\">Favorite</a></li>\r\n");
-      out.write("                                        <li><a href=\"searchRecipe.jsp\">Healthy Food</a></li>\r\n");
       out.write("                                        <li><a href=\"contact.jsp\">Contact</a></li>\r\n");
       out.write("                                        <li><a href=\"about.jsp\">About Us</a></li>\r\n");
       out.write("                                            ");
@@ -224,7 +223,7 @@ public final class create_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div> <br>\r\n");
       out.write("        </header>\r\n");
       out.write("        <div class=\"update-form\">\r\n");
-      out.write("            <form action=\"CreateRecipeServlet\" method=\"POST\" class=\"form\">\r\n");
+      out.write("            <form action=\"CreateRecipeController\" method=\"POST\" class=\"form\">\r\n");
       out.write("                <div class=\"form-group\">\r\n");
       out.write("                    <label for=\"categoryID\">Category:</label>\r\n");
       out.write("                    <select name=\"categoryID\" id=\"categoryID\" required>\r\n");
@@ -578,8 +577,7 @@ public final class create_jsp extends org.apache.jasper.runtime.HttpJspBase
         out.write("                                                <div class=\"megamenu\">\r\n");
         out.write("                                                    <ul class=\"dropdown\">\r\n");
         out.write("                                                        <li><a href=\"profile.jsp\">Profile</a></li>\r\n");
-        out.write("                                                        <li><a href=\"setting_interface.jsp\">Setting</a></li>\r\n");
-        out.write("                                                        <li><a href=\"plan.jsp\">Meal Plan</a></li>\r\n");
+        out.write("                                                        <li><a href=\"plan.jsp\">Meal Planer</a></li>\r\n");
         out.write("                                                            ");
         if (_jspx_meth_c_if_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_if_3, _jspx_page_context))
           return true;

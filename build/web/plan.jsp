@@ -137,7 +137,6 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
                                                         <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
@@ -381,7 +380,7 @@
                                         }
                                     %>
                                 </h2>
-                                <p style="display: inline-block; font-size: 20px; padding-left: 30% ">|</p>
+                                <p style="display: inline-block; font-size: 20px; padding-left: 37% ">|</p>
                                 <p style="display: inline-block;text-align: center; color: black; font-family: Times New Roman; font-size: 20px;">Your Calories Estimate: 
                                     <%
                                         float calo;
@@ -427,29 +426,32 @@
                                 <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Breakfast</h2></div>
                                 <div style="background-color: grey; height: 3px"></div>
                                 <div style="padding-bottom: 15px; padding-top: -5px"></div>
-                                <div class="row meal-items">
-                                    <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
-                                        <div class="col-12 col-sm-6">
-                                            <c:if test="${loop.index < 2}">
-                                                <div class="row meal-item">
-                                                    <div class="col-12 col-sm-6">
-                                                        <img src=${meal_plan.imgUrl}>
-                                                    </div>
-                                                    <div class="col-12 col-sm-6">
-                                                        <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
-                                                            <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
-                                                        </a>
-                                                        <p><b>${meal_plan.caloRecipe} calories </b></p>
-                                                        
-                                                        <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}" class="refresh-button">
-                                                            <img src="img/recipe/refresh.png" alt="Refresh">
-                                                        </button>
-                                                    </div>
+                                <div style="display: flex; justify-content: center;">
+                                    <div class="container">
+                                        <div class="row meal-items">
+                                            <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
+                                                <div class="col-12 col-sm-6">
+                                                    <c:if test="${loop.index < 2}">
+                                                        <div class="row meal-item">
+                                                            <div class="col-12 col-sm-6">
+                                                                <img src=${meal_plan.imgUrl}>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6">
+                                                                <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
+                                                                    <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
+                                                                </a>
+                                                                <p><b>${meal_plan.caloRecipe} calories </b></p>
 
+                                                                <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}" class="refresh-button">
+                                                                    <img src="img/recipe/refresh.png" alt="Refresh">
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </c:if>
                                                 </div>
-                                            </c:if>
+                                            </c:forEach>
                                         </div>
-                                    </c:forEach>
+                                    </div>
                                 </div>
                             </div>
                             <div class="meal-frame">
@@ -473,8 +475,8 @@
                                                                     </a>
                                                                     <p><b>${meal_plan.caloRecipe} calories </b></p>
                                                                     <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}" class="refresh-button">
-                                                                    <img src="img/recipe/refresh.png" alt="Refresh">
-                                                                </button>
+                                                                        <img src="img/recipe/refresh.png" alt="Refresh">
+                                                                    </button>
                                                                 </div>    
                                                             </div>
                                                         </c:if>
@@ -489,27 +491,31 @@
                                 <div class="meal-title"><h2 style="color: green; font-family: Times New Roman; text-align: center">Dinner</h2></div>
                                 <div style="background-color: grey; height: 3px"></div>
                                 <div style="padding-bottom: 15px; padding-top: -5px"></div>
-                                <div class="row meal-items">
-                                    <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
-                                        <div class="col-12 col-sm-6">
-                                            <c:if test="${loop.index > 3}">
-                                                <div class="row meal-item">
-                                                    <div class="col-12 col-sm-6">
-                                                        <img src=${meal_plan.imgUrl}>
-                                                    </div>
-                                                    <div class="col-12 col-sm-6">
-                                                        <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
-                                                            <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
-                                                        </a>
-                                                        <p><b>${meal_plan.caloRecipe} calories </b></p>
-                                                        <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}" class="refresh-button">
-                                                        <img src="img/recipe/refresh.png" alt="Refresh">
-                                                    </button>
-                                                    </div>                                               
+                                <div style="display: flex; justify-content: center;">
+                                    <div class="container">
+                                        <div class="row meal-items">
+                                            <c:forEach var="meal_plan" items="${sessionScope.MEAL_PLAN}" varStatus="loop">
+                                                <div class="col-12 col-sm-6">
+                                                    <c:if test="${loop.index > 3}">
+                                                        <div class="row meal-item">
+                                                            <div class="col-12 col-sm-6">
+                                                                <img src=${meal_plan.imgUrl}>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6">
+                                                                <a href="DetailController?recipeID=${meal_plan.recipeID}" title="View Product">
+                                                                    <h4 style="font-family: Times New Roman">${meal_plan.recipeName}</h4>
+                                                                </a>
+                                                                <p><b>${meal_plan.caloRecipe} calories </b></p>
+                                                                <button type="submit" name="refreshRecipe" value="${meal_plan.recipeID}" class="refresh-button">
+                                                                    <img src="img/recipe/refresh.png" alt="Refresh">
+                                                                </button>
+                                                            </div>                                               
+                                                        </div>
+                                                    </c:if>
                                                 </div>
-                                            </c:if>
-                                        </div>
-                                    </c:forEach>
+                                            </c:forEach>
+                                        </div> 
+                                    </div> 
                                 </div> 
                             </c:if>
 

@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form action="#" method="post">
+                        <form action="SearchController" method="post">
                             <input type="search" name="search" placeholder="Type any keywords...">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
@@ -131,8 +131,7 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="setting_interface.jsp">Setting</a></li>
-                                                        <li><a href="plan.jsp">Meal Plan</a></li>
+                                                        <li><a href="plan.jsp">Meal Planer</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -196,7 +195,7 @@
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-cool-fact">
                             <img src="img/recipe/rib.png" alt="">
-                            <h3><span class="counter">1287</span></h3>
+                            <h3><span class="counter">105</span></h3>
                             <h6>Recipes</h6>
                         </div>
                     </div>
@@ -205,8 +204,8 @@
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-cool-fact">
                             <img src="img/recipe/hamburger.png" alt="">
-                            <h3><span class="counter">25</span></h3>
-                            <h6>Cake Recipes</h6>
+                            <h3><span class="counter">17</span></h3>
+                            <h6>Dessert</h6>
                         </div>
                     </div>
 
@@ -214,8 +213,8 @@
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-cool-fact">
                             <img src="img/recipe/salad.png" alt="">
-                            <h3><span class="counter">471</span></h3>
-                            <h6>Healthy Food</h6>
+                            <h3><span class="counter">16</span></h3>
+                            <h6>Salad</h6>
                         </div>
                     </div>
 
@@ -223,8 +222,8 @@
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-cool-fact">
                             <img src="img/recipe/pancake.png" alt="">
-                            <h3><span class="counter">326</span></h3>
-                            <h6>Dessert recipes</h6>
+                            <h3><span class="counter">64</span></h3>
+                            <h6>Main dish</h6>
                         </div>
                     </div>
                 </div>
@@ -239,8 +238,7 @@
         </section>
         <!-- ##### About Area End ##### -->
 
-        
-        
+        <!-- ##### Contact Area End ##### -->
 
         <!-- ##### Follow Us Instagram Area Start ##### -->
         <div class="follow-us-instagram">
