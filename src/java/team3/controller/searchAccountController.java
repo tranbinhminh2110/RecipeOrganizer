@@ -47,7 +47,7 @@ public class searchAccountController extends HttpServlet {
                     result2.add(ac);
                 }
             }
-            request.setAttribute("usersearch", result2);;
+            request.setAttribute("usersearch", result2);
             request.getRequestDispatcher("managerAccount.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();

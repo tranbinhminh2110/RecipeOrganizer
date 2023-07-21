@@ -172,7 +172,7 @@
         </header>
 
     <form action="DispatchController" method="post">
-        <input type="text" name="txtSearch" placeholder="Search...">
+        <input type="text" name="txtSearch" placeholder="Search by username">
         <input type="submit" value="Search Account" name="btAction">
     </form><br>
         <table>

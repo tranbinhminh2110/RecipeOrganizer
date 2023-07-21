@@ -123,7 +123,7 @@
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
-                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>
                                             </c:if>
@@ -133,9 +133,10 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="plan.jsp">Meal Planer</a></li>
+                                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
+                                                            <li><a href="RecipeManagementController">Management Recipe</a></li>
                                                             </c:if>
                                                         <li><a href="LogoutController">Logout</a> </li>
                                                     </ul>
@@ -204,8 +205,15 @@
                                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= user.getFullName()%></h4>
                                                             <p class="mb-0">Fullname: <%= user.getFullName()%></p>
-                                                            <p class="mb-0">Phone: <%= user.getPhone()%></p>
+                                                            
+                                                                     <c:if test="${sessionScope.USER.phone == null}">
+                                                                    <p class="mb-0">Phone: Empty</p>
+                                                                </c:if>
+                                                                    <c:if test="${sessionScope.USER.phone != null}">
+                                                                    <p class="mb-0">Phone: <%= user.getPhone()%></p>
+                                                                </c:if>
                                                             <p class="mb-0">Email: <%= user.getEmail()%></p>
+                                
                                                             <div class="mt-2">
                                                                 <button class="btn btn-primary" type="file" accept=".jpg,.png">
                                                                     <i class="fa fa-fw fa-camera"></i>
@@ -255,7 +263,12 @@
                                                                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= admin.getFullName()%></h4>
                                                                                             <p class="mb-0">Fullname: <%= admin.getFullName()%></p>
-                                                                                            <p class="mb-0">Phone: <%= admin.getPhone()%></p>
+                                                                                            <c:if test="${sessionScope.ADMIN.phone == null}">
+                                                                    <p class="mb-0">Phone: Empty</p>
+                                                                </c:if>
+                                                                    <c:if test="${sessionScope.ADMIN.phone != null}">
+                                                                    <p class="mb-0">Phone: <%= admin.getPhone()%></p>
+                                                                </c:if>
                                                                                             <p class="mb-0">Email: <%= admin.getEmail()%></p>
                                                                                             <div class="mt-2">
                                                                                                 <button class="btn btn-primary" type="file" accept=".jpg,.png">
@@ -305,13 +318,24 @@
                                                                                                     <div class="col">
                                                                                                         <div class="form-group">
                                                                                                             <label>Full Name</label>
-                                                                                                            <input class="form-control" type="text" name="txtFullname" value="${param.txtFullname}" placeholder="1 - 50 characters">
+                                                                                                            <c:if test="${sessionScope.USER != null}">
+                                                                                                                <input class="form-control" type="text" name="txtFullname" value="<%= user.getFullName()%>" placeholder="1 - 50 characters">
+                                                                                                            </c:if>
+                                                                                                            <c:if test="${sessionScope.ADMIN != null}">
+                                                                                                                <input class="form-control" type="text" name="txtFullname" value="<%= admin.getFullName()%>" placeholder="1 - 50 characters">
+                                                                                                            </c:if>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="col">
                                                                                                         <div class="form-group">
                                                                                                             <label>Phone</label>
-                                                                                                            <input class="form-control" type="text" name="txtPhone" value="${param.txtPhone}">
+                                                                                                            <c:if test="${sessionScope.USER != null}">
+                                                                                                                <input class="form-control" type="number" name="txtPhone" value="<%= user.getPhone()%>">
+                                                                                                            </c:if>
+                                                                                                            <c:if test="${sessionScope.ADMIN != null}">
+                                                                                                                <input class="form-control" type="number" name="txtPhone" value="<%= admin.getPhone()%>">
+                                                                                                            </c:if>
+                                                                                                            
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -319,7 +343,13 @@
                                                                                                     <div class="col">
                                                                                                         <div class="form-group">
                                                                                                             <label>Email</label>
-                                                                                                            <input class="form-control" type="text" name="txtEmail" value="${param.txtEmail}" placeholder="your email">
+                                                                                                            <c:if test="${sessionScope.USER != null}">
+                                                                                                               <input class="form-control" type="text" name="txtEmail" value="<%= user.getEmail()%>" placeholder="your email">
+                                                                                                            </c:if>
+                                                                                                            <c:if test="${sessionScope.ADMIN != null}">
+                                                                                                                <input class="form-control" type="text" name="txtEmail" value="<%= admin.getEmail()%>" placeholder="your email">
+                                                                                                            </c:if>
+                                                                                                            
                                                                                                         </div>
 
                                                                                                     </div>

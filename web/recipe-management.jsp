@@ -171,7 +171,7 @@
         <!-- Display the search form -->
         <div class="search-form">
             <form action="RecipeManagementController" method="GET">
-                <input type="text" name="txtSearch" placeholder="Search recipes...">
+                <input type="text" name="txtSearch" placeholder="Search by recipe name">
                 <input type="submit" value="Search">
             </form>
         </div>

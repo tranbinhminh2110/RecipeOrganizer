@@ -233,7 +233,7 @@
                             <div class="top-cta-content">
                                 <h3>Dessert</h3>
                                 <h6>Simple &amp; Delicios</h6>
-                                <a href="AllRecipeController" class="btn delicious-btn">See Full Receipe</a>
+                                <a href="CategoryController?categoryID=5" class="btn delicious-btn">See Full Receipe</a>
                             </div>
                         </div>
                     </div>
@@ -245,7 +245,7 @@
                             <div class="top-cta-content">
                                 <h3>Main dish</h3>
                                 <h6>Simple &amp; Delicios</h6>
-                                <a href="AllRecipeController" class="btn delicious-btn">See Full Receipe</a>
+                                <a href="CategoryController?categoryID=1" class="btn delicious-btn">See Full Receipe</a>
                             </div>
                         </div>
                     </div>

@@ -193,27 +193,40 @@
                         var your_age = document.getElementById('age').value;
                         var your_activity_level = parseFloat(document.getElementById('activity_level').value);
                         var BMR;
+                        if (your_height >= 100 && your_height <= 210) {
+                            if (your_weight >= 30 && your_weight <= 180 ) {
+                        if (your_age >= 12 && your_age <= 110){
                         if (your_gender == "M") {
                             if (your_hope == "L") {
                                 BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) + 5) * (your_activity_level - 0.3);
                             } else if (your_hope == "M") {
-                                BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) + 5) * your_activity_level;
+                                BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) + 5) * (your_activity_level - 0.15);
                             } else if (your_hope == "B") {
-                                BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) + 5) * (your_activity_level + 0.3);
+                                BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) + 5) * your_activity_level;
                             }
                         } else {
                             if (your_hope == "L") {
                                 BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) - 161) * (your_activity_level - 0.3);
                             } else if (your_hope == "M") {
-                                BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) - 161) * your_activity_level;
+                                BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) - 161) * (your_activity_level - 0.15);
                             } else if (your_hope == "B") {
-                                BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) - 161) * (your_activity_level + 0.3);
+                                BMR = ((10 * your_weight) + (6.25 * your_height) - (5 * your_age) - 161) * your_activity_level;
                             }
                         }
+                    
                         document.getElementById("bmrInput").value = BMR;
                         // Close the popup
                         document.getElementById("popup").style.display = "none";
+                    } else {
+                        alert ("Age is 12 - 110");
+                        }}else {
+                            alert ("Weight is 30 - 180");
+                        }
+                            
+                    } else {
+                        alert ("Height is 100 - 210");
                     }
+                }
                 </script>
                 <div class="popup-card">
                     <div class="form">
@@ -253,7 +266,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div id="popup" class="modal">
                     <div class="  modal-dialog ">
@@ -304,7 +316,7 @@
                                 <div class="w-100 d-flex  ">
                                     <div class=" d-flex align-items-center">
                                         <label>Height:</label>
-                                        <input id="height" name="height" value="" class="form-control  inline_block ml-15" type="number">
+                                        <input type="number" min="100" max="210" step="any" pattern="[0-9]*" id="height" name="height" value="" class="form-control  inline_block ml-15">
                                         <label for="height-secondary" class="metric_inputs signup_input_label ml-15">cms</label>
                                     </div>
                                 </div>
@@ -313,7 +325,7 @@
                                 <div class="w-100 d-flex mt-2 ">
                                     <div class="d-flex align-items-center">
                                         <label>Weight:</label>
-                                        <input id="weight" name="weight" value="" class="form-control inline_block ml-15" type="number">
+                                        <input type="number" min="30" max="180" step="any" pattern="[0-9]*" id="weight" name="weight" value="" class="form-control inline_block ml-15" type="number" >
                                         <label for="weight" class="signup_input_label metric_inputs ml-15">kgs</label>
                                     </div>
                                 </div>
@@ -321,7 +333,7 @@
                                 <div class="w-100 d-flex mt-2">
                                     <div class="d-flex align-items-center">
                                         <label>Age:</label>
-                                        <input name="age" id="age" value="" class="form-control inline_block ml-15 " type="number">
+                                        <input type="number" min="12" max="100" step="any" pattern="[0-9]*" name="age" id="age" value="" class="form-control inline_block ml-15 " type="number">
                                         <label for="age" class="signup_input_label ml-15">years</label>
                                     </div>
                                 </div>

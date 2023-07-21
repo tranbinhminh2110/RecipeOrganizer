@@ -131,7 +131,7 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="plan.jsp">Meal Planer</a></li>
+                                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
