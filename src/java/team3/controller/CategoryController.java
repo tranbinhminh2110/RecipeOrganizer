@@ -47,6 +47,7 @@ public class CategoryController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String categoryID = request.getParameter("categoryID");
+            String name = request.getParameter("name");
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
             ArrayList<RecipeOrganizeDTO> listCategories = dao.getAllCategories();
             List<RecipeOrganizeDTO> listRecipe = dao.getAllRecipe();
@@ -65,7 +66,7 @@ public class CategoryController extends HttpServlet {
                 request.setAttribute("listR", listRecipe);
                 request.setAttribute("list", list);
                 request.setAttribute("listC", listCategories);
-
+                request.setAttribute("txtS", name);
                 request.getRequestDispatcher("searchRecipe.jsp").forward(request, response);
             }
         } catch (Exception e) {

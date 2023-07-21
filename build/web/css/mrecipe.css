@@ -51,3 +51,6 @@ td img {
     height: 3cm;
     object-fit: cover;
 }
+.breadcumb-text {
+    font-family: 'YourFontName', Arial, sans-serif;
+}

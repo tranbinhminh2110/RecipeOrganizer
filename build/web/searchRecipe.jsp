@@ -170,74 +170,73 @@
             </div>
         </div>
         <!-- ##### Breadcumb Area End ##### -->
+    </script>
+    <div class="receipe-post-area section-padding-80">
 
-        <div class="receipe-post-area section-padding-80">
+        <!-- Receipe Post Search -->
+        <div class="receipe-post-search mb-80">
+            <div class="container">
 
-            <!-- Receipe Post Search -->
-            <div class="receipe-post-search mb-80">
-                <div class="container">
-
-                    <form value="${txtS}" action="SearchController" method="post">
-                        <div class="row">
-                            <!-- Recipe Category-->
-                            <div class="col-12 col-lg-4">
-                                <ul class="category-list">
-                                    <select onchange="location = this.value;">
-                                        <option value="CategoryController?categoryID=0">All Recipe Categories</option>
-                                        <option value="CategoryController?categoryID=1">Main Dish</option>
-                                        <option value="CategoryController?categoryID=2">Pasta</option>
-                                        <option value="CategoryController?categoryID=3">Salad</option>
-                                        <option value="CategoryController?categoryID=4">Vegetarian</option>
-                                        <option value="CategoryController?categoryID=5">Dessert</option>
-                                        <option value="CategoryController?categoryID=6">Bakery</option>
-                                    </select>
-
-                                </ul>
-                            </div>
-                            <!-- Recipe Search-->
-                            <div class="col-12 col-lg-4">
-                                <input type="search" name="txtSearch" placeholder="Search Receipies" >
-                            </div>
-                            <div class="col-12 col-lg-4 text-right">
-                                <button type="submit" class="py-4 px-10 text-white bg-success" name="btAction" value="search">Search</button>
-                            </div>
+                <form value="${txtS}" action="SearchController" method="post">
+                    <div class="row">
+                        <!-- Recipe Category-->
+                        <div class="col-12 col-lg-4">
+                            <ul class="category-list">
+                                <select onchange="location = this.value;">
+                                    <option value="CategoryController?categoryID=0&name=All Recipe Categories" ${txtS == 'All Recipe Categories' ? 'selected' : ''}>All Recipe Categories</option>
+                                    <option value="CategoryController?categoryID=1&name=Main Dish" ${txtS == 'Main Dish' ? 'selected' : ''}>Main Dish</option>
+                                    <option value="CategoryController?categoryID=2&name=Pasta" ${txtS == 'Pasta' ? 'selected' : ''}>Pasta</option>
+                                    <option value="CategoryController?categoryID=3&name=Salad" ${txtS == 'Salad' ? 'selected' : ''}>Salad</option>
+                                    <option value="CategoryController?categoryID=4&name=Vegetarian" ${txtS == 'Vegetarian' ? 'selected' : ''}>Vegetarian</option>
+                                    <option value="CategoryController?categoryID=5&name=Dessert" ${txtS == 'Dessert' ? 'selected' : ''}>Dessert</option>
+                                    <option value="CategoryController?categoryID=6&name=Bakery" ${txtS == 'Bakery' ? 'selected' : ''}>Bakery</option>
+                                </select>
+                            </ul>
                         </div>
-                    </form>
-                </div>
-            </div>
-            <!-- Result -->
-            <div class="result pl-6">
-                <h3 class="text-3xl">Result</h3>
-            </div>
-
-            <!-- Recipe by Category -->
-            <div class="row">
-                <c:forEach items="${list}" var="o">
-                    <div class="col-12 col-md-3 mt-30">
-                        <div class="card product-container rounded">
-                            <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
-                            <div class="card-body">
-                                <div>
-                                    <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product">${o.recipeName}</a></b></h3>
-                                </div>
-                                <div  class="card-text calo ">
-                                    <p><b>${o.caloRecipe}</b></p>
-                                </div>
-                                <div class="card-text show_txt" id="description">
-                                    <p>${o.description}</p>
-                                </div>
-                                <div class="rating">
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                </div>
-                                <p><button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button></p>
-                            </div>
+                        <!-- Recipe Search-->
+                        <div class="col-12 col-lg-4">
+                            <input type="search" name="txtSearch" placeholder="Search Receipies" >
                         </div>
-                    </div> 
-                </c:forEach>
+                        <div class="col-12 col-lg-4 text-right">
+                            <button type="submit" class="py-4 px-10 text-white bg-success" name="btAction" value="search">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Result -->
+        <div class="result pl-6">
+            <h3 class="text-3xl">Result</h3>
+        </div>
+
+        <!-- Recipe by Category -->
+        <div class="row">
+            <c:forEach items="${list}" var="o">
+                <div class="col-12 col-md-3 mt-30">
+                    <div class="card product-container rounded">
+                        <img class="card-img-top" src="${o.imgUrl}" alt="Card image cap">
+                        <div class="card-body">
+                            <div>
+                                <h3 class="card-title view-title" style="line-height: 15px"><b><a href="DetailController?recipeID=${o.recipeID}" title="View Product">${o.recipeName}</a></b></h3>
+                            </div>
+                            <div  class="card-text calo ">
+                                <p><b>${o.caloRecipe}</b></p>
+                            </div>
+                            <div class="card-text show_txt" id="description">
+                                <p>${o.description}</p>
+                            </div>
+                            <div class="rating">
+                                <span class="star"><i class="fa fa-star"></i></span>
+                                <span class="star"><i class="fa fa-star"></i></span>
+                                <span class="star"><i class="fa fa-star"></i></span>
+                                <span class="star"><i class="fa fa-star"></i></span>
+                                <span class="star"><i class="fa fa-star"></i></span>
+                            </div>
+                            <p><button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button></p>
+                        </div>
+                    </div>
+                </div> 
+            </c:forEach>
         </div>
         <!-- Recipe by search -->
         <div class="row">
@@ -382,5 +381,5 @@
         <!-- Active js -->
         <script src="js/active.js"></script>
 
-    </body>
+</body>
 </html>

@@ -30,37 +30,44 @@ public class RecipeManagementController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
 
     String searchValue = request.getParameter("txtSearch");
 
-try {
-    // Create an instance of RecipeOrganizeDAO
-    RecipeOrganizeDAO recipeDAO = new RecipeOrganizeDAO();
-    List<RecipeOrganizeDTO> recipes;
+    try {
+        // Create an instance of RecipeOrganizeDAO
+        RecipeOrganizeDAO recipeDAO = new RecipeOrganizeDAO();
+        List<RecipeOrganizeDTO> recipes;
 
-    if (searchValue != null && !searchValue.isEmpty()) {
-        // If a search value is provided, perform a search using the DAO
-        recipes = recipeDAO.searchRecipe(searchValue);
-    } else {
-        // If no search value is provided, get all recipes using the DAO
-        recipes = recipeDAO.getAllRecipe();
+        if (searchValue != null && !searchValue.trim().isEmpty()) {
+            // If a search value is provided, perform a search using the DAO
+            recipes = recipeDAO.searchRecipe(searchValue);
+
+            if (recipes.isEmpty()) {
+                // If no results found, set an error message and display it to the user
+                String errorMessage = "No recipes found for the search: " + searchValue;
+                request.setAttribute("errorMessage", errorMessage);
+            }
+        } else {
+            // If no search value is provided, set searchValue to null and get all recipes using the DAO
+            searchValue = null;
+            recipes = recipeDAO.getAllRecipe();
+        }
+
+        // Set the recipes and search value as request attributes
+        request.setAttribute("recipes", recipes);
+        request.setAttribute("txtSearch", searchValue);
+
+        // Forward the request to the recipe-management.jsp
+        request.getRequestDispatcher("recipe-management.jsp").forward(request, response);
+    } catch (Exception ex) {
+        // Handle error message if an exception occurs
+        String errorMessage = "An error occurred while loading the recipe list: " + ex.getMessage();
+        request.setAttribute("errorMessage", errorMessage);
+        request.getRequestDispatcher("recipe-management.jsp").forward(request, response);
     }
-
-    // Set the recipes and search value as request attributes
-    request.setAttribute("recipes", recipes);
-    request.setAttribute("txtSearch", searchValue);
-
-    // Forward the request to the recipe-management.jsp
-    request.getRequestDispatcher("recipe-management.jsp").forward(request, response);
-} catch (Exception ex) {
-    // Handle error message if an exception occurs
-    String errorMessage = "An error occurred while loading the recipe list: " + ex.getMessage();
-    request.setAttribute("errorMessage", errorMessage);
-    request.getRequestDispatcher("recipe-management.jsp").forward(request, response);
 }
-  }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

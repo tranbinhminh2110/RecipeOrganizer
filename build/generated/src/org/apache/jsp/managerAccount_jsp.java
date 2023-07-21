@@ -128,7 +128,7 @@ public final class managerAccount_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("            <div class=\"container\">\r\n");
       out.write("                <div class=\"row\">\r\n");
       out.write("                    <div class=\"col-12\">\r\n");
-      out.write("                        <form action=\"#\" method=\"post\">\r\n");
+      out.write("                        <form action=\"SearchController\" method=\"post\">\r\n");
       out.write("                            <input type=\"search\" name=\"search\" placeholder=\"Type any keywords...\">\r\n");
       out.write("                            <button type=\"submit\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i></button>\r\n");
       out.write("                        </form>\r\n");
@@ -211,7 +211,6 @@ public final class managerAccount_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("                                        <li class=\"active\"><a href=\"homePage.jsp\">Home</a></li>\r\n");
       out.write("                                        <li><a href=\"AllRecipeController\">Recipes</a></li>\r\n");
       out.write("                                        <li><a href=\"favorite.jsp\">Favorite</a></li>\r\n");
-      out.write("                                        <li><a href=\"HeathyRecipeController\">Healthy Food</a></li>\r\n");
       out.write("                                        <li><a href=\"contact.jsp\">Contact</a></li>\r\n");
       out.write("                                        <li><a href=\"about.jsp\">About Us</a></li>\r\n");
       out.write("                                            ");
@@ -251,7 +250,7 @@ public final class managerAccount_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("        </header>\r\n");
       out.write("\r\n");
       out.write("    <form action=\"DispatchController\" method=\"post\">\r\n");
-      out.write("        <input type=\"text\" name=\"txtSearch\" placeholder=\"Search...\">\r\n");
+      out.write("        <input type=\"text\" name=\"txtSearch\" placeholder=\"Search by username\">\r\n");
       out.write("        <input type=\"submit\" value=\"Search Account\" name=\"btAction\">\r\n");
       out.write("    </form><br>\r\n");
       out.write("        <table>\r\n");
@@ -291,7 +290,7 @@ public final class managerAccount_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("            <div class=\"container\">\r\n");
       out.write("                <div class=\"row\">\r\n");
       out.write("                    <div class=\"col-12\">\r\n");
-      out.write("                        <h5>Follow Us Instragram</h5>\r\n");
+      out.write("                        <h5>Enjoy Your Passion</h5>\r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
@@ -560,7 +559,6 @@ public final class managerAccount_jsp extends org.apache.jasper.runtime.HttpJspB
         out.write("                                                <div class=\"megamenu\">\r\n");
         out.write("                                                    <ul class=\"dropdown\">\r\n");
         out.write("                                                        <li><a href=\"profile.jsp\">Profile</a></li>\r\n");
-        out.write("                                                        <li><a href=\"setting_interface.jsp\">Setting</a></li>\r\n");
         out.write("                                                        <li><a href=\"plan.jsp\">Meal Planer</a></li>\r\n");
         out.write("                                                            ");
         if (_jspx_meth_c_if_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_if_3, _jspx_page_context))

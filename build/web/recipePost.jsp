@@ -190,14 +190,14 @@
                             <div class="col-12 col-lg-4">
                                 <ul class="category-list">
                                     <select onchange="location = this.value;">
-                                        <option value="CategoryController?categoryID=0">All Recipe Categories</option>
-                                        <option value="CategoryController?categoryID=1">Main Dish</option>
-                                        <option value="CategoryController?categoryID=2">Pasta</option>
-                                        <option value="CategoryController?categoryID=3">Salad</option>
-                                        <option value="CategoryController?categoryID=4">Vegetarian</option>
-                                        <option value="CategoryController?categoryID=5">Dessert</option>
-                                        <option value="CategoryController?categoryID=6">Bakery</option>
-                                    </select>
+                                            <option value="CategoryController?categoryID=0&name=All Recipe Categories" ${txtS == 'All Recipe Categories' ? 'selected' : ''}>All Recipe Categories</option>
+                                            <option value="CategoryController?categoryID=1&name=Main Dish" ${txtS == 'Main Dish' ? 'selected' : ''}>Main Dish</option>
+                                            <option value="CategoryController?categoryID=2&name=Pasta" ${txtS == 'Pasta' ? 'selected' : ''}>Pasta</option>
+                                            <option value="CategoryController?categoryID=3&name=Salad" ${txtS == 'Salad' ? 'selected' : ''}>Salad</option>
+                                            <option value="CategoryController?categoryID=4&name=Vegetarian" ${txtS == 'Vegetarian' ? 'selected' : ''}>Vegetarian</option>
+                                            <option value="CategoryController?categoryID=5&name=Dessert" ${txtS == 'Dessert' ? 'selected' : ''}>Dessert</option>
+                                            <option value="CategoryController?categoryID=6&name=Bakery" ${txtS == 'Bakery' ? 'selected' : ''}>Bakery</option>
+                                        </select>
 
                                 </ul>
                             </div>

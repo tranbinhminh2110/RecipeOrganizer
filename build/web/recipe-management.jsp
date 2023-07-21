@@ -175,18 +175,17 @@
                 <input type="submit" value="Search">
             </form>
         </div>
-        <%-- Button "Create New Recipe" --%>
+
+        <!-- Button "Create New Recipe" -->
         <div class="create-button">
             <form action="create.jsp" method="get">
                 <input type="submit" value="Create New Recipe" class="btn-create">
             </form>
         </div>
-        <%-- Hiển thị thông báo lỗi nếu có --%>
-        <c:if test="${not empty errorMessage}">
-            <div class="error">${errorMessage}</div>
-        </c:if>
 
-        <%-- Hiển thị danh sách công thức --%>
+
+
+        <!-- Display the list of recipes -->
         <c:if test="${not empty recipes}">
             <table>
                 <tr>
@@ -200,7 +199,7 @@
                 <c:forEach var="recipe" items="${recipes}">
                     <tr>
                         <td>${recipe.recipeID}</td>
-                        <td><a href="DetailController?recipeID=${recipe.recipeID}" title="View Product" >${recipe.recipeName}</a></td>
+                        <td><a href="DetailController?recipeID=${recipe.recipeID}" title="View Product">${recipe.recipeName}</a></td>
                         <td>${recipe.caloRecipe}</td>
                         <td>${recipe.description}</td>
                         <td><img src="${recipe.imgUrl}" alt="Recipe Image" class="recipe-image"></td>
@@ -210,10 +209,15 @@
                         </td>
                     </tr>
                 </c:forEach>
-            </table>
+
+                <%-- If no recipes found, display a message --%>
+
+            </c:if>
+
+        </table>
+        <c:if test="${empty recipes}">
+            <p class="error-message" style="padding: 17px 10px 0px 10px; margon-top: 5px;">No recipes found.</p>
         </c:if>
-
-
         <!-- ##### Follow Us Instagram Area Start ##### -->
         <div class="follow-us-instagram">
             <div class="container">
