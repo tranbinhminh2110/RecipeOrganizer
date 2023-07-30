@@ -35,22 +35,7 @@
             <i class="circle-preloader"></i>
             <img src="img/recipe/salad.png" alt="">
         </div>
-        <!-- Search Wrapper -->
-        <div class="search-wrapper">
-            <!-- Close Btn -->
-            <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <form action="SearchController" method="post">
-                            <input type="search" name="search" placeholder="Type any keywords...">
-                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- ##### Header Area Start ##### -->
         <header class="header-area">
@@ -122,7 +107,9 @@
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
+                                        <c:if test="${(empty sessionScope.USER and empty sessionScope.ADMIN) or not empty sessionScope.USER}">
                                         <li><a href="contact.jsp">Contact</a></li>
+                                        </c:if>
                                         <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>
@@ -133,7 +120,7 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="plan.jsp">Meal Planer</a></li>
+                                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -147,7 +134,7 @@
 
                                     <!-- Newsletter Form -->
                                     <div class="search-btn">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <i></i>
                                     </div>
 
                                 </div>

@@ -38,22 +38,7 @@
             <img src="img/recipe/salad.png" alt="">
         </div>
 
-        <!-- Search Wrapper -->
-        <div class="search-wrapper">
-            <!-- Close Btn -->
-            <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <form action="SearchController" method="post">
-                            <input type="search" name="txtSearch" placeholder="Type any keywords...">
-                            <button type="submit" name="btAction" value="search"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- ##### Header Area Start ##### -->
         <header class="header-area">
@@ -126,7 +111,9 @@
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
+                                        <c:if test="${(empty sessionScope.USER and empty sessionScope.ADMIN) or not empty sessionScope.USER}">
                                         <li><a href="contact.jsp">Contact</a></li>
+                                        </c:if>
                                         <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>
@@ -151,7 +138,7 @@
 
                                     <!-- Newsletter Form -->
                                     <div class="search-btn">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <i></i>
                                     </div>
 
                                 </div>
@@ -333,7 +320,7 @@
                                 <div class="w-100 d-flex mt-2">
                                     <div class="d-flex align-items-center">
                                         <label>Age:</label>
-                                        <input type="number" min="12" max="100" step="any" pattern="[0-9]*" name="age" id="age" value="" class="form-control inline_block ml-15 " type="number">
+                                        <input type="number" min="12" max="100" step="any" pattern="[0-9]*" name="age" id="age" value="" class="form-control inline_block ml-30 " type="number">
                                         <label for="age" class="signup_input_label ml-15">years</label>
                                     </div>
                                 </div>

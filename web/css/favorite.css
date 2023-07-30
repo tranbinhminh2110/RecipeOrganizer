@@ -85,14 +85,4 @@ input[type="submit"][name="btAction"] {
 input[type="submit"][name="btAction"]:hover {
   background-color: #d32f2f; /* Darker red color code */
 }
-.classynav ul {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
 
-.classynav li {
-  margin-right: 10px;
-}
