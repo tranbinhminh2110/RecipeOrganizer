@@ -3,6 +3,9 @@
     Created on : Jun 3, 2023, 11:42:02 AM
     Author     : AS
 --%>
+<%@page import="team3.DTO.ShowRatingDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="team3.recipe.RecipeOrganizeDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -26,6 +29,7 @@
         <link rel="stylesheet" href="recipe.css">
         <link rel="stylesheet" href="css/rating.css">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/TotalRating.css">
     </head>
     <body>
         <div style="background-color: white">
@@ -267,23 +271,59 @@
                 </div>
             </c:forEach>
             <!-- End Detail Page -->
+            <%
+                    RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
+                    RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+
+                    if (user != null || admin != null) {
+                %>
+            <%
+                List<ShowRatingDTO> result
+                        = (List<ShowRatingDTO>) session.getAttribute("SHOWRATING");
+                if (result != null) {
+            %>
+                    <%
+                        for (ShowRatingDTO dto : result) {
+                    %>
+                         <div class="rating-container">
+                            <h1>Total rating: <%= dto.getRatingCount()%></h1>
+                            <p>Average rating: <%= dto.getAverageRating()%></p>
+                        </div>
+                    <%
+                        }
+                    %>
+            <%
+            } else {
+            %>
+            <h1>No Rating</h1>
+            <%
+                }
+             } else {
+                %>
+                <h4>You need login for rating</h4>
+                <%
+                    }
+                %>
             <div class="stars">
                 <c:forEach items="${detailP}" var="detail">
+                <div class="stars">
                     <form action="RatingController" method="POST">
-
-                        <input type="submit" class="star star-5" id="star-5" value="5" type="radio" name="ratingValue"/>
+                        <input class="star star-5" id="star-5" value="5" type="radio" name="ratingValue"/>
                         <label class="star star-5" for="star-5"></label>
-                        <input type="submit" class="star star-4" id="star-4" value="4" type="radio" name="ratingValue"/>
+                        <input class="star star-4" id="star-4" value="4" type="radio" name="ratingValue"/>
                         <label class="star star-4" for="star-4"></label>
-                        <input type="submit" class="star star-3" id="star-3" value="3" type="radio" name="ratingValue"/>
+                        <input class="star star-3" id="star-3" value="3" type="radio" name="ratingValue"/>
                         <label class="star star-3" for="star-3"></label>
-                        <input type="submit" class="star star-2" id="star-2" value="2" type="radio" name="ratingValue"/>
+                        <input class="star star-2" id="star-2" value="2" type="radio" name="ratingValue"/>
                         <label class="star star-2" for="star-2"></label>
-                        <input type="submit" class="star star-1" id="star-1" value="1" type="radio" name="ratingValue"/>
+                        <input class="star star-1" id="star-1" value="1" type="radio" name="ratingValue"/>
                         <label class="star star-1" for="star-1"></label>
                         <input type="hidden" name="recipeID" value="${detail.recipeID}" />
+                        <input type="submit" value="Save" name="ratingValue" />
                     </form>
-                </c:forEach>
+                </div>
+                        
+            </c:forEach>
 
             </div>
             <!-- Comment and Review-->
@@ -476,6 +516,7 @@
                         <script src="js/plugins/plugins.js"></script>
                         <!-- Active js -->
                         <script src="js/active.js"></script>
+                        <script src="js/rating.js"></script>
                     </div>
                 </div>
             </div>

@@ -20,6 +20,7 @@ import javax.naming.NamingException;
 import team3.DTO.FavoriteDTO;
 import team3.DTO.RatingDTO;
 import team3.DTO.RecipeDTO;
+import team3.DTO.ShowRatingDTO;
 import team3.DTO.StepsDTO;
 import team3.util.DBUtils;
 import team3.recipe.RecipeOrganizeDTO;
@@ -1540,13 +1541,13 @@ public class RecipeOrganizeDAO implements Serializable {
         return false;
     }
 
-    private List<RatingDTO> listRating;
+    private List<ShowRatingDTO> listRating;
 
-    public List<RatingDTO> getListRating() {
+    public List<ShowRatingDTO> getListRating() {
         return listRating;
     }
 
-    public void searchRating()
+    public void ShowRating(int recipeID)
             throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -1555,20 +1556,19 @@ public class RecipeOrganizeDAO implements Serializable {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "SELECT recipeID, COUNT(*) AS rating_count, AVG(ratingValue) AS averageRating\n"
-                        + "FROM rating\n"
-                        + "GROUP BY recipeID;";
+                String sql = "SELECT recipeID, COUNT(ratingID) AS totalRating, AVG(ratingValue) AS averageRating "
+                        + "FROM rating\n "
+                        + "where recipeID = ? \n"
+                        + "GROUP BY recipeID ";
                 stm = con.prepareStatement(sql);
-
+                stm.setInt(1, recipeID);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    int ratingID = rs.getInt("ratingID");
-                    String userName = rs.getString("userName");
-                    int recipeID = rs.getInt("recipeID");
-                    float ratingValue = rs.getFloat("ratingValue");
+                    int ratingCount = rs.getInt("totalRating");
+                    float averageRating = rs.getFloat("averageRating");
 
-                    RatingDTO dto = new RatingDTO(ratingID, userName, recipeID, ratingValue);
+                    ShowRatingDTO dto = new ShowRatingDTO(recipeID, ratingCount, averageRating);
 
                     if (this.listRating == null) {
                         this.listRating = new ArrayList<>();
@@ -1589,5 +1589,35 @@ public class RecipeOrganizeDAO implements Serializable {
             }
         }
 
+    }
+    
+    public void updateRatingRecipe(int avgRating, int recipeID)
+            throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE recipe Set avgRating = ? WHERE recipeID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, avgRating);
+                stm.setInt(2, recipeID);
+
+                int row = stm.executeUpdate();
+
+                if (row > 0) {
+                    
+                }
+            }
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 }

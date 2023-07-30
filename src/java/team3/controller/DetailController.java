@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import team3.DTO.RecipeDTO;
+import team3.DTO.ShowRatingDTO;
 import team3.DTO.StepsDTO;
 import team3.recipe.RecipeOrganizeDAO;
 import team3.recipe.RecipeOrganizeDTO;
@@ -81,9 +82,19 @@ public class DetailController extends HttpServlet {
         request.setAttribute("userComments", userComments);
 
         try {
+            HttpSession session = request.getSession();
+            
             RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
             List<RecipeDTO> detailProduct = dao.searchRecipeID(recipeID);
             List<StepsDTO> detailSteps = dao.stepByRecipeID(recipeID);
+            dao.ShowRating(Integer.parseInt(recipeID));
+            List<ShowRatingDTO> result = dao.getListRating();
+            int reID = Integer.parseInt(recipeID);
+            dao.updateRatingRecipe(0, reID);
+            
+            
+            session.setAttribute("SHOWRATING", result);
+            
             // Show inde
             String show = "";
             for(RecipeDTO s: detailProduct){

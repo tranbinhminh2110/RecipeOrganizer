@@ -21,7 +21,7 @@ public class DBUtils implements Serializable {
         String url = "jdbc:sqlserver:"
                 + "//localhost:1433"
                 + ";databaseName=RecipeOrganize";
-        Connection con = DriverManager.getConnection(url, "sa", "12345");
+        Connection con = DriverManager.getConnection(url, "sa", "1234567890");
         return con;
     }
     

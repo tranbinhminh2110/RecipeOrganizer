@@ -25,8 +25,10 @@ import team3.recipe.RecipeOrganizeDTO;
  */
 @WebServlet(name = "RatingController", urlPatterns = {"/RatingController"})
 public class RatingController extends HttpServlet {
+
     private final String DETAIL_PAGE = "DetailController";
     private RecipeOrganizeDAO recipeDAO = new RecipeOrganizeDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,24 +41,37 @@ public class RatingController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String url = DETAIL_PAGE;
         RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
         try {
             HttpSession session = request.getSession(false);
             RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
+            RecipeOrganizeDTO admin = (RecipeOrganizeDTO) session.getAttribute("ADMIN");
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             float ratingValue = Integer.parseInt(request.getParameter("ratingValue"));
             Random rng = new Random();
             int ratingID = rng.nextInt(900000) + 100000;
-            boolean result = dao.checkRating(recipeID, user.getUserName());
-            
-            if (result) {
-                boolean Results = dao.updateRating(user.getUserName(), recipeID, ratingValue);
-                url = DETAIL_PAGE;
-            } else {
-                boolean Results = dao.addRating(ratingID, user.getUserName(), recipeID, ratingValue);
-                url = DETAIL_PAGE;
+            if (user != null) {
+                boolean result = dao.checkRating(recipeID, user.getUserName());
+
+                if (result) {
+                    boolean Results = dao.updateRating(user.getUserName(), recipeID, ratingValue);
+                    url = DETAIL_PAGE;
+                } else {
+                    boolean Results = dao.addRating(ratingID, user.getUserName(), recipeID, ratingValue);
+                    url = DETAIL_PAGE;
+                }
+            } else if (admin != null) {
+                boolean result = dao.checkRating(recipeID, admin.getUserName());
+
+                if (result) {
+                    boolean Results = dao.updateRating(admin.getUserName(), recipeID, ratingValue);
+                    url = DETAIL_PAGE;
+                } else {
+                    boolean Results = dao.addRating(ratingID, admin.getUserName(), recipeID, ratingValue);
+                    url = DETAIL_PAGE;
+                }
             }
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();

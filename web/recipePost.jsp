@@ -4,6 +4,9 @@
     Author     : AS
 --%>
 
+<%@page import="team3.DTO.ShowRatingDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%-- 
     Document   : showrecipe
     Created on : Jun 3, 2023, 11:42:02 AM
@@ -38,7 +41,7 @@
             <i class="circle-preloader"></i>
             <img src="img/recipe/salad.png" alt="">
         </div>
-       
+
 
         <!-- ##### Header Area Start ##### -->
         <header class="header-area">
@@ -111,9 +114,9 @@
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
-                                        <c:if test="${(empty sessionScope.USER and empty sessionScope.ADMIN) or not empty sessionScope.USER}">
-                                        <li><a href="contact.jsp">Contact</a></li>
-                                        </c:if>
+                                            <c:if test="${(empty sessionScope.USER and empty sessionScope.ADMIN) or not empty sessionScope.USER}">
+                                            <li><a href="contact.jsp">Contact</a></li>
+                                            </c:if>
                                         <li><a href="about.jsp">About Us</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>
@@ -177,14 +180,14 @@
                             <div class="col-12 col-lg-4">
                                 <ul class="category-list">
                                     <select onchange="location = this.value;">
-                                            <option value="CategoryController?categoryID=0&name=All Recipe Categories" ${txtS == 'All Recipe Categories' ? 'selected' : ''}>All Recipe Categories</option>
-                                            <option value="CategoryController?categoryID=1&name=Main Dish" ${txtS == 'Main Dish' ? 'selected' : ''}>Main Dish</option>
-                                            <option value="CategoryController?categoryID=2&name=Pasta" ${txtS == 'Pasta' ? 'selected' : ''}>Pasta</option>
-                                            <option value="CategoryController?categoryID=3&name=Salad" ${txtS == 'Salad' ? 'selected' : ''}>Salad</option>
-                                            <option value="CategoryController?categoryID=4&name=Vegetarian" ${txtS == 'Vegetarian' ? 'selected' : ''}>Vegetarian</option>
-                                            <option value="CategoryController?categoryID=5&name=Dessert" ${txtS == 'Dessert' ? 'selected' : ''}>Dessert</option>
-                                            <option value="CategoryController?categoryID=6&name=Bakery" ${txtS == 'Bakery' ? 'selected' : ''}>Bakery</option>
-                                        </select>
+                                        <option value="CategoryController?categoryID=0&name=All Recipe Categories" ${txtS == 'All Recipe Categories' ? 'selected' : ''}>All Recipe Categories</option>
+                                        <option value="CategoryController?categoryID=1&name=Main Dish" ${txtS == 'Main Dish' ? 'selected' : ''}>Main Dish</option>
+                                        <option value="CategoryController?categoryID=2&name=Pasta" ${txtS == 'Pasta' ? 'selected' : ''}>Pasta</option>
+                                        <option value="CategoryController?categoryID=3&name=Salad" ${txtS == 'Salad' ? 'selected' : ''}>Salad</option>
+                                        <option value="CategoryController?categoryID=4&name=Vegetarian" ${txtS == 'Vegetarian' ? 'selected' : ''}>Vegetarian</option>
+                                        <option value="CategoryController?categoryID=5&name=Dessert" ${txtS == 'Dessert' ? 'selected' : ''}>Dessert</option>
+                                        <option value="CategoryController?categoryID=6&name=Bakery" ${txtS == 'Bakery' ? 'selected' : ''}>Bakery</option>
+                                    </select>
 
                                 </ul>
                             </div>
@@ -218,13 +221,29 @@
                                 <div class="card-text show_txt" id="description">
                                     <p>${o.description}</p>
                                 </div>
-                                <div class="rating ">
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                    <span class="star"><i class="fa fa-star"></i></span>
-                                    <span class="star"><i class="fa fa-star"></i></span>
+                                <%
+                                    List<ShowRatingDTO> result
+                                            = (List<ShowRatingDTO>) session.getAttribute("SHOWRATING");
+                                    if (result != null) {
+                                %>
+                                <%
+                                    for (ShowRatingDTO dto : result) {
+                                %>
+                                <div class="rating-container">
+                                    <h1>Total rating: <%= dto.getRatingCount()%></h1>
+                                    <p>Average rating: <%= dto.getAverageRating()%></p>
                                 </div>
+                                <%
+                                    }
+                                %>
+                                <%
+                                } else {
+                                %>
+                                <h1>No Rating</h1>
+                                <%
+                                    }
+                                %>
+
                             </div>
                             <%
                                 RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");
