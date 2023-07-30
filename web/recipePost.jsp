@@ -221,8 +221,6 @@
                                 <div class="card-text show_txt" id="description">
                                     <p>${o.description}</p>
                                 </div>
-                                
-
                             </div>
                             <%
                                 RecipeOrganizeDTO user = (RecipeOrganizeDTO) session.getAttribute("USER");

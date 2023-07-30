@@ -212,13 +212,6 @@
                             <div class="card-text show_txt" id="description">
                                 <p>${o.description}</p>
                             </div>
-                            <div class="rating">
-                                <span class="star"><i class="fa fa-star"></i></span>
-                                <span class="star"><i class="fa fa-star"></i></span>
-                                <span class="star"><i class="fa fa-star"></i></span>
-                                <span class="star"><i class="fa fa-star"></i></span>
-                                <span class="star"><i class="fa fa-star"></i></span>
-                            </div>
                             <p><button class="add-to-cart-btn"><a href="AddFavorite?recipeID=${o.recipeID}"> Add Favorite</a></button></p>
                         </div>
                     </div>
