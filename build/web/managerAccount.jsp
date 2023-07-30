@@ -64,16 +64,7 @@
                         </div>
 
                         <!-- Top Social Info -->
-                        <div class="col-12 col-sm-6">
-                            <div class="top-social-info text-right">
-                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -107,10 +98,10 @@
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
-                                        <c:if test="${(empty sessionScope.USER and empty sessionScope.ADMIN) or not empty sessionScope.USER}">
-                                        <li><a href="contact.jsp">Contact</a></li>
-                                        </c:if>
-                                        <li><a href="about.jsp">About Us</a></li>
+                                            <c:if test="${(empty sessionScope.USER and empty sessionScope.ADMIN) or not empty sessionScope.USER}">
+                                            <li><a href="contact.jsp">Contact</a></li>
+                                            </c:if>
+                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>
                                             </c:if>
@@ -120,7 +111,6 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -257,7 +247,8 @@
                 </c:otherwise>
             </c:choose>
 
-        </table>
+        </table><br>
+        
 
 
 
@@ -277,7 +268,7 @@
                     <img src="img/bg-img/insta1.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=101"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -286,7 +277,7 @@
                     <img src="img/bg-img/insta2.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=102"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -295,7 +286,7 @@
                     <img src="img/bg-img/insta3.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=103"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -304,7 +295,7 @@
                     <img src="img/bg-img/insta4.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=104"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -313,7 +304,7 @@
                     <img src="img/bg-img/insta5.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=105"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -322,7 +313,7 @@
                     <img src="img/bg-img/insta6.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=106"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -331,7 +322,7 @@
                     <img src="img/bg-img/insta7.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=107"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -344,14 +335,7 @@
                 <div class="row h-100">
                     <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
                         <!-- Footer Social Info -->
-                        <div class="footer-social-info text-right">
-                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </div>
+
                         <!-- Footer Logo -->
                         <div class="footer-logo">
                             <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>

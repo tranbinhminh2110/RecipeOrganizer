@@ -86,17 +86,7 @@
                             </div>
                         </div>
 
-                        <!-- Top Social Info -->
-                        <div class="col-12 col-sm-6">
-                            <div class="top-social-info text-right">
-                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -131,10 +121,10 @@
                                         <li class="active"><a href="homePage.jsp">Home</a></li>
                                         <li><a href="AllRecipeController">Recipes</a></li>
                                         <li><a href="favorite.jsp">Favorite</a></li>
-                                        <c:if test="${(empty sessionScope.USER and empty sessionScope.ADMIN) or not empty sessionScope.USER}">
-                                        <li><a href="contact.jsp">Contact</a></li>
-                                        </c:if>
-                                        <li><a href="about.jsp">About Us</a></li>
+                                            <c:if test="${(empty sessionScope.USER and empty sessionScope.ADMIN) or not empty sessionScope.USER}">
+                                            <li><a href="contact.jsp">Contact</a></li>
+                                            </c:if>
+                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                             <c:if test="${empty sessionScope.ADMIN and empty sessionScope.USER}">
                                             <li><a href="login.jsp">Login</a></li>
                                             </c:if>
@@ -144,7 +134,6 @@
                                                 <div class="megamenu">
                                                     <ul class="dropdown">
                                                         <li><a href="profile.jsp">Profile</a></li>
-                                                        <li><a href="plan.jsp">Meal Plan</a></li>
                                                             <c:if test="${not empty sessionScope.ADMIN}">
                                                             <li><a href="managerAccount.jsp">Management Account</a></li>
                                                             <li><a href="RecipeManagementController">Management Recipe</a></li>
@@ -335,16 +324,17 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="section-heading">
-                                <h3>The Best Recipes</h3><br>
+                                <h3>The Healthy Recipes</h3><br>
                                 <div class="receipe-grid">
                                     <% RecipeOrganizeDAO dao = new RecipeOrganizeDAO();
                                         List<RecipeOrganizeDTO> results = dao.getAllRecipe();
                                         Collections.shuffle(results);
-                                        int count = 0;
+                                        float count = 0;
                                         if (results != null) {
                                             for (RecipeOrganizeDTO recipe : results) {
                                                 int rating = recipe.getAvgRating();
-                                                if (rating >= 4) {
+                                                float ratingcalo = recipe.getCaloRecipe();
+                                                if (ratingcalo < 300) {
                                                     if (count >= 9) {
                                                         break;
                                                     }
@@ -356,16 +346,8 @@
                                         <div class="receipe-content">
                                             <a href="DetailController?recipeID=<%= recipe.getRecipeID()%>" title="View Product" ><%= recipe.getRecipeName()%><a>
                                                 </a>
-                                                <div class="ratings">
-                                                    <% for (int i = 0; i < rating; i++) { %>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <% } %>
-                                                    <% int remainingStars = 5 - rating;
-                                                    for (int i = 0; i < remainingStars; i++) { %>
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                    <% }%>
-                                                </div>
-                                                <p><%= recipe.getAvgRating()%> comment</p>                                            
+
+                                                <h6 style="color: orangered"><%= recipe.getCaloRecipe()%> calo</h6>                                            
                                         </div>
                                     </div>
                                     <% count++;
@@ -373,7 +355,7 @@
                                         }
                                     } else { %>
                                     <p>No recipes found.</p>
-                                    <% } %>
+                                    <% }%>
                                 </div>
                             </div>
                         </div>
@@ -393,69 +375,18 @@
                     <div class="col-12">
                         <!-- Cta Content -->
                         <div class="cta-content text-center">
-                            <h2>Healthy Food Recipes</h2>
+                            <h2>Salad Recipes</h2>
                             <p>Healthy foods are foods that are healthy, safe and healthy for the user's body. Using organic foods, natural foods, free of harmful impurities, minimal processing to keep the essence of food are the principles of healthy food. As a result, healthy food brings positive values to users' health.</p>
-                            <a href="AllRecipeController" class="btn delicious-btn">Discover all the receipies</a>
+                            <a href="CategoryController?categoryID=3" class="btn delicious-btn">Discover all the receipies</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section><br>
         <!-- ##### CTA Area End ##### -->
 
         <!-- ##### Small Receipe Area Start ##### -->
-        <section class="small-receipe-area section-padding-80-0">
-            <div class="container">
-                <div class="row">
-                    <%
-                        Collections.shuffle(results);
-                        float counti = 0;
-                        if (results != null) {
-                            for (RecipeOrganizeDTO recipe : results) {
-                                int rating = recipe.getAvgRating();
-                                float ratingcalo = recipe.getCaloRecipe();
-                                if (ratingcalo < 300) {
-                                    if (counti >= 16) {
-                                        break;
-                                    }
-                    %>
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-small-receipe-area d-flex">
-                            <div class="receipe-thumb">
-                                <img src="<%= recipe.getImgUrl()%>" alt="">
-                            </div>
-                            <div class="receipe-content">
-                                <span>April 04, 2023</span>
-                                <a href="DetailController?recipeID=<%= recipe.getRecipeID()%>" title="View Product" ><%= recipe.getRecipeName()%><a>
-                                    </a>
-                                    <div class="ratings">
-                                        <%
-                                            for (int i = 0; i < rating; i++) {
-                                        %>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <% } %>
-                                        <%
-                                            int remainingStars = 5 - rating;
-                                            for (int i = 0; i < remainingStars; i++) {
-                                        %>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <% }%>
-                                    </div>
-                                    <p> <%= recipe.getAvgRating()%> comment</p>
-                            </div>
-                        </div>
-                    </div>
-                    <%
-                                counti++;
-                            }
-                        }
-                    } else {
-                    %>
-                    <p>No recipes found.</p>
-                    <% }%>
-                </div>
-            </div>
-        </section>
+
         <!-- ##### CTA Area End ##### -->
 
 
@@ -479,7 +410,7 @@
                     <img src="img/bg-img/insta1.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=101"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -488,7 +419,7 @@
                     <img src="img/bg-img/insta2.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=102"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -497,7 +428,7 @@
                     <img src="img/bg-img/insta3.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=103"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -506,7 +437,7 @@
                     <img src="img/bg-img/insta4.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=104"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -515,7 +446,7 @@
                     <img src="img/bg-img/insta5.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=105"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -524,7 +455,7 @@
                     <img src="img/bg-img/insta6.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=106"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -533,7 +464,7 @@
                     <img src="img/bg-img/insta7.jpg" alt="">
                     <!-- Icon -->
                     <div class="insta-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href="DetailController?recipeID=107"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -545,15 +476,7 @@
             <div class="container h-100">
                 <div class="row h-100">
                     <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
-                        <!-- Footer Social Info -->
-                        <div class="footer-social-info text-right">
-                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </div>
+
                         <!-- Footer Logo -->
                         <div class="footer-logo">
                             <a href="homePage.jsp"><img src="img/recipe/logo.png" alt=""></a>
