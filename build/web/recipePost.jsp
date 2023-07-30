@@ -221,28 +221,7 @@
                                 <div class="card-text show_txt" id="description">
                                     <p>${o.description}</p>
                                 </div>
-                                <%
-                                    List<ShowRatingDTO> result
-                                            = (List<ShowRatingDTO>) session.getAttribute("SHOWRATING");
-                                    if (result != null) {
-                                %>
-                                <%
-                                    for (ShowRatingDTO dto : result) {
-                                %>
-                                <div class="rating-container">
-                                    <h1>Total rating: <%= dto.getRatingCount()%></h1>
-                                    <p>Average rating: <%= dto.getAverageRating()%></p>
-                                </div>
-                                <%
-                                    }
-                                %>
-                                <%
-                                } else {
-                                %>
-                                <h1>No Rating</h1>
-                                <%
-                                    }
-                                %>
+                                
 
                             </div>
                             <%
